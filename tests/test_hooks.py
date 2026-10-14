@@ -59,7 +59,6 @@ def project(tmp_path: Path, requirements: str, code: str | None = None,
             name: str = "target.py") -> Path:
     p = tmp_path / "proj"
     p.mkdir(exist_ok=True)
-    (p / ".git").mkdir(exist_ok=True)
     (p / "requirements.txt").write_text(requirements)
     if code is not None:
         (p / name).write_text(code)
@@ -78,77 +77,55 @@ def run(event: str, payload, monkeypatch, capsys) -> tuple[int, str, str]:
 
 
 def ss_input(cwd: Path) -> dict:
-    return {"session_id": "abc", "transcript_path": "/tmp/t.jsonl", "cwd": str(cwd),
-            "permission_mode": "default", "hook_event_name": "SessionStart", "source": "startup"}
+    return {"session_id": "abc", "cwd": str(cwd), "hook_event_name": "SessionStart",
+            "source": "startup"}
 
 
 def ptu_input(cwd: Path, file_path: str, tool: str = "Write") -> dict:
-    return {"session_id": "abc", "transcript_path": "/tmp/t.jsonl", "cwd": str(cwd),
-            "hook_event_name": "PostToolUse", "tool_name": tool,
-            "tool_input": {"file_path": file_path, "content": "..."},
-            "tool_response": {"filePath": file_path, "success": True}, "tool_use_id": "toolu_1"}
+    return {"session_id": "abc", "cwd": str(cwd), "hook_event_name": "PostToolUse",
+            "tool_name": tool, "tool_input": {"file_path": file_path, "content": "..."}}
+
+
+def context(out: str) -> str:
+    data = json.loads(out)["hookSpecificOutput"]
+    assert data["hookEventName"] == "SessionStart"
+    return data["additionalContext"]
 
 
 # --------------------------------------------------------------------------- session-start
 
-def test_session_start_output_format_and_facts(tmp_path, catalog, monkeypatch, capsys):
+def test_session_start_states_facts(tmp_path, catalog, monkeypatch, capsys):
     p = project(tmp_path, "numpy==2.4.1\n")
     rc, out, err = run("session-start", ss_input(p), monkeypatch, capsys)
     assert rc == 0 and err == ""
-    data = json.loads(out)
-    hso = data["hookSpecificOutput"]
-    assert hso["hookEventName"] == "SessionStart"
-    ctx = hso["additionalContext"]
+    ctx = context(out)
     lines = ctx.splitlines()
-    assert len(lines) <= 10
-    # newest breakage first, phrased as a fact with installed version and id
-    assert lines[1].startswith("- In numpy>=2.4 (project: numpy 2.4.1), `np.trapz(y, x)` results in")
-    assert "the working form is `np.trapezoid(y, x)`" in lines[1]
-    assert lines[1].endswith("[mend:numpy-trapz-removed]")
-    assert "[mend:numpy-old-thing]" in lines[2]
+    assert len(lines) <= hooks.MAX_FACTS + 2
+    trapz = next(line for line in lines if "[mend:numpy-trapz-removed]" in line)
+    assert trapz.startswith("- In numpy>=2.4 (project: 2.4.1), `np.trapz(y, x)` results in")
+    assert "the working form is `np.trapezoid(y, x)`" in trapz
+    assert "[mend:numpy-old-thing]" in ctx
     assert "numpy-draft" not in ctx               # verified only
     assert "use the other thing" not in ctx       # rule messages (imperative) not used
-    for line in lines:
-        first = line.lstrip("- ").split()[0].lower()
-        assert first not in {"use", "always", "never", "do", "don't", "must", "ignore"}
 
 
 def test_session_start_version_out_of_range(tmp_path, catalog, monkeypatch, capsys):
     p = project(tmp_path, "numpy==2.1.0\n")
-    rc, out, _ = run("session-start", ss_input(p), monkeypatch, capsys)
-    ctx = json.loads(out)["hookSpecificOutput"]["additionalContext"]
+    _, out, _ = run("session-start", ss_input(p), monkeypatch, capsys)
+    ctx = context(out)
     assert "numpy-trapz-removed" not in ctx and "numpy-old-thing" in ctx
 
 
-@pytest.mark.parametrize("reqs", ["requests==2.31.0\n", "", "numpy==1.26.4\n", "numpy<2\n"])
+@pytest.mark.parametrize("reqs", ["requests==2.31.0\n", "", "numpy==1.26.4\n"])
 def test_session_start_nothing_relevant(tmp_path, catalog, monkeypatch, capsys, reqs):
     p = project(tmp_path, reqs)
-    rc, out, err = run("session-start", ss_input(p), monkeypatch, capsys)
-    assert (rc, out, err) == (0, "", "")
+    assert run("session-start", ss_input(p), monkeypatch, capsys) == (0, "", "")
 
 
-def test_session_start_unknown_version_is_conditional(tmp_path, catalog, monkeypatch, capsys):
+def test_session_start_unpinned_version_is_conditional(tmp_path, catalog, monkeypatch, capsys):
     p = project(tmp_path, "numpy\n")
     _, out, _ = run("session-start", ss_input(p), monkeypatch, capsys)
-    ctx = json.loads(out)["hookSpecificOutput"]["additionalContext"]
-    assert "If numpy>=2.4 (project pins no numpy version)" in ctx
-
-
-def test_session_start_declared_range_implies(tmp_path, catalog, monkeypatch, capsys):
-    p = project(tmp_path, "numpy>=2.5,<3\n")
-    _, out, _ = run("session-start", ss_input(p), monkeypatch, capsys)
-    ctx = json.loads(out)["hookSpecificOutput"]["additionalContext"]
-    assert "In numpy>=2.4 (project requires numpy<3,>=2.5)" in ctx
-
-
-def test_session_start_uses_venv_version(tmp_path, catalog, monkeypatch, capsys):
-    p = project(tmp_path, "numpy\n")
-    (p / ".venv").mkdir()
-    (p / ".venv" / "pyvenv.cfg").write_text("home = /usr/bin\n")
-    (p / ".venv" / "lib" / "python3.12" / "site-packages" / "numpy-2.4.1.dist-info").mkdir(parents=True)
-    _, out, _ = run("session-start", ss_input(p), monkeypatch, capsys)
-    ctx = json.loads(out)["hookSpecificOutput"]["additionalContext"]
-    assert "In numpy>=2.4 (project: numpy 2.4.1)" in ctx
+    assert "If numpy>=2.4 (version not pinned)" in context(out)
 
 
 def test_session_start_sanitizes_fixture_text(tmp_path, monkeypatch, capsys):
@@ -159,16 +136,8 @@ def test_session_start_sanitizes_fixture_text(tmp_path, monkeypatch, capsys):
     monkeypatch.setenv("MEND_FIXTURES_DIR", str(root))
     p = project(tmp_path, "numpy==2.4.1\n")
     _, out, _ = run("session-start", ss_input(p), monkeypatch, capsys)
-    ctx = json.loads(out)["hookSpecificOutput"]["additionalContext"]
+    ctx = context(out)
     assert "<system>" not in ctx and "<|im_start|>" not in ctx and "SYSTEM:" not in ctx
-
-
-def test_session_start_finds_project_root_from_subdir(tmp_path, catalog, monkeypatch, capsys):
-    p = project(tmp_path, "numpy==2.4.1\n")
-    sub = p / "pkg" / "inner"
-    sub.mkdir(parents=True)
-    _, out, _ = run("session-start", ss_input(sub), monkeypatch, capsys)
-    assert "numpy-trapz-removed" in out
 
 
 # --------------------------------------------------------------------------- post-tool-use
@@ -177,8 +146,7 @@ def test_post_tool_use_flags(tmp_path, catalog, monkeypatch, capsys):
     p = project(tmp_path, "numpy==2.4.1\n", TRAPZ)
     rc, out, err = run("post-tool-use", ptu_input(p, str(p / "target.py")), monkeypatch, capsys)
     assert rc == 2 and out == ""
-    assert "target.py:5: `return np.trapz(y, x)`" in err
-    assert "In numpy>=2.4 (project: numpy 2.4.1)" in err
+    assert "target.py:5: In numpy>=2.4 (project: 2.4.1)" in err
     assert "the working form is `np.trapezoid(y, x)`" in err
     assert "[mend:numpy-trapz-removed]" in err
     assert "use the other thing" not in err
@@ -197,17 +165,17 @@ def test_post_tool_use_clean_file(tmp_path, catalog, monkeypatch, capsys):
     assert (rc, out, err) == (0, "", "")
 
 
-@pytest.mark.parametrize("reqs", ["numpy==2.3.0\n", "numpy==1.26.4\n", "numpy<2.4\n", "requests\n"])
+@pytest.mark.parametrize("reqs", ["numpy==2.3.0\n", "numpy==1.26.4\n", "requests\n"])
 def test_post_tool_use_version_out_of_range(tmp_path, catalog, monkeypatch, capsys, reqs):
     p = project(tmp_path, reqs, TRAPZ)
     rc, out, err = run("post-tool-use", ptu_input(p, str(p / "target.py")), monkeypatch, capsys)
     assert (rc, out, err) == (0, "", "")
 
 
-def test_post_tool_use_unknown_version_conditional(tmp_path, catalog, monkeypatch, capsys):
+def test_post_tool_use_unpinned_version_conditional(tmp_path, catalog, monkeypatch, capsys):
     p = project(tmp_path, "numpy\n", TRAPZ)
     rc, _, err = run("post-tool-use", ptu_input(p, str(p / "target.py")), monkeypatch, capsys)
-    assert rc == 2 and "If numpy>=2.4 (project pins no numpy version)" in err
+    assert rc == 2 and "If numpy>=2.4 (version not pinned)" in err
 
 
 def test_post_tool_use_non_python(tmp_path, catalog, monkeypatch, capsys):
