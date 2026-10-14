@@ -105,24 +105,41 @@ jobs:
         if: always()
         run: |
           python - "bench/results/ci-v2-${{ github.run_id }}" <<'EOF'
+          # GitHub keeps ~4KB per annotation and 10 annotations per step: one summary
+          # (totals + per-fixture tally), then one annotation per failing trial.
           import json, sys
+          from collections import defaultdict
           from pathlib import Path
           out = Path(sys.argv[1])
+
+          def notice(title, text):
+              text = text[:3900].replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+              print(f"::notice title={title}::{text}")
+
+          rows = []
+          if (out / "results.jsonl").is_file():
+              rows = [json.loads(x) for x in (out / "results.jsonl").read_text().splitlines() if x.strip()]
           lines = []
           if (out / "summary.json").is_file():
               s = json.loads((out / "summary.json").read_text())
               lines.append(f"trials={s['trials']} spend_usd={s['spend_usd']} hooks={json.dumps(s['hooks'])}")
               lines += [f"{a['arm']}: fail {a['failures']}/{a['scored']}, other {a['other_failures']}, infra {a['infra']}"
                         for a in s["arms"]]
-          if (out / "results.jsonl").is_file():
-              for line in (out / "results.jsonl").read_text().splitlines():
-                  r = json.loads(line)
-                  # Compact per-trial lines; None fields are omitted to stay under the 64KB limit.
-                  lines.append(" ".join(f"{k}={r[k]}" for k in
-                                        ("fixture", "arm", "trial", "outcome", "num_turns", "agent_error", "detail")
-                                        if r.get(k) is not None) + f" usd={r.get('cost_usd') or 0:.4f}")
-          msg = "\n".join(lines)[:60000] or "no results produced"
-          print("::notice title=MEND-Bench results::" + msg.replace("%", "%25").replace("\r", "").replace("\n", "%0A"))
+          tally = defaultdict(lambda: defaultdict(lambda: [0, 0]))  # fixture -> arm -> [not pass, total]
+          for r in rows:
+              cell = tally[r["fixture"]][r["arm"]]
+              cell[0] += r["outcome"] != "pass"
+              cell[1] += 1
+          lines += [f"{fx}: " + " ".join(f"{arm} {n}/{k}" for arm, (n, k) in sorted(arms.items()))
+                    for fx, arms in sorted(tally.items()) if any(n for n, _ in arms.values())]
+          notice("MEND-Bench results", "\n".join(lines) or "no results produced")
+          for r in [r for r in rows if r["outcome"] != "pass"][:9]:
+              raw = out / "raw" / r["fixture"] / r["arm"] / f"t{r['trial']}"
+              parts = [f"{r['fixture']} {r['arm']} t{r['trial']} {r['outcome']} {r.get('detail') or ''}"]
+              for name, keep in (("target.py", 1800), ("score_output.txt", 1800)):
+                  if (raw / name).is_file():
+                      parts.append(f"--- {name}\n" + (raw / name).read_text()[-keep:])
+              notice("MEND-Bench failure", "\n".join(parts))
           EOF
 
       - name: Upload results
