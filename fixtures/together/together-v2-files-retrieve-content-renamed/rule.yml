@@ -1,0 +1,8 @@
+rules:
+  - id: together-v2-files-retrieve-content-renamed
+    languages: [python]
+    severity: ERROR
+    message: "together 2.0 removed files.retrieve_content / fine_tuning.download (AttributeError): use files.content(id) / fine_tuning.content(...) and write the bytes yourself, e.g. .write_to_file(path)."
+    pattern-either:
+      - pattern: $C.files.retrieve_content(...)
+      - pattern: $C.fine_tuning.download(...)

@@ -1,0 +1,28 @@
+id: together-v2-batches-create-batch-renamed
+title: "Calling client.batches.create_batch() with the together 2.0 SDK"
+summary: >
+  The together 2.0 SDK (a regenerated client) renamed the batch methods: create_batch,
+  get_batch, list_batches and cancel_batch became create, retrieve, list and cancel.
+  create() takes keyword-only input_file_id= and endpoint= and returns a wrapper whose job
+  is at .job, so v1-style code fails with AttributeError.
+ecosystem: python
+package: together
+versions: ">=2.0.0"
+tags: [llm, batch, client, migration]
+failure:
+  kind: api-renamed
+  symptom: "AttributeError: 'BatchesResource' object has no attribute 'create_batch'"
+  bad_pattern: "client.batches.create_batch(file_id, endpoint=\"/v1/chat/completions\").id"
+  fix_pattern: "client.batches.create(input_file_id=file_id, endpoint=\"/v1/chat/completions\").job.id"
+repro:
+  python: "3.13"
+  deps: ["together==2.0.0", "httpx==0.28.1"]
+  old_deps: ["together==1.5.35"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.together.ai/docs/pythonv2-migration-guide"}
+    - {type: changelog, url: "https://github.com/togethercomputer/together-py/blob/v2.0.0/CHANGELOG.md"}
+    - {type: other, url: "https://github.com/togethercomputer/together-python/blob/v1.5.35/src/together/resources/batch.py"}
+  license: "Apache-2.0"
+  released: "2026-02-04"
+status: verified

@@ -1,0 +1,10 @@
+rules:
+  - id: together-v2-batches-create-batch-renamed
+    languages: [python]
+    severity: ERROR
+    message: "together 2.0 renamed the batch methods (AttributeError): use batches.create(input_file_id=..., endpoint=...).job, batches.retrieve, batches.list, batches.cancel."
+    pattern-either:
+      - pattern: $C.batches.create_batch(...)
+      - pattern: $C.batches.get_batch(...)
+      - pattern: $C.batches.list_batches(...)
+      - pattern: $C.batches.cancel_batch(...)
