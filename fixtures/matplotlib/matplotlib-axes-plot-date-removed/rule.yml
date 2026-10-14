@@ -1,0 +1,8 @@
+rules:
+  - id: matplotlib-axes-plot-date-removed
+    languages: [python]
+    severity: ERROR
+    message: "Axes.plot_date / pyplot.plot_date were removed in Matplotlib 3.11: plot datetime data with plot()."
+    pattern-either:
+      - pattern: matplotlib.pyplot.plot_date(...)
+      - pattern: $AX.plot_date(...)

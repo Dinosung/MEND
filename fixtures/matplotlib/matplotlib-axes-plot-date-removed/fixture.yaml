@@ -1,0 +1,26 @@
+id: matplotlib-axes-plot-date-removed
+title: "Calling Axes.plot_date / pyplot.plot_date removed in Matplotlib 3.11"
+summary: >
+  Axes.plot_date (and pyplot.plot_date) was discouraged since Matplotlib 3.5, deprecated in
+  3.9 and removed in 3.11. Calls raise AttributeError; plot datetime data with Axes.plot,
+  which sets up date tick locators and formatters automatically.
+ecosystem: python
+package: matplotlib
+versions: ">=3.11"
+tags: [plotting, dates, time-series, migration]
+failure:
+  kind: api-removed
+  symptom: "AttributeError: 'Axes' object has no attribute 'plot_date'"
+  bad_pattern: "ax.plot_date(dates, values, \"-\")"
+  fix_pattern: "ax.plot(dates, values, \"-\")"
+repro:
+  python: "3.13"
+  deps: ["matplotlib==3.11.2", "numpy==2.5.3"]
+  old_deps: ["matplotlib==3.10.9", "numpy==2.3.5"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://matplotlib.org/stable/api/prev_api_changes/api_changes_3.11.0.html"}
+    - {type: pr, url: "https://github.com/matplotlib/matplotlib/pull/29697"}
+  license: "PSF-based Matplotlib License"
+  released: "2026-06-11"
+status: draft

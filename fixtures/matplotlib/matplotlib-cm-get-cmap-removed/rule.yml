@@ -1,0 +1,8 @@
+rules:
+  - id: matplotlib-cm-get-cmap-removed
+    languages: [python]
+    severity: ERROR
+    message: "matplotlib.cm.get_cmap was removed in Matplotlib 3.11: use matplotlib.colormaps[name] (and .resampled(n) instead of lut=n)."
+    pattern-either:
+      - pattern: matplotlib.cm.get_cmap
+      - pattern: from matplotlib.cm import get_cmap

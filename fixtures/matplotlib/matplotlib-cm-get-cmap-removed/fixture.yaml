@@ -1,0 +1,26 @@
+id: matplotlib-cm-get-cmap-removed
+title: "Calling matplotlib.cm.get_cmap removed in Matplotlib 3.11"
+summary: >
+  matplotlib.cm.get_cmap(name, lut) was deprecated in Matplotlib 3.7 and removed in 3.11
+  (it was briefly removed in 3.9 and restored in 3.9.1). Calls raise AttributeError; look
+  colormaps up in the registry, matplotlib.colormaps[name], and use .resampled(n) for lut.
+ecosystem: python
+package: matplotlib
+versions: ">=3.11"
+tags: [colormaps, plotting, namespace, migration]
+failure:
+  kind: api-removed
+  symptom: "AttributeError: module 'matplotlib.cm' has no attribute 'get_cmap'"
+  bad_pattern: "cm.get_cmap(name, n)"
+  fix_pattern: "matplotlib.colormaps[name].resampled(n)"
+repro:
+  python: "3.13"
+  deps: ["matplotlib==3.11.2", "numpy==2.5.3"]
+  old_deps: ["matplotlib==3.10.9", "numpy==2.3.5"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://matplotlib.org/stable/api/prev_api_changes/api_changes_3.11.0.html"}
+    - {type: pr, url: "https://github.com/matplotlib/matplotlib/pull/30005"}
+  license: "PSF-based Matplotlib License"
+  released: "2026-06-11"
+status: draft
