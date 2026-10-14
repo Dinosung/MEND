@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -196,16 +197,41 @@ def score(fx: Any, deps: dict[str, str | None], task: str | None = None) -> floa
     return s
 
 
+def _fixture_words(fx: Any) -> set[str]:
+    """Searchable vocabulary of a fixture: prose plus the code patterns and symptom."""
+    failure = get(fx, "failure", default={}) or {}
+    parts = [str(get(fx, "id", default="")), str(get(fx, "title", default="")),
+             str(get(fx, "summary", default="")),
+             " ".join(map(str, get(fx, "tags", default=[]) or []))]
+    for key in ("bad_pattern", "fix_pattern", "symptom"):
+        parts.append(str(get(failure, key, default="") or ""))
+    return _words(" ".join(parts).replace("_", " "))
+
+
 def lookup(fixtures: list[Any], deps: dict[str, str | None], task: str | None = None,
            limit: int = 10) -> list[Any]:
     deps = {normalize(k): v for k, v in deps.items()}
-    scored = []
+    candidates = []
     for fx in fixtures:
-        sc = score(fx, deps, task)
+        sc = score(fx, deps, None)
         if sc is not None:
-            scored.append((sc, str(get(fx, "id", default="")), fx))
-    scored.sort(key=lambda t: (-t[0], t[1]))
-    return [fx for _, _, fx in scored[: max(0, limit)]]
+            candidates.append([sc, str(get(fx, "id", default="")), fx])
+
+    tw = _words(task.replace("_", " ")) if task else set()
+    if tw and candidates:
+        # IDF-weighted overlap: words shared by many candidates (e.g. "model" across all
+        # pydantic fixtures) count little; distinctive words ("orm", "resample") count a lot.
+        vocab = [_fixture_words(c[2]) for c in candidates]
+        n = len(candidates)
+        df: dict[str, int] = {}
+        for words in vocab:
+            for w in words & tw:
+                df[w] = df.get(w, 0) + 1
+        for cand, words in zip(candidates, vocab):
+            cand[0] += 6.0 * sum(math.log(1.0 + n / df[w]) for w in words & tw)
+
+    candidates.sort(key=lambda t: (-t[0], t[1]))
+    return [fx for _, _, fx in candidates[: max(0, limit)]]
 
 
 # --------------------------------------------------------------------------- fixtures root

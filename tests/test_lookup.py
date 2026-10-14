@@ -163,6 +163,25 @@ def test_task_keyword_overlap_ranks(tmp_path):
     assert [f.id for f in res] == ["pydantic-a", "pydantic-b"]
 
 
+def test_distinctive_words_outweigh_common_ones(tmp_path):
+    # "model" appears in every candidate, "orm" in only one: one rare match must beat
+    # two common ones.
+    common = [make_fixture(tmp_path, f"pydantic-m{i}", title="model json schema",
+                           tags=["model", "json"]) for i in range(5)]
+    orm = make_fixture(tmp_path, "pydantic-orm", title="model from ORM objects", tags=["model"])
+    res = lookup(common + [orm], {"pydantic": "2.5"}, task="convert ORM rows to a model as json")
+    assert res[0].id == "pydantic-orm"
+
+
+def test_code_patterns_are_searchable(tmp_path):
+    a = make_fixture(tmp_path, "pydantic-a", title="Something renamed")
+    b = make_fixture(tmp_path, "pydantic-b", title="Something else renamed")
+    # make_fixture gives both the same patterns, so rewrite b's bad pattern.
+    b.failure.bad_pattern = "Field(regex=r'^x$')"
+    res = lookup([a, b], {"pydantic": "2.5"}, task="constrain the field with a regex")
+    assert res[0].id == "pydantic-b"
+
+
 def test_limit(tmp_path):
     fxs = [make_fixture(tmp_path, f"pydantic-{i}") for i in range(5)]
     assert len(lookup(fxs, {"pydantic": None}, limit=2)) == 2
