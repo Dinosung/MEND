@@ -13,9 +13,12 @@ from mend.fixture import Fixture, load_fixture
 from mend.verify import RunResult, evaluate, filter_changed, uv_command, verify_fixture
 
 FID = "demo-thing-moved"
+OLD_PIN = "demo==1.9.0"
 
 
-def make_fixture(root: Path, fid: str = FID, deps: list[str] | None = None) -> Fixture:
+def make_fixture(
+    root: Path, fid: str = FID, deps: list[str] | None = None, old_deps: list[str] | None = None, old_python: str = ""
+) -> Fixture:
     d = root / "demo" / fid
     for sub in ("bad", "fixed", "check"):
         (d / sub).mkdir(parents=True)
@@ -32,6 +35,10 @@ def make_fixture(root: Path, fid: str = FID, deps: list[str] | None = None) -> F
         "provenance": {"sources": [{"type": "docs", "url": "https://example.org"}], "license": "MIT"},
         "status": "verified",
     }
+    if old_deps:
+        meta["repro"]["old_deps"] = old_deps
+    if old_python:
+        meta["repro"]["old_python"] = old_python
     (d / "fixture.yaml").write_text(yaml.safe_dump(meta))
     (d / "bad" / "target.py").write_text("x = 1\n")
     (d / "fixed" / "target.py").write_text("x = 2\n")
@@ -47,13 +54,13 @@ class FakePopen:
     """Stands in for subprocess.Popen: records calls, writes the junit report when pytest 'runs'."""
 
     calls: list[dict[str, Any]] = []
-    # side ("bad"/"fixed") -> (exit code, pytest_ran, output)
+    # run ("bad"/"fixed"/"bad_old") -> (exit code, pytest_ran, output)
     script: dict[str, tuple[int, bool, str]] = {}
     timeout_sides: set[str] = set()
 
     def __init__(self, cmd: list[str], *, env: dict[str, str], **kw: Any) -> None:
         self.cmd, self.env, self.kw = cmd, env, kw
-        self.side = Path(env["PYTHONPATH"]).name
+        self.side = Path(env["PYTHONPATH"]).name + ("_old" if OLD_PIN in cmd else "")
         FakePopen.calls.append({"cmd": cmd, "env": env, "side": self.side, **kw})
         self.returncode: int | None = None
         self.pid = 999_999
@@ -93,6 +100,17 @@ def test_uv_command_matches_reference(tmp_path: Path) -> None:
         "--with", "demo==2.1.0", "--with", "demo-extras==1.0", "--with", "pytest",
         "pytest", "-q", "-p", "no:cacheprovider", str(fx.check_dir),
     ]  # fmt: skip
+
+
+def test_uv_command_old_uses_old_deps_and_python(tmp_path: Path) -> None:
+    fx = make_fixture(tmp_path, old_deps=[OLD_PIN, "httpx==0.28.1"])
+    cmd = uv_command(fx, old=True)
+    assert cmd[cmd.index("--python") + 1] == "3.12"  # defaults to repro.python
+    assert "demo==1.9.0" in cmd and "httpx==0.28.1" in cmd and "demo==2.1.0" not in cmd
+    fx2 = make_fixture(tmp_path / "x", old_deps=[OLD_PIN], old_python="3.11")
+    assert uv_command(fx2, old=True)[5] == "3.11"
+    assert verify.docker_image(fx2, old=True) == "python:3.11-slim"
+    assert "demo==1.9.0" in verify.docker_command(fx2, "bad", tmp_path, "c", old=True)[-1]
 
 
 def test_docker_command_mounts_readonly(tmp_path: Path) -> None:
@@ -168,6 +186,50 @@ def test_evaluate_bad_unexpected_exit_is_infra(code: int) -> None:
     assert not r.ok and r.infra_error
 
 
+def test_evaluate_differential_verified() -> None:
+    r = evaluate(FID, fixed=run(0), bad=run(1), bad_old=run(0), differential=True)
+    assert r.ok and r.bad_passed_old is True and r.bad_old_exit == 0
+    assert r.reason == "verified (differential)"
+    assert r.durations == {"fixed": 1.0, "bad": 1.0, "bad_old": 1.0} and r.total_duration == 3.0
+    assert r.to_dict()["total_duration"] == 3.0
+
+
+def test_evaluate_non_differential_leaves_gate_unset() -> None:
+    r = evaluate(FID, fixed=run(0), bad=run(1))
+    assert r.ok and r.bad_passed_old is None and not r.differential and "bad_old" not in r.durations
+
+
+@pytest.mark.parametrize("code", [1, 2])
+def test_evaluate_bad_fails_on_old_is_real_failure(code: int) -> None:
+    r = evaluate(FID, fixed=run(0), bad=run(1), bad_old=run(code), differential=True)
+    assert not r.ok and not r.infra_error and r.bad_passed_old is False
+    assert "not caused by the version change" in r.reason and r.outcome == "fail"
+
+
+def test_evaluate_old_setup_failure_is_infra() -> None:
+    r = evaluate(FID, fixed=run(0), bad=run(1), bad_old=run(1, ran=False, out="no wheels"), differential=True)
+    assert not r.ok and r.infra_error and r.bad_passed_old is None
+    assert "old_deps" in r.reason and "no wheels" in r.logs["bad_old"]
+
+
+def test_evaluate_old_timeout_is_infra() -> None:
+    r = evaluate(FID, fixed=run(0), bad=run(1), bad_old=run(-1, ran=False, timed_out=True), differential=True)
+    assert r.infra_error and "timed out" in r.reason
+
+
+@pytest.mark.parametrize("code", [3, 4])
+def test_evaluate_old_unexpected_exit_is_infra(code: int) -> None:
+    r = evaluate(FID, fixed=run(0), bad=run(1), bad_old=run(code), differential=True)
+    assert not r.ok and r.infra_error
+
+
+def test_enforce_differential() -> None:
+    plain = verify.enforce_differential(evaluate(FID, fixed=run(0), bad=run(1)))
+    assert not plain.ok and not plain.infra_error and "old_deps" in plain.reason
+    diff = verify.enforce_differential(evaluate(FID, fixed=run(0), bad=run(1), bad_old=run(0), differential=True))
+    assert diff.ok
+
+
 def test_logs_are_tailed() -> None:
     out = "\n".join(f"line {i}" for i in range(500))
     r = evaluate(FID, fixed=run(1, out=out), bad=None)
@@ -192,6 +254,23 @@ def test_verify_fixture_runs_fixed_then_bad(tmp_path: Path, fake_popen: type[Fak
         assert cmd[:4] == ["uv", "run", "--isolated", "--no-project"]
         assert cmd[-1] == str(fx.check_dir)
         assert any(a.startswith("--junitxml=") for a in cmd)
+
+
+def test_verify_fixture_differential_runs_three(tmp_path: Path, fake_popen: type[FakePopen]) -> None:
+    fx = make_fixture(tmp_path, old_deps=[OLD_PIN])
+    fake_popen.script = {"fixed": (0, True, ""), "bad": (1, True, ""), "bad_old": (0, True, "")}
+    r = verify_fixture(fx)
+    assert r.ok and r.differential and r.bad_passed_old is True
+    assert [c["side"] for c in fake_popen.calls] == ["fixed", "bad", "bad_old"]
+    assert fake_popen.calls[2]["env"]["PYTHONPATH"] == str(fx.path / "bad")
+
+
+def test_verify_fixture_skips_old_when_bad_passes(tmp_path: Path, fake_popen: type[FakePopen]) -> None:
+    fx = make_fixture(tmp_path, old_deps=[OLD_PIN])
+    fake_popen.script = {"fixed": (0, True, ""), "bad": (0, True, "")}
+    r = verify_fixture(fx)
+    assert not r.ok and r.bad_passed_old is None
+    assert [c["side"] for c in fake_popen.calls] == ["fixed", "bad"]
 
 
 def test_verify_fixture_skips_bad_when_fixed_fails(tmp_path: Path, fake_popen: type[FakePopen]) -> None:
@@ -248,7 +327,9 @@ def test_main_json_report_and_exit_code(
     monkeypatch.setattr(verify, "verify_fixture", fake_verify)
     assert verify.main([str(tmp_path), "--json", "-j", "2"]) == 1
     report = json.loads(capsys.readouterr().out)
-    assert report["summary"] == {"total": 2, "ok": 1, "fail": 1, "error": 0}
+    assert report["summary"] == {"total": 2, "ok": 1, "fail": 1, "error": 0, "differential": 0, "differential_ok": 0}
+    assert report["timing"]["by_run"] == {"fixed": 2.0, "bad": 2.0, "bad_old": 0.0}
+    assert report["results"][0]["total_duration"] == 2.0
     assert [r["fixture_id"] for r in report["results"]] == ["demo-bad", "demo-good"]
     assert report["results"][1]["outcome"] == "ok"
 
@@ -259,6 +340,35 @@ def test_main_table_all_ok(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, caps
     assert verify.main([str(tmp_path / "demo" / FID)]) == 0
     out = capsys.readouterr().out
     assert FID in out and "OK" in out and "1 ok" in out
+
+
+def test_main_require_differential(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    make_fixture(tmp_path, "demo-plain")
+    make_fixture(tmp_path, "demo-diff", old_deps=[OLD_PIN])
+
+    def fake_verify(fx: Fixture, backend: str, timeout: float) -> verify.VerifyResult:
+        diff = bool(fx.repro.old_deps)
+        return evaluate(fx.id, fixed=run(0), bad=run(1), bad_old=run(0) if diff else None, differential=diff)
+
+    monkeypatch.setattr(verify, "verify_fixture", fake_verify)
+    assert verify.main([str(tmp_path)]) == 0
+    out = capsys.readouterr().out
+    assert "differential gate: 1/1 passed (1 fixture(s) without old_deps)" in out and "timing:" in out
+    assert verify.main([str(tmp_path), "--require-differential", "--json"]) == 1
+    report = json.loads(capsys.readouterr().out)
+    assert report["summary"]["ok"] == 1 and report["summary"]["fail"] == 1
+    assert report["results"][1]["fixture_id"] == "demo-plain" and "old_deps" in report["results"][1]["reason"]
+
+
+def test_timing_summary() -> None:
+    a = evaluate("a", fixed=run(0), bad=run(1), bad_old=run(0), differential=True)
+    b = evaluate("b", fixed=run(1), bad=None)
+    t = verify.timing_summary([a, b], wall=2.5)
+    assert t["wall_seconds"] == 2.5 and t["run_seconds"] == 4.0
+    assert t["by_run"] == {"fixed": 2.0, "bad": 1.0, "bad_old": 1.0}
+    assert t["slowest"][0] == {"fixture_id": "a", "seconds": 3.0}
 
 
 def test_main_changed_since(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
