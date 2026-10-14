@@ -23,4 +23,4 @@ provenance:
     - {type: pr, url: "https://github.com/matplotlib/matplotlib/pull/30005"}
   license: "PSF-based Matplotlib License"
   released: "2026-06-11"
-status: draft
+status: verified

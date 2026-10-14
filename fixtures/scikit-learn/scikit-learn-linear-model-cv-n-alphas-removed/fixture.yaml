@@ -24,4 +24,4 @@ provenance:
     - {type: pr, url: "https://github.com/scikit-learn/scikit-learn/pull/30616"}
   license: "BSD-3-Clause"
   released: "2026-06-02"
-status: draft
+status: verified

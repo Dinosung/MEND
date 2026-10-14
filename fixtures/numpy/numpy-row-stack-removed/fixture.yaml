@@ -22,4 +22,4 @@ provenance:
     - {type: pr, url: "https://github.com/numpy/numpy/pull/30463"}
   license: "BSD-3-Clause"
   released: "2026-06-21"
-status: draft
+status: verified
