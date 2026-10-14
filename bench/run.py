@@ -58,6 +58,9 @@ def parse_args(argv: list[str] | None) -> argparse.Namespace:
     ap.add_argument("--mend-exclude-self", action="store_true",
                     help="held-out: the with-MEND context omits the fixture under test "
                          "(measures spill-over, not recall). Context mode only; MCP serves the full catalog.")
+    ap.add_argument("--hide-versions", action="store_true",
+                    help="task text names dependencies without versions (closer to a real "
+                         "repo where the agent must notice the lockfile itself)")
     add_agent_args(ap)
     args = ap.parse_args(argv)
     args.arms = [a.strip() for a in args.arms.split(",") if a.strip()]
@@ -91,6 +94,7 @@ def main(argv: list[str] | None = None) -> int:
             "trials": args.trials, "scorer": args.scorer, "fixtures_root": str(args.root),
             "fixtures": [f.id for f in fixtures], "mend_mode": args.mend_mode,
             "mend_exclude_self": args.mend_exclude_self,
+            "hide_versions": args.hide_versions,
             "replay_source": args.replay_source if args.agent == "replay" else None,
             "python": sys.version.split()[0], "platform": platform.platform(),
             "started": dt.datetime.now(dt.timezone.utc).isoformat()}
@@ -106,6 +110,8 @@ def main(argv: list[str] | None = None) -> int:
     with results_path.open("w", encoding="utf-8") as fh:
         for fx in fixtures:
             task = build_task(fx, use_llm=args.llm_tasks)
+            if args.hide_versions:
+                task.deps = [d.split("==")[0] for d in task.deps]
             pool = [f for f in all_fixtures if f.id != fx.id] if args.mend_exclude_self else all_fixtures
             ctx = lookup_context(pool, deps_of(fx), task.text)
             if hasattr(agent, "bind"):

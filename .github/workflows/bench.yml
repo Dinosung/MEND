@@ -1,0 +1,80 @@
+name: MEND-Bench
+
+# Manual benchmark run: baseline vs with-MEND repeat-failure rate.
+# Requires the repository secret ANTHROPIC_API_KEY.
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "Model under test"
+        default: "claude-sonnet-5-5"
+      fixtures:
+        description: "Fixture globs (comma-separated), e.g. 'pydantic/*,sqlalchemy/*'"
+        default: "*"
+      trials:
+        description: "Trials per fixture per arm"
+        default: "3"
+      exclude_self:
+        description: "Held-out mode: omit the fixture under test from MEND context"
+        type: boolean
+        default: false
+      hide_versions:
+        description: "Don't tell the agent the pinned versions in the task text"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bench-${{ inputs.model }}
+  cancel-in-progress: false
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Install MEND
+        run: pip install -e .
+
+      - name: Run benchmark
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MODEL: ${{ inputs.model }}
+          FIXTURES: ${{ inputs.fixtures }}
+          TRIALS: ${{ inputs.trials }}
+          EXCLUDE_SELF: ${{ inputs.exclude_self }}
+          HIDE_VERSIONS: ${{ inputs.hide_versions }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::Repository secret ANTHROPIC_API_KEY is not set"; exit 1
+          fi
+          extra=""
+          if [ "$EXCLUDE_SELF" = "true" ]; then extra="$extra --mend-exclude-self"; fi
+          if [ "$HIDE_VERSIONS" = "true" ]; then extra="$extra --hide-versions"; fi
+          python -m bench.run --agent anthropic_api --model "$MODEL" \
+            --arms baseline,mend --fixtures "$FIXTURES" --trials "$TRIALS" \
+            --scorer uv --out "bench/results/ci-${{ github.run_id }}" $extra
+
+      - name: Publish report to job summary
+        if: always()
+        run: |
+          f="bench/results/ci-${{ github.run_id }}/report.md"
+          if [ -f "$f" ]; then cat "$f" >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-${{ inputs.model }}-${{ github.run_id }}
+          path: bench/results/ci-${{ github.run_id }}/
+          if-no-files-found: warn

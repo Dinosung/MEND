@@ -96,7 +96,10 @@ def contract_footer(interface: list[str], deps: list[str]) -> str:
              "- Put your solution in a single file `target.py` in the current directory.",
              "- It must expose:"]
     lines += [f"    {s}" for s in interface] or ["    (see description)"]
-    lines.append("- Pinned dependencies (already in requirements.txt): " + ", ".join(deps))
+    if any("==" in d for d in deps):
+        lines.append("- Pinned dependencies (already in requirements.txt): " + ", ".join(deps))
+    else:
+        lines.append("- Dependencies (already installed): " + ", ".join(deps))
     lines.append("- Standard library plus those dependencies only. No network access at runtime.")
     return "\n".join(lines)
 
