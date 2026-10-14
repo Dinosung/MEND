@@ -1,0 +1,14 @@
+rules:
+  - id: azure-ai-translation-document-models-not-reexported
+    languages: [python]
+    severity: ERROR
+    message: "azure-ai-translation-document 2.0 no longer re-exports models at the top level (ImportError). Import them from azure.ai.translation.document.models."
+    pattern-either:
+      - pattern: from azure.ai.translation.document import DocumentTranslationInput
+      - pattern: from azure.ai.translation.document import TranslationTarget
+      - pattern: from azure.ai.translation.document import TranslationGlossary
+      - pattern: from azure.ai.translation.document import TranslationStatus
+      - pattern: from azure.ai.translation.document import DocumentStatus
+      - pattern: from azure.ai.translation.document import DocumentTranslationError
+      - pattern: from azure.ai.translation.document import DocumentTranslationFileFormat
+      - pattern: from azure.ai.translation.document import StorageInputType

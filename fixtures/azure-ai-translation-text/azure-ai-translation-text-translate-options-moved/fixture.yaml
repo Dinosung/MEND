@@ -1,0 +1,29 @@
+id: azure-ai-translation-text-translate-options-moved
+title: "Passing text_type= (and other options) to TextTranslationClient.translate() in azure-ai-translation-text 2.0"
+summary: >
+  azure-ai-translation-text 2.0 (API version 2026-06-06) reduced translate() to
+  body/to_language/from_language. Per-request options such as text_type, profanity_action,
+  include_alignment or include_sentence_length are no longer keywords: they fall through to
+  the HTTP layer and raise TypeError. Options now live on TranslateInputItem (text_type,
+  language) and TranslationTarget (language, profanity_action, ...), and each returned
+  TranslationText names its language in .language instead of .to.
+ecosystem: python
+package: azure-ai-translation-text
+versions: ">=2.0.0"
+tags: [azure, translation, signature, migration]
+failure:
+  kind: signature-changed
+  symptom: "TypeError: Session.request() got an unexpected keyword argument 'text_type'"
+  bad_pattern: "client.translate(body=[html], to_language=langs, text_type=\"html\"); t.to"
+  fix_pattern: "client.translate(body=[TranslateInputItem(text=html, text_type=\"html\", targets=[TranslationTarget(language=l) for l in langs])]); t.language"
+repro:
+  python: "3.13"
+  deps: ["azure-ai-translation-text==2.0.0", "azure-core==1.38.0", "isodate==0.7.2", "requests==2.32.5"]
+  old_deps: ["azure-ai-translation-text==1.0.1", "azure-core==1.38.0", "isodate==0.7.2", "requests==2.32.5"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-translation-text_2.0.0/sdk/translation/azure-ai-translation-text/CHANGELOG.md"}
+    - {type: other, url: "https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-translation-text_2.0.0/sdk/translation/azure-ai-translation-text/azure/ai/translation/text/_operations/_patch.py"}
+  license: "MIT"
+  released: "2026-06-06"
+status: verified

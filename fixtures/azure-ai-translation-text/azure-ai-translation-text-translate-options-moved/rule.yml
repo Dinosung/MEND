@@ -1,0 +1,10 @@
+rules:
+  - id: azure-ai-translation-text-translate-options-moved
+    languages: [python]
+    severity: ERROR
+    message: "azure-ai-translation-text 2.0: translate() only takes body/to_language/from_language; options such as text_type or profanity_action raise TypeError. Put them on TranslateInputItem / TranslationTarget."
+    patterns:
+      - pattern: $C.translate(..., $K=$V, ...)
+      - metavariable-regex:
+          metavariable: $K
+          regex: ^(text_type|profanity_action|profanity_marker|include_alignment|include_sentence_length|suggested_from|from_script|to_script|category|allow_fallback)$
