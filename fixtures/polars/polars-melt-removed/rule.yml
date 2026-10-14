@@ -1,0 +1,8 @@
+rules:
+  - id: polars-melt-removed
+    languages: [python]
+    severity: ERROR
+    message: "DataFrame/LazyFrame.melt() was removed in Polars 2.0: use unpivot(on=..., index=...) (index replaces id_vars, on replaces value_vars)."
+    pattern-either:
+      - pattern: $DF.melt(..., id_vars=$I, ...)
+      - pattern: $DF.melt(..., value_vars=$V, ...)

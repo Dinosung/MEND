@@ -1,0 +1,8 @@
+rules:
+  - id: polars-parquet-allow-missing-columns-removed
+    languages: [python]
+    severity: ERROR
+    message: "Polars 2.0 removed allow_missing_columns= from read_parquet/scan_parquet: use missing_columns=\"insert\" (or \"raise\")."
+    pattern-either:
+      - pattern: polars.read_parquet(..., allow_missing_columns=$V, ...)
+      - pattern: polars.scan_parquet(..., allow_missing_columns=$V, ...)

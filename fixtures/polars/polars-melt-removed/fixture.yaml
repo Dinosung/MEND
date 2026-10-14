@@ -1,0 +1,26 @@
+id: polars-melt-removed
+title: "Calling DataFrame.melt() / LazyFrame.melt() removed in Polars 2.0"
+summary: >
+  DataFrame.melt() and LazyFrame.melt() (deprecated since Polars 1.0) were removed in
+  Polars 2.0; calling them raises AttributeRemovedError (an AttributeError). Use unpivot(),
+  with index= instead of id_vars= and on= instead of value_vars=.
+ecosystem: python
+package: polars
+versions: ">=2.0.0"
+tags: [dataframe, reshape, unpivot, migration]
+failure:
+  kind: api-renamed
+  symptom: "polars.exceptions.AttributeRemovedError: `melt` was removed in version 2.0; use `DataFrame.unpivot` instead, with `index` instead of `id_vars` and `on` instead of `value_vars`"
+  bad_pattern: "df.melt(id_vars=\"store\", value_vars=[\"jan\", \"feb\"])"
+  fix_pattern: "df.unpivot(on=[\"jan\", \"feb\"], index=\"store\")"
+repro:
+  python: "3.13"
+  deps: ["polars==2.0.0"]
+  old_deps: ["polars==1.44.2"]
+provenance:
+  sources:
+    - {type: docs, url: "https://github.com/pola-rs/polars/blob/py-2.0.0/docs/source/releases/upgrade/2.md"}
+    - {type: changelog, url: "https://github.com/pola-rs/polars/releases/tag/py-2.0.0"}
+  license: "MIT"
+  released: "2026-10-06"
+status: draft

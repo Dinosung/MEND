@@ -1,0 +1,26 @@
+id: polars-parquet-allow-missing-columns-removed
+title: "Passing allow_missing_columns= to read_parquet/scan_parquet in Polars 2.0"
+summary: >
+  Polars 2.0 removed the allow_missing_columns parameter of read_parquet() and
+  scan_parquet() (deprecated in 1.30). Passing it raises ArgumentRemovedError (a TypeError);
+  use missing_columns="insert" (or "raise").
+ecosystem: python
+package: polars
+versions: ">=2.0.0"
+tags: [io, parquet, schema, signature, migration]
+failure:
+  kind: api-renamed
+  symptom: "polars.exceptions.ArgumentRemovedError: the argument 'allow_missing_columns' for 'read_parquet' was deprecated in version 1.30.0 and has been removed in version 2.0. It was renamed to 'missing_columns'."
+  bad_pattern: "pl.read_parquet(paths, allow_missing_columns=True)"
+  fix_pattern: "pl.read_parquet(paths, missing_columns=\"insert\")"
+repro:
+  python: "3.13"
+  deps: ["polars==2.0.0"]
+  old_deps: ["polars==1.44.2"]
+provenance:
+  sources:
+    - {type: docs, url: "https://github.com/pola-rs/polars/blob/py-2.0.0/docs/source/releases/upgrade/2.md"}
+    - {type: changelog, url: "https://github.com/pola-rs/polars/releases/tag/py-2.0.0"}
+  license: "MIT"
+  released: "2026-10-06"
+status: draft
