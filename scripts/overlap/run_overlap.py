@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Which fixtures' bad patterns do existing linters already flag?
 
-For each fixture, run ruff's library rule families and bump-pydantic on bad/ and
-fixed/. A tool "covers" a fixture if it flags bad/ but not fixed/; "partially" if it
-flags both. Reviewed verdicts in manual_review.json override the automatic one.
+For each fixture, run ruff's library rule families, pyupgrade and bump-pydantic on
+bad/ and fixed/. A tool "covers" a fixture if it flags bad/ but not fixed/;
+"partially" if it flags both. Reviewed verdicts in manual_review.json override the
+automatic one.
 
 Usage: python scripts/overlap/run_overlap.py [fixtures_dir] > overlap.md
-Requires ruff and bump-pydantic on PATH (missing tools are reported, not fatal).
+Prints a markdown table and writes overlap.json to the current directory.
+Requires ruff, pyupgrade and bump-pydantic on PATH (missing tools are reported, not fatal).
 """
 
 from __future__ import annotations
@@ -30,14 +32,15 @@ def ruff_codes(d: Path) -> set[str]:
     return {f["code"] for f in json.loads(out or "[]")}
 
 
-def bump_pydantic_changes(d: Path) -> bool:
-    """True if bump-pydantic rewrites anything (run on a temp copy, never in place)."""
+def rewrites(d: Path, cmd: list[str]) -> bool:
+    """True if `cmd` rewrites any file. Runs on a temp copy (as ./src), never in place."""
     with tempfile.TemporaryDirectory() as tmp:
         work = Path(tmp) / "src"
         shutil.copytree(d, work)
         before = {p: p.read_text() for p in work.rglob("*.py")}
-        subprocess.run(["bump-pydantic", "--log-file", str(Path(tmp) / "log"), str(work)],
-                       capture_output=True, text=True, check=False, cwd=tmp)
+        # Relative paths: bump-pydantic calls Path.relative_to(".") on its inputs.
+        args = [str(p.relative_to(tmp)) for p in before] if cmd[0] == "pyupgrade" else ["src"]
+        subprocess.run(cmd + args, capture_output=True, text=True, check=False, cwd=tmp)
         return any(p.read_text() != text for p, text in before.items())
 
 
@@ -48,33 +51,44 @@ def verdict(bad: bool, fixed: bool) -> str:
 def main(argv: list[str]) -> int:
     root = Path(argv[0] if argv else "fixtures")
     review = json.loads(REVIEW.read_text()) if REVIEW.is_file() else {}
-    have_ruff, have_bump = shutil.which("ruff"), shutil.which("bump-pydantic")
-    rows, counts = [], {}
+    tools = {
+        "pyupgrade": ["pyupgrade", "--py313-plus"],
+        "bump-pydantic": ["bump-pydantic", "--log-file", "bump.log"],
+    }
+    have_ruff = shutil.which("ruff")
+    rows, counts, results = [], {}, []
     for fx in sorted(p.parent for p in root.glob("*/*/fixture.yaml")):
+        result = {"id": fx.name}
         cells, auto = [], "MEND-only"
         if have_ruff:
             codes_bad, codes_fixed = ruff_codes(fx / "bad"), ruff_codes(fx / "fixed")
-            hits = sorted(codes_bad)
-            cells.append(", ".join(hits) or "-")
-            if hits:
+            result["ruff"] = {"bad": sorted(codes_bad), "fixed": sorted(codes_fixed)}
+            cells.append(", ".join(sorted(codes_bad)) or "-")
+            if codes_bad:
                 auto = verdict(True, bool(codes_bad & codes_fixed))
         else:
             cells.append("not installed")
-        if have_bump and fx.parent.name == "pydantic":
-            bad, fixed = bump_pydantic_changes(fx / "bad"), bump_pydantic_changes(fx / "fixed")
+        for name, cmd in tools.items():
+            if not shutil.which(cmd[0]):
+                cells.append("not installed")
+                continue
+            bad, fixed = rewrites(fx / "bad", cmd), rewrites(fx / "fixed", cmd)
+            result[name] = {"bad": bad, "fixed": fixed}
             cells.append("rewrites" + (" (also fixed)" if fixed else "") if bad else "-")
-            if bad and auto == "MEND-only":
-                auto = verdict(bad, fixed)
-        else:
-            cells.append("not installed" if fx.parent.name == "pydantic" else "n/a")
+            # A rewrite that also touches fixed/ is modernisation, not this migration.
+            if bad and not fixed and auto == "MEND-only" and name == "bump-pydantic":
+                auto = "covered"
         reviewed = review.get(fx.name, {}).get("verdict", "")
+        result.update(auto=auto, reviewed=reviewed)
+        results.append(result)
         final = reviewed or auto
         counts[final] = counts.get(final, 0) + 1
         flag = " **(differs)**" if reviewed and reviewed != auto else ""
         rows.append(f"| {fx.name} | {' | '.join(cells)} | {auto} | {reviewed}{flag} |")
 
-    print("| fixture | ruff (" + RUFF_RULES + ") | bump-pydantic | auto | reviewed |")
-    print("|---|---|---|---|---|")
+    Path("overlap.json").write_text(json.dumps(results, indent=2) + "\n")
+    print("| fixture | ruff (" + RUFF_RULES + ") | pyupgrade | bump-pydantic | auto | reviewed |")
+    print("|---|---|---|---|---|---|")
     print("\n".join(rows))
     print("\nCounts: " + ", ".join(f"{k}: {v}" for k, v in sorted(counts.items())))
     return 0
