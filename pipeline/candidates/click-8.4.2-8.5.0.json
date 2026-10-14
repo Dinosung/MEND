@@ -1,0 +1,162 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "click",
+ "repo": "https://github.com/pallets/click",
+ "packages": [
+  "click"
+ ],
+ "old": {
+  "tag": "8.4.2",
+  "date": "2026-06-23",
+  "src_root": "src"
+ },
+ "new": {
+  "tag": "8.5.0",
+  "date": "2026-08-21",
+  "src_root": "src"
+ },
+ "engine": "griffe",
+ "errors": [],
+ "counts": {
+  "raw": 13,
+  "kept": 7,
+  "by_category": {
+   "removed_symbol": 7
+  },
+  "hard_failures": 0,
+  "changelog_confirmed": 7,
+  "dropped": {
+   "attribute_changed_value": 4,
+   "duplicate": 2
+  }
+ },
+ "candidates": [
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "click.utils.get_binary_stream",
+   "obj_kind": "function",
+   "file": "click/utils.py",
+   "lineno": 349,
+   "canonical": "click.utils.get_binary_stream",
+   "category": "removed_symbol",
+   "failure_mode": "shim",
+   "public_path": "click.get_binary_stream",
+   "flags": [
+    "module_getattr_shim"
+   ],
+   "changelog_mentions": [
+    "get_binary_stream"
+   ],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "click.utils.get_text_stream",
+   "obj_kind": "function",
+   "file": "click/utils.py",
+   "lineno": 361,
+   "canonical": "click.utils.get_text_stream",
+   "category": "removed_symbol",
+   "failure_mode": "shim",
+   "public_path": "click.get_text_stream",
+   "flags": [
+    "module_getattr_shim"
+   ],
+   "changelog_mentions": [
+    "get_text_stream"
+   ],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "click.utils.KeepOpenFile",
+   "obj_kind": "class",
+   "file": "click/utils.py",
+   "lineno": 207,
+   "canonical": "click.utils.KeepOpenFile",
+   "category": "removed_symbol",
+   "failure_mode": "shim",
+   "public_path": "click.utils.KeepOpenFile",
+   "flags": [
+    "module_getattr_shim"
+   ],
+   "changelog_mentions": [
+    "KeepOpenFile"
+   ],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "click.utils.LazyFile",
+   "obj_kind": "class",
+   "file": "click/utils.py",
+   "lineno": 113,
+   "canonical": "click.utils.LazyFile",
+   "category": "removed_symbol",
+   "failure_mode": "shim",
+   "public_path": "click.utils.LazyFile",
+   "flags": [
+    "module_getattr_shim"
+   ],
+   "changelog_mentions": [
+    "LazyFile"
+   ],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "click.utils.PacifyFlushWrapper",
+   "obj_kind": "class",
+   "file": "click/utils.py",
+   "lineno": 522,
+   "canonical": "click.utils.PacifyFlushWrapper",
+   "category": "removed_symbol",
+   "failure_mode": "shim",
+   "public_path": "click.utils.PacifyFlushWrapper",
+   "flags": [
+    "module_getattr_shim"
+   ],
+   "changelog_mentions": [
+    "PacifyFlushWrapper"
+   ],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "click.utils.make_default_short_help",
+   "obj_kind": "function",
+   "file": "click/utils.py",
+   "lineno": 60,
+   "canonical": "click.utils.make_default_short_help",
+   "category": "removed_symbol",
+   "failure_mode": "shim",
+   "public_path": "click.utils.make_default_short_help",
+   "flags": [
+    "module_getattr_shim"
+   ],
+   "changelog_mentions": [
+    "make_default_short_help"
+   ],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "click.utils.safecall",
+   "obj_kind": "function",
+   "file": "click/utils.py",
+   "lineno": 37,
+   "canonical": "click.utils.safecall",
+   "category": "removed_symbol",
+   "failure_mode": "shim",
+   "public_path": "click.utils.safecall",
+   "flags": [
+    "module_getattr_shim"
+   ],
+   "changelog_mentions": [
+    "safecall"
+   ],
+   "score": 7.25
+  }
+ ]
+}

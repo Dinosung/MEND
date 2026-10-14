@@ -1,0 +1,33 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "openai",
+ "repo": "https://github.com/openai/openai-python",
+ "packages": [
+  "openai"
+ ],
+ "old": {
+  "tag": "v2.54.0",
+  "date": "2026-08-11",
+  "src_root": "src"
+ },
+ "new": {
+  "tag": "v3.0.0",
+  "date": "2026-08-12",
+  "src_root": "src"
+ },
+ "engine": "griffe",
+ "errors": [],
+ "counts": {
+  "raw": 7,
+  "kept": 0,
+  "by_category": {},
+  "hard_failures": 0,
+  "changelog_confirmed": 0,
+  "dropped": {
+   "attribute_changed_value": 6,
+   "private_parameter": 1
+  }
+ },
+ "candidates": []
+}

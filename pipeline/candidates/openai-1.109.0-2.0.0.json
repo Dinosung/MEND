@@ -1,0 +1,32 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "openai",
+ "repo": "https://github.com/openai/openai-python",
+ "packages": [
+  "openai"
+ ],
+ "old": {
+  "tag": "v1.109.0",
+  "date": "2025-09-23",
+  "src_root": "src"
+ },
+ "new": {
+  "tag": "v2.0.0",
+  "date": "2025-09-30",
+  "src_root": "src"
+ },
+ "engine": "griffe",
+ "errors": [],
+ "counts": {
+  "raw": 1,
+  "kept": 0,
+  "by_category": {},
+  "hard_failures": 0,
+  "changelog_confirmed": 0,
+  "dropped": {
+   "attribute_changed_value": 1
+  }
+ },
+ "candidates": []
+}

@@ -1,0 +1,1703 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "anthropic",
+ "repo": "https://github.com/anthropics/anthropic-sdk-python",
+ "packages": [
+  "anthropic"
+ ],
+ "old": {
+  "tag": "v0.125.0",
+  "date": "2026-08-19",
+  "src_root": "src"
+ },
+ "new": {
+  "tag": "v1.0.0",
+  "date": "2026-08-20",
+  "src_root": "src"
+ },
+ "engine": "griffe",
+ "errors": [],
+ "counts": {
+  "raw": 403,
+  "kept": 103,
+  "by_category": {
+   "removed_parameter": 52,
+   "removed_symbol": 51
+  },
+  "hard_failures": 103,
+  "changelog_confirmed": 61,
+  "dropped": {
+   "attribute_changed_value": 286,
+   "duplicate": 10,
+   "private": 4
+  }
+ },
+ "candidates": [
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.resources.completions",
+   "obj_kind": "module",
+   "file": "anthropic/resources/completions.py",
+   "lineno": null,
+   "canonical": "anthropic.resources.completions",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.completions",
+   "flags": [],
+   "changelog_mentions": [
+    "completions"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.AsyncMessages.create",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 2323,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.AsyncMessages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "create"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.AsyncMessages.create",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 2323,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.AsyncMessages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "create"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.AsyncMessages.create",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 2323,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.AsyncMessages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "create"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.AsyncMessages.stream",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 2402,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.AsyncMessages.stream",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "stream"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.AsyncMessages.stream",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 2402,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.AsyncMessages.stream",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "stream"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.AsyncMessages.stream",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 2402,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.AsyncMessages.stream",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "stream"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.Messages.create",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 921,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.Messages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "create"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.Messages.create",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 921,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.Messages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "create"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.Messages.create",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 921,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.Messages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "create"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.Messages.stream",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 1000,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.Messages.stream",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "stream"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.Messages.stream",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 1000,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.Messages.stream",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "stream"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.Messages.stream",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 1000,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.Messages.stream",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "stream"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.BetaBase64PDFBlockParam",
+   "obj_kind": "alias",
+   "old_value": "anthropic.types.beta.beta_base64_pdf_block_param.BetaBase64PDFBlockParam",
+   "canonical": "anthropic.types.beta.beta_base64_pdf_block_param.BetaBase64PDFBlockParam",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.BetaBase64PDFBlockParam",
+   "flags": [],
+   "changelog_mentions": [
+    "BetaBase64PDFBlockParam"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.count_tokens",
+   "obj_kind": "function",
+   "param": "output_format",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 3534,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.count_tokens",
+   "flags": [],
+   "changelog_mentions": [
+    "output_format",
+    "count_tokens"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.create",
+   "obj_kind": "function",
+   "param": "output_format",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 2924,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "output_format",
+    "create"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.create",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 2924,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "create"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.create",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 2924,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "create"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.create",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 2924,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "create"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.parse",
+   "obj_kind": "function",
+   "param": "stream",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 3025,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "stream",
+    "parse"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.parse",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 3025,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "parse"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.parse",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 3025,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "parse"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.parse",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 3025,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "parse"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.stream",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 3405,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.stream",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "stream"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.stream",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 3405,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.stream",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "stream"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.stream",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 3405,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.stream",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "stream"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.tool_runner",
+   "obj_kind": "function",
+   "param": "compaction_control",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 3279,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.tool_runner",
+   "flags": [],
+   "changelog_mentions": [
+    "compaction_control",
+    "tool_runner"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.tool_runner",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 3279,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.tool_runner",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "tool_runner"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.tool_runner",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 3279,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.tool_runner",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "tool_runner"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.AsyncMessages.tool_runner",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 3279,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.AsyncMessages.tool_runner",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "tool_runner"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.count_tokens",
+   "obj_kind": "function",
+   "param": "output_format",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1687,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.count_tokens",
+   "flags": [],
+   "changelog_mentions": [
+    "output_format",
+    "count_tokens"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.create",
+   "obj_kind": "function",
+   "param": "output_format",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1067,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "output_format",
+    "create"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.create",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1067,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "create"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.create",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1067,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "create"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.create",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1067,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.create",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "create"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.parse",
+   "obj_kind": "function",
+   "param": "stream",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1168,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "stream",
+    "parse"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.parse",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1168,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "parse"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.parse",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1168,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "parse"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.parse",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1168,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "parse"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.stream",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1556,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.stream",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "stream"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.stream",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1556,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.stream",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "stream"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.stream",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1556,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.stream",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "stream"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.tool_runner",
+   "obj_kind": "function",
+   "param": "compaction_control",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1423,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.tool_runner",
+   "flags": [],
+   "changelog_mentions": [
+    "compaction_control",
+    "tool_runner"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.tool_runner",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1423,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.tool_runner",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "tool_runner"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.tool_runner",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1423,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.tool_runner",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "tool_runner"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.beta.messages.messages.Messages.tool_runner",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/beta/messages/messages.py",
+   "lineno": 1423,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.beta.Messages.tool_runner",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "tool_runner"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic._client.Anthropic.AI_PROMPT",
+   "obj_kind": "attribute",
+   "file": "anthropic/_client.py",
+   "lineno": 154,
+   "canonical": "anthropic._client.Anthropic.AI_PROMPT",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.Anthropic.AI_PROMPT",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic._client.Anthropic.HUMAN_PROMPT",
+   "obj_kind": "attribute",
+   "file": "anthropic/_client.py",
+   "lineno": 153,
+   "canonical": "anthropic._client.Anthropic.HUMAN_PROMPT",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.Anthropic.HUMAN_PROMPT",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic._client.Anthropic.completions",
+   "obj_kind": "function",
+   "file": "anthropic/_client.py",
+   "lineno": 307,
+   "canonical": "anthropic._client.Anthropic.completions",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.Anthropic.completions",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.lib.foundry.AnthropicFoundry.completions",
+   "obj_kind": "function",
+   "file": "anthropic/_client.py",
+   "lineno": 307,
+   "canonical": "anthropic.lib.foundry.AnthropicFoundry.completions",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.AnthropicFoundry.completions",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic._client.AsyncAnthropic.AI_PROMPT",
+   "obj_kind": "attribute",
+   "file": "anthropic/_client.py",
+   "lineno": 586,
+   "canonical": "anthropic._client.AsyncAnthropic.AI_PROMPT",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.AsyncAnthropic.AI_PROMPT",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic._client.AsyncAnthropic.HUMAN_PROMPT",
+   "obj_kind": "attribute",
+   "file": "anthropic/_client.py",
+   "lineno": 585,
+   "canonical": "anthropic._client.AsyncAnthropic.HUMAN_PROMPT",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.AsyncAnthropic.HUMAN_PROMPT",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic._client.AsyncAnthropic.completions",
+   "obj_kind": "function",
+   "file": "anthropic/_client.py",
+   "lineno": 739,
+   "canonical": "anthropic._client.AsyncAnthropic.completions",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.AsyncAnthropic.completions",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.lib.foundry.AsyncAnthropicFoundry.completions",
+   "obj_kind": "function",
+   "file": "anthropic/_client.py",
+   "lineno": 739,
+   "canonical": "anthropic.lib.foundry.AsyncAnthropicFoundry.completions",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.AsyncAnthropicFoundry.completions",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.AI_PROMPT",
+   "obj_kind": "attribute",
+   "file": "anthropic/_constants.py",
+   "lineno": 18,
+   "canonical": "anthropic._constants.AI_PROMPT",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.AI_PROMPT",
+   "flags": [],
+   "changelog_mentions": [
+    "AI_PROMPT"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.HUMAN_PROMPT",
+   "obj_kind": "attribute",
+   "file": "anthropic/_constants.py",
+   "lineno": 16,
+   "canonical": "anthropic._constants.HUMAN_PROMPT",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.HUMAN_PROMPT",
+   "flags": [],
+   "changelog_mentions": [
+    "HUMAN_PROMPT"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.ProxiesTypes",
+   "obj_kind": "attribute",
+   "file": "anthropic/_types.py",
+   "lineno": 58,
+   "canonical": "anthropic._types.ProxiesTypes",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.ProxiesTypes",
+   "flags": [],
+   "changelog_mentions": [
+    "ProxiesTypes"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.Transport",
+   "obj_kind": "attribute",
+   "file": "anthropic/_types.py",
+   "lineno": 43,
+   "canonical": "anthropic._types.Transport",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.Transport",
+   "flags": [],
+   "changelog_mentions": [
+    "Transport"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.beta_base64_pdf_block_param",
+   "obj_kind": "module",
+   "file": "anthropic/types/beta/beta_base64_pdf_block_param.py",
+   "lineno": null,
+   "canonical": "anthropic.types.beta.beta_base64_pdf_block_param",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.beta_base64_pdf_block_param",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 9.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.resources.Completions",
+   "obj_kind": "class",
+   "file": "anthropic/resources/completions.py",
+   "lineno": 28,
+   "canonical": "anthropic.resources.completions.Completions",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.Completions",
+   "flags": [],
+   "changelog_mentions": [
+    "Completions"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.Completion",
+   "obj_kind": "alias",
+   "old_value": "anthropic.types.completion.Completion",
+   "canonical": "anthropic.types.completion.Completion",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.Completion",
+   "flags": [],
+   "changelog_mentions": [
+    "Completion"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.CompletionCreateParams",
+   "obj_kind": "alias",
+   "old_value": "anthropic.types.completion_create_params.CompletionCreateParams",
+   "canonical": "anthropic.types.completion_create_params.CompletionCreateParams",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.CompletionCreateParams",
+   "flags": [],
+   "changelog_mentions": [
+    "CompletionCreateParams"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.message_count_tokens_params.MessageCountTokensParams.output_format",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/beta/message_count_tokens_params.py",
+   "lineno": 148,
+   "canonical": "anthropic.types.beta.message_count_tokens_params.MessageCountTokensParams.output_format",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.MessageCountTokensParams.output_format",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.AsyncMessages.parse",
+   "obj_kind": "function",
+   "param": "stream",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 2514,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.AsyncMessages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "stream",
+    "parse"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.AsyncMessages.parse",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 2514,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.AsyncMessages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "parse"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.AsyncMessages.parse",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 2514,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.AsyncMessages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "parse"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.AsyncMessages.parse",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 2514,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.AsyncMessages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "parse"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.Messages.parse",
+   "obj_kind": "function",
+   "param": "stream",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 1113,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.Messages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "stream",
+    "parse"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.Messages.parse",
+   "obj_kind": "function",
+   "param": "temperature",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 1113,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.Messages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "temperature",
+    "parse"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.Messages.parse",
+   "obj_kind": "function",
+   "param": "top_k",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 1113,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.Messages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "top_k",
+    "parse"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "anthropic.resources.messages.messages.Messages.parse",
+   "obj_kind": "function",
+   "param": "top_p",
+   "old_value": "keyword-only, default=omit",
+   "file": "anthropic/resources/messages/messages.py",
+   "lineno": 1113,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.Messages.parse",
+   "flags": [],
+   "changelog_mentions": [
+    "top_p",
+    "parse"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.message_create_params.MessageCreateParamsBase.output_format",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/beta/message_create_params.py",
+   "lineno": 199,
+   "canonical": "anthropic.types.beta.message_create_params.MessageCreateParamsBase.output_format",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.message_create_params.MessageCreateParamsBase.output_format",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.message_create_params.MessageCreateParamsBase.temperature",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/beta/message_create_params.py",
+   "lineno": 246,
+   "canonical": "anthropic.types.beta.message_create_params.MessageCreateParamsBase.temperature",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.message_create_params.MessageCreateParamsBase.temperature",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.message_create_params.MessageCreateParamsBase.top_k",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/beta/message_create_params.py",
+   "lineno": 356,
+   "canonical": "anthropic.types.beta.message_create_params.MessageCreateParamsBase.top_k",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.message_create_params.MessageCreateParamsBase.top_k",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.message_create_params.MessageCreateParamsBase.top_p",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/beta/message_create_params.py",
+   "lineno": 365,
+   "canonical": "anthropic.types.beta.message_create_params.MessageCreateParamsBase.top_p",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.message_create_params.MessageCreateParamsBase.top_p",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.message_create_params.MessageCreateParamsNonStreaming.output_format",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/beta/message_create_params.py",
+   "lineno": 199,
+   "canonical": "anthropic.types.beta.message_create_params.MessageCreateParamsNonStreaming.output_format",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.message_create_params.MessageCreateParamsNonStreaming.output_format",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.message_create_params.MessageCreateParamsNonStreaming.temperature",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/beta/message_create_params.py",
+   "lineno": 246,
+   "canonical": "anthropic.types.beta.message_create_params.MessageCreateParamsNonStreaming.temperature",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.message_create_params.MessageCreateParamsNonStreaming.temperature",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.message_create_params.MessageCreateParamsNonStreaming.top_k",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/beta/message_create_params.py",
+   "lineno": 356,
+   "canonical": "anthropic.types.beta.message_create_params.MessageCreateParamsNonStreaming.top_k",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.message_create_params.MessageCreateParamsNonStreaming.top_k",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.message_create_params.MessageCreateParamsNonStreaming.top_p",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/beta/message_create_params.py",
+   "lineno": 365,
+   "canonical": "anthropic.types.beta.message_create_params.MessageCreateParamsNonStreaming.top_p",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.message_create_params.MessageCreateParamsNonStreaming.top_p",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.message_create_params.MessageCreateParamsStreaming.output_format",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/beta/message_create_params.py",
+   "lineno": 199,
+   "canonical": "anthropic.types.beta.message_create_params.MessageCreateParamsStreaming.output_format",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.message_create_params.MessageCreateParamsStreaming.output_format",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.message_create_params.MessageCreateParamsStreaming.temperature",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/beta/message_create_params.py",
+   "lineno": 246,
+   "canonical": "anthropic.types.beta.message_create_params.MessageCreateParamsStreaming.temperature",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.message_create_params.MessageCreateParamsStreaming.temperature",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.message_create_params.MessageCreateParamsStreaming.top_k",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/beta/message_create_params.py",
+   "lineno": 356,
+   "canonical": "anthropic.types.beta.message_create_params.MessageCreateParamsStreaming.top_k",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.message_create_params.MessageCreateParamsStreaming.top_k",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.beta.message_create_params.MessageCreateParamsStreaming.top_p",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/beta/message_create_params.py",
+   "lineno": 365,
+   "canonical": "anthropic.types.beta.message_create_params.MessageCreateParamsStreaming.top_p",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.beta.message_create_params.MessageCreateParamsStreaming.top_p",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.lib.foundry.AnthropicFoundry.AI_PROMPT",
+   "obj_kind": "attribute",
+   "file": "anthropic/_client.py",
+   "lineno": 154,
+   "canonical": "anthropic.lib.foundry.AnthropicFoundry.AI_PROMPT",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.AnthropicFoundry.AI_PROMPT",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.lib.foundry.AnthropicFoundry.HUMAN_PROMPT",
+   "obj_kind": "attribute",
+   "file": "anthropic/_client.py",
+   "lineno": 153,
+   "canonical": "anthropic.lib.foundry.AnthropicFoundry.HUMAN_PROMPT",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.AnthropicFoundry.HUMAN_PROMPT",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.lib.foundry.AsyncAnthropicFoundry.AI_PROMPT",
+   "obj_kind": "attribute",
+   "file": "anthropic/_client.py",
+   "lineno": 586,
+   "canonical": "anthropic.lib.foundry.AsyncAnthropicFoundry.AI_PROMPT",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.AsyncAnthropicFoundry.AI_PROMPT",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.lib.foundry.AsyncAnthropicFoundry.HUMAN_PROMPT",
+   "obj_kind": "attribute",
+   "file": "anthropic/_client.py",
+   "lineno": 585,
+   "canonical": "anthropic.lib.foundry.AsyncAnthropicFoundry.HUMAN_PROMPT",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.AsyncAnthropicFoundry.HUMAN_PROMPT",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.resources.AsyncCompletions",
+   "obj_kind": "class",
+   "file": "anthropic/resources/completions.py",
+   "lineno": 423,
+   "canonical": "anthropic.resources.completions.AsyncCompletions",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.AsyncCompletions",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.resources.AsyncCompletionsWithRawResponse",
+   "obj_kind": "class",
+   "file": "anthropic/resources/completions.py",
+   "lineno": 827,
+   "canonical": "anthropic.resources.completions.AsyncCompletionsWithRawResponse",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.AsyncCompletionsWithRawResponse",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.resources.AsyncCompletionsWithStreamingResponse",
+   "obj_kind": "class",
+   "file": "anthropic/resources/completions.py",
+   "lineno": 845,
+   "canonical": "anthropic.resources.completions.AsyncCompletionsWithStreamingResponse",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.AsyncCompletionsWithStreamingResponse",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.resources.CompletionsWithRawResponse",
+   "obj_kind": "class",
+   "file": "anthropic/resources/completions.py",
+   "lineno": 818,
+   "canonical": "anthropic.resources.completions.CompletionsWithRawResponse",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.CompletionsWithRawResponse",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.resources.CompletionsWithStreamingResponse",
+   "obj_kind": "class",
+   "file": "anthropic/resources/completions.py",
+   "lineno": 836,
+   "canonical": "anthropic.resources.completions.CompletionsWithStreamingResponse",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.resources.CompletionsWithStreamingResponse",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.completion",
+   "obj_kind": "module",
+   "file": "anthropic/types/completion.py",
+   "lineno": null,
+   "canonical": "anthropic.types.completion",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.completion",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.completion_create_params",
+   "obj_kind": "module",
+   "file": "anthropic/types/completion_create_params.py",
+   "lineno": null,
+   "canonical": "anthropic.types.completion_create_params",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.completion_create_params",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.message_create_params.MessageCreateParamsBase.temperature",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/message_create_params.py",
+   "lineno": 179,
+   "canonical": "anthropic.types.message_create_params.MessageCreateParamsBase.temperature",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.message_create_params.MessageCreateParamsBase.temperature",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.message_create_params.MessageCreateParamsBase.top_k",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/message_create_params.py",
+   "lineno": 289,
+   "canonical": "anthropic.types.message_create_params.MessageCreateParamsBase.top_k",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.message_create_params.MessageCreateParamsBase.top_k",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.message_create_params.MessageCreateParamsBase.top_p",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/message_create_params.py",
+   "lineno": 298,
+   "canonical": "anthropic.types.message_create_params.MessageCreateParamsBase.top_p",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.message_create_params.MessageCreateParamsBase.top_p",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.message_create_params.MessageCreateParamsNonStreaming.temperature",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/message_create_params.py",
+   "lineno": 179,
+   "canonical": "anthropic.types.message_create_params.MessageCreateParamsNonStreaming.temperature",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.message_create_params.MessageCreateParamsNonStreaming.temperature",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.message_create_params.MessageCreateParamsNonStreaming.top_k",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/message_create_params.py",
+   "lineno": 289,
+   "canonical": "anthropic.types.message_create_params.MessageCreateParamsNonStreaming.top_k",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.message_create_params.MessageCreateParamsNonStreaming.top_k",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.message_create_params.MessageCreateParamsNonStreaming.top_p",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/message_create_params.py",
+   "lineno": 298,
+   "canonical": "anthropic.types.message_create_params.MessageCreateParamsNonStreaming.top_p",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.message_create_params.MessageCreateParamsNonStreaming.top_p",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.message_create_params.MessageCreateParamsStreaming.temperature",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/message_create_params.py",
+   "lineno": 179,
+   "canonical": "anthropic.types.message_create_params.MessageCreateParamsStreaming.temperature",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.message_create_params.MessageCreateParamsStreaming.temperature",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.message_create_params.MessageCreateParamsStreaming.top_k",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/message_create_params.py",
+   "lineno": 289,
+   "canonical": "anthropic.types.message_create_params.MessageCreateParamsStreaming.top_k",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.message_create_params.MessageCreateParamsStreaming.top_k",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "anthropic.types.message_create_params.MessageCreateParamsStreaming.top_p",
+   "obj_kind": "attribute",
+   "file": "anthropic/types/message_create_params.py",
+   "lineno": 298,
+   "canonical": "anthropic.types.message_create_params.MessageCreateParamsStreaming.top_p",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "anthropic.types.message_create_params.MessageCreateParamsStreaming.top_p",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  }
+ ]
+}

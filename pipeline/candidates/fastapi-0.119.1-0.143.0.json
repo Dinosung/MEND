@@ -1,0 +1,876 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "fastapi",
+ "repo": "https://github.com/fastapi/fastapi",
+ "packages": [
+  "fastapi"
+ ],
+ "old": {
+  "tag": "0.119.1",
+  "date": "2025-10-20",
+  "src_root": "."
+ },
+ "new": {
+  "tag": "0.143.0",
+  "date": "2026-10-08",
+  "src_root": "."
+ },
+ "engine": "griffe",
+ "errors": [],
+ "counts": {
+  "raw": 143,
+  "kept": 52,
+  "by_category": {
+   "moved_parameter": 1,
+   "removed_parameter": 1,
+   "removed_symbol": 50
+  },
+  "hard_failures": 51,
+  "changelog_confirmed": 2,
+  "dropped": {
+   "attribute_changed_value": 37,
+   "dunder": 5,
+   "internal": 35,
+   "private": 13,
+   "private_parameter": 1
+  }
+ },
+ "candidates": [
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.datastructures.UploadFile.validate",
+   "obj_kind": "function",
+   "file": "fastapi/datastructures.py",
+   "lineno": 143,
+   "canonical": "fastapi.datastructures.UploadFile.validate",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.UploadFile.validate",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.Example.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 233,
+   "canonical": "fastapi.openapi.models.Example.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.Example.Config",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "fastapi.security.api_key.APIKeyBase.check_api_key",
+   "obj_kind": "function",
+   "param": "auto_error",
+   "old_value": "positional or keyword",
+   "file": "fastapi/security/api_key.py",
+   "lineno": 47,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "fastapi.security.api_key.APIKeyBase.check_api_key",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.params.Body.deprecated",
+   "obj_kind": "attribute",
+   "file": "fastapi/params.py",
+   "lineno": 569,
+   "canonical": "fastapi.params.Body.deprecated",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.params.Body.deprecated",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.params.Cookie.deprecated",
+   "obj_kind": "attribute",
+   "file": "fastapi/params.py",
+   "lineno": 113,
+   "canonical": "fastapi.params.Cookie.deprecated",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.params.Cookie.deprecated",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.params.File.deprecated",
+   "obj_kind": "attribute",
+   "file": "fastapi/params.py",
+   "lineno": 569,
+   "canonical": "fastapi.params.File.deprecated",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.params.File.deprecated",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.params.Form.deprecated",
+   "obj_kind": "attribute",
+   "file": "fastapi/params.py",
+   "lineno": 569,
+   "canonical": "fastapi.params.Form.deprecated",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.params.Form.deprecated",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.params.Header.deprecated",
+   "obj_kind": "attribute",
+   "file": "fastapi/params.py",
+   "lineno": 113,
+   "canonical": "fastapi.params.Header.deprecated",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.params.Header.deprecated",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.params.Path.deprecated",
+   "obj_kind": "attribute",
+   "file": "fastapi/params.py",
+   "lineno": 113,
+   "canonical": "fastapi.params.Path.deprecated",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.params.Path.deprecated",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.params.Query.deprecated",
+   "obj_kind": "attribute",
+   "file": "fastapi/params.py",
+   "lineno": 113,
+   "canonical": "fastapi.params.Query.deprecated",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.params.Query.deprecated",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.Header.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.Header.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.Header.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 4.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.Response.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.Response.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.Response.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 4.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.routing.APIRoute.methods",
+   "obj_kind": "attribute",
+   "file": "fastapi/routing.py",
+   "lineno": 572,
+   "canonical": "fastapi.routing.APIRoute.methods",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.routing.APIRoute.methods",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [
+    "APIRoute",
+    "methods"
+   ],
+   "score": 4.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.routing.APIRoute.path",
+   "obj_kind": "attribute",
+   "file": "fastapi/routing.py",
+   "lineno": 541,
+   "canonical": "fastapi.routing.APIRoute.path",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.routing.APIRoute.path",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [
+    "APIRoute",
+    "path"
+   ],
+   "score": 4.5
+  },
+  {
+   "kind": "PARAMETER_MOVED",
+   "path": "fastapi.security.api_key.APIKeyBase.check_api_key",
+   "obj_kind": "function",
+   "param": "api_key",
+   "old_value": "positional or keyword",
+   "details": "position: from 0 to 1 (+1)",
+   "file": "fastapi/security/api_key.py",
+   "lineno": 47,
+   "category": "moved_parameter",
+   "failure_mode": "soft",
+   "public_path": "fastapi.security.api_key.APIKeyBase.check_api_key",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 2.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.params.Param.deprecated",
+   "obj_kind": "attribute",
+   "file": "fastapi/params.py",
+   "lineno": 113,
+   "canonical": "fastapi.params.Param.deprecated",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.params.Param.deprecated",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 2.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.routing.APIRoute.endpoint",
+   "obj_kind": "attribute",
+   "file": "fastapi/routing.py",
+   "lineno": 542,
+   "canonical": "fastapi.routing.APIRoute.endpoint",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.routing.APIRoute.endpoint",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 2.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.routing.APIRoute.name",
+   "obj_kind": "attribute",
+   "file": "fastapi/routing.py",
+   "lineno": 568,
+   "canonical": "fastapi.routing.APIRoute.name",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.routing.APIRoute.name",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 2.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.routing.APIRoute.secure_cloned_response_field",
+   "obj_kind": "attribute",
+   "file": "fastapi/routing.py",
+   "lineno": 602,
+   "canonical": "fastapi.routing.APIRoute.secure_cloned_response_field",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.routing.APIRoute.secure_cloned_response_field",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 2.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.routing.APIWebSocketRoute.dependant",
+   "obj_kind": "attribute",
+   "file": "fastapi/routing.py",
+   "lineno": 481,
+   "canonical": "fastapi.routing.APIWebSocketRoute.dependant",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.routing.APIWebSocketRoute.dependant",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 2.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.APIKey.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.APIKey.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.APIKey.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.BaseModelWithConfig.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.BaseModelWithConfig.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.BaseModelWithConfig.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.Components.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.Components.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.Components.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.Contact.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.Contact.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.Contact.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.Encoding.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.Encoding.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.Encoding.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.ExternalDocumentation.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.ExternalDocumentation.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.ExternalDocumentation.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.HTTPBase.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.HTTPBase.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.HTTPBase.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.HTTPBearer.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.HTTPBearer.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.HTTPBearer.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.Info.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.Info.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.Info.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.License.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.License.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.License.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.Link.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.Link.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.Link.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.MediaType.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.MediaType.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.MediaType.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.OAuth2.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.OAuth2.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.OAuth2.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.OAuthFlow.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.OAuthFlow.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.OAuthFlow.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.OAuthFlowAuthorizationCode.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.OAuthFlowAuthorizationCode.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.OAuthFlowAuthorizationCode.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.OAuthFlowClientCredentials.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.OAuthFlowClientCredentials.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.OAuthFlowClientCredentials.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.OAuthFlowImplicit.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.OAuthFlowImplicit.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.OAuthFlowImplicit.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.OAuthFlowPassword.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.OAuthFlowPassword.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.OAuthFlowPassword.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.OAuthFlows.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.OAuthFlows.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.OAuthFlows.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.OpenAPI.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.OpenAPI.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.OpenAPI.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.OpenIdConnect.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.OpenIdConnect.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.OpenIdConnect.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.Operation.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.Operation.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.Operation.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.Parameter.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.Parameter.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.Parameter.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.ParameterBase.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.ParameterBase.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.ParameterBase.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.PathItem.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.PathItem.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.PathItem.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.RequestBody.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.RequestBody.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.RequestBody.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.Schema.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.Schema.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.Schema.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.SecurityBase.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.SecurityBase.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.SecurityBase.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.Server.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.Server.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.Server.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.ServerVariable.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.ServerVariable.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.ServerVariable.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.Tag.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.Tag.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.Tag.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "fastapi.openapi.models.XML.Config",
+   "obj_kind": "class",
+   "file": "fastapi/openapi/models.py",
+   "lineno": 64,
+   "canonical": "fastapi.openapi.models.XML.Config",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "fastapi.openapi.models.XML.Config",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 1.75
+  }
+ ]
+}

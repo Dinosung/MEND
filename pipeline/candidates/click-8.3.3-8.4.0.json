@@ -1,0 +1,32 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "click",
+ "repo": "https://github.com/pallets/click",
+ "packages": [
+  "click"
+ ],
+ "old": {
+  "tag": "8.3.3",
+  "date": "2026-04-17",
+  "src_root": "src"
+ },
+ "new": {
+  "tag": "8.4.0",
+  "date": "2026-05-16",
+  "src_root": "src"
+ },
+ "engine": "griffe",
+ "errors": [],
+ "counts": {
+  "raw": 1,
+  "kept": 0,
+  "by_category": {},
+  "hard_failures": 0,
+  "changelog_confirmed": 0,
+  "dropped": {
+   "attribute_changed_value": 1
+  }
+ },
+ "candidates": []
+}

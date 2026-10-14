@@ -1,0 +1,486 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "starlette",
+ "repo": "https://github.com/Kludex/starlette",
+ "packages": [
+  "starlette"
+ ],
+ "old": {
+  "tag": "0.52.1",
+  "date": "2026-01-18",
+  "src_root": "."
+ },
+ "new": {
+  "tag": "1.0.0",
+  "date": "2026-03-22",
+  "src_root": "."
+ },
+ "engine": "griffe",
+ "errors": [],
+ "counts": {
+  "raw": 32,
+  "kept": 26,
+  "by_category": {
+   "moved_parameter": 3,
+   "new_required_parameter": 2,
+   "removed_parameter": 5,
+   "removed_symbol": 16
+  },
+  "hard_failures": 23,
+  "changelog_confirmed": 24,
+  "dropped": {
+   "attribute_changed_value": 3,
+   "private_parameter": 2,
+   "variadic_parameter": 1
+  }
+ },
+ "candidates": [
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "starlette.applications.Starlette.__init__",
+   "obj_kind": "function",
+   "param": "on_shutdown",
+   "old_value": "positional or keyword, default=None",
+   "file": "starlette/applications.py",
+   "lineno": 22,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "starlette.applications.Starlette.__init__",
+   "flags": [],
+   "changelog_mentions": [
+    "on_shutdown",
+    "Starlette"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "starlette.applications.Starlette.__init__",
+   "obj_kind": "function",
+   "param": "on_startup",
+   "old_value": "positional or keyword, default=None",
+   "file": "starlette/applications.py",
+   "lineno": 22,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "starlette.applications.Starlette.__init__",
+   "flags": [],
+   "changelog_mentions": [
+    "on_startup",
+    "Starlette"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.applications.Starlette.add_event_handler",
+   "obj_kind": "function",
+   "file": "starlette/applications.py",
+   "lineno": 135,
+   "canonical": "starlette.applications.Starlette.add_event_handler",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.applications.Starlette.add_event_handler",
+   "flags": [],
+   "changelog_mentions": [
+    "Starlette",
+    "add_event_handler"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.applications.Starlette.exception_handler",
+   "obj_kind": "function",
+   "file": "starlette/applications.py",
+   "lineno": 160,
+   "canonical": "starlette.applications.Starlette.exception_handler",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.applications.Starlette.exception_handler",
+   "flags": [],
+   "changelog_mentions": [
+    "Starlette",
+    "exception_handler"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.applications.Starlette.middleware",
+   "obj_kind": "function",
+   "file": "starlette/applications.py",
+   "lineno": 225,
+   "canonical": "starlette.applications.Starlette.middleware",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.applications.Starlette.middleware",
+   "flags": [],
+   "changelog_mentions": [
+    "Starlette",
+    "middleware"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.applications.Starlette.on_event",
+   "obj_kind": "function",
+   "file": "starlette/applications.py",
+   "lineno": 109,
+   "canonical": "starlette.applications.Starlette.on_event",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.applications.Starlette.on_event",
+   "flags": [],
+   "changelog_mentions": [
+    "Starlette",
+    "on_event"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.applications.Starlette.route",
+   "obj_kind": "function",
+   "file": "starlette/applications.py",
+   "lineno": 173,
+   "canonical": "starlette.applications.Starlette.route",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.applications.Starlette.route",
+   "flags": [],
+   "changelog_mentions": [
+    "Starlette",
+    "route"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.applications.Starlette.websocket_route",
+   "obj_kind": "function",
+   "file": "starlette/applications.py",
+   "lineno": 205,
+   "canonical": "starlette.applications.Starlette.websocket_route",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.applications.Starlette.websocket_route",
+   "flags": [],
+   "changelog_mentions": [
+    "Starlette",
+    "websocket_route"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "starlette.responses.FileResponse.__init__",
+   "obj_kind": "function",
+   "param": "method",
+   "old_value": "positional or keyword, default=None",
+   "file": "starlette/responses.py",
+   "lineno": 300,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "starlette.responses.FileResponse.__init__",
+   "flags": [],
+   "changelog_mentions": [
+    "method",
+    "FileResponse"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "starlette.routing.Router.__init__",
+   "obj_kind": "function",
+   "param": "on_shutdown",
+   "old_value": "positional or keyword, default=None",
+   "file": "starlette/routing.py",
+   "lineno": 567,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "starlette.routing.Router.__init__",
+   "flags": [],
+   "changelog_mentions": [
+    "on_shutdown",
+    "Router"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "starlette.routing.Router.__init__",
+   "obj_kind": "function",
+   "param": "on_startup",
+   "old_value": "positional or keyword, default=None",
+   "file": "starlette/routing.py",
+   "lineno": 567,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "starlette.routing.Router.__init__",
+   "flags": [],
+   "changelog_mentions": [
+    "on_startup",
+    "Router"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.routing.Router.add_event_handler",
+   "obj_kind": "function",
+   "file": "starlette/routing.py",
+   "lineno": 857,
+   "canonical": "starlette.routing.Router.add_event_handler",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.routing.Router.add_event_handler",
+   "flags": [],
+   "changelog_mentions": [
+    "Router",
+    "add_event_handler"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.routing.Router.on_event",
+   "obj_kind": "function",
+   "file": "starlette/routing.py",
+   "lineno": 865,
+   "canonical": "starlette.routing.Router.on_event",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.routing.Router.on_event",
+   "flags": [],
+   "changelog_mentions": [
+    "Router",
+    "on_event"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.routing.Router.on_shutdown",
+   "obj_kind": "attribute",
+   "file": "starlette/routing.py",
+   "lineno": 598,
+   "canonical": "starlette.routing.Router.on_shutdown",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.routing.Router.on_shutdown",
+   "flags": [],
+   "changelog_mentions": [
+    "Router",
+    "on_shutdown"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.routing.Router.on_startup",
+   "obj_kind": "attribute",
+   "file": "starlette/routing.py",
+   "lineno": 597,
+   "canonical": "starlette.routing.Router.on_startup",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.routing.Router.on_startup",
+   "flags": [],
+   "changelog_mentions": [
+    "Router",
+    "on_startup"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.routing.Router.route",
+   "obj_kind": "function",
+   "file": "starlette/routing.py",
+   "lineno": 805,
+   "canonical": "starlette.routing.Router.route",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.routing.Router.route",
+   "flags": [],
+   "changelog_mentions": [
+    "Router",
+    "route"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.routing.Router.shutdown",
+   "obj_kind": "function",
+   "file": "starlette/routing.py",
+   "lineno": 675,
+   "canonical": "starlette.routing.Router.shutdown",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.routing.Router.shutdown",
+   "flags": [],
+   "changelog_mentions": [
+    "Router",
+    "shutdown"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.routing.Router.startup",
+   "obj_kind": "function",
+   "file": "starlette/routing.py",
+   "lineno": 665,
+   "canonical": "starlette.routing.Router.startup",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.routing.Router.startup",
+   "flags": [],
+   "changelog_mentions": [
+    "Router",
+    "startup"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.routing.Router.websocket_route",
+   "obj_kind": "function",
+   "file": "starlette/routing.py",
+   "lineno": 837,
+   "canonical": "starlette.routing.Router.websocket_route",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.routing.Router.websocket_route",
+   "flags": [],
+   "changelog_mentions": [
+    "Router",
+    "websocket_route"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_ADDED_REQUIRED",
+   "path": "starlette.templating.Jinja2Templates.TemplateResponse",
+   "obj_kind": "function",
+   "param": "name",
+   "file": "starlette/templating.py",
+   "lineno": 117,
+   "category": "new_required_parameter",
+   "failure_mode": "hard",
+   "public_path": "starlette.templating.Jinja2Templates.TemplateResponse",
+   "flags": [],
+   "changelog_mentions": [
+    "name",
+    "TemplateResponse"
+   ],
+   "score": 10.5
+  },
+  {
+   "kind": "PARAMETER_ADDED_REQUIRED",
+   "path": "starlette.templating.Jinja2Templates.TemplateResponse",
+   "obj_kind": "function",
+   "param": "request",
+   "file": "starlette/templating.py",
+   "lineno": 117,
+   "category": "new_required_parameter",
+   "failure_mode": "hard",
+   "public_path": "starlette.templating.Jinja2Templates.TemplateResponse",
+   "flags": [],
+   "changelog_mentions": [
+    "request",
+    "TemplateResponse"
+   ],
+   "score": 10.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.applications.Starlette.add_websocket_route",
+   "obj_kind": "function",
+   "file": "starlette/applications.py",
+   "lineno": 152,
+   "canonical": "starlette.applications.Starlette.add_websocket_route",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.applications.Starlette.add_websocket_route",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 9.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.routing.iscoroutinefunction_or_partial",
+   "obj_kind": "function",
+   "file": "starlette/routing.py",
+   "lineno": 46,
+   "canonical": "starlette.routing.iscoroutinefunction_or_partial",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.routing.iscoroutinefunction_or_partial",
+   "flags": [],
+   "changelog_mentions": [
+    "iscoroutinefunction_or_partial"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "PARAMETER_MOVED",
+   "path": "starlette.applications.Starlette.__init__",
+   "obj_kind": "function",
+   "param": "lifespan",
+   "old_value": "positional or keyword, default=None",
+   "details": "position: from 7 to 5 (-2)",
+   "file": "starlette/applications.py",
+   "lineno": 22,
+   "category": "moved_parameter",
+   "failure_mode": "soft",
+   "public_path": "starlette.applications.Starlette.__init__",
+   "flags": [],
+   "changelog_mentions": [
+    "lifespan",
+    "Starlette"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "PARAMETER_MOVED",
+   "path": "starlette.routing.Router.__init__",
+   "obj_kind": "function",
+   "param": "lifespan",
+   "old_value": "positional or keyword, default=None",
+   "details": "position: from 6 to 4 (-2)",
+   "file": "starlette/routing.py",
+   "lineno": 567,
+   "category": "moved_parameter",
+   "failure_mode": "soft",
+   "public_path": "starlette.routing.Router.__init__",
+   "flags": [],
+   "changelog_mentions": [
+    "lifespan",
+    "Router"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "PARAMETER_MOVED",
+   "path": "starlette.responses.FileResponse.__init__",
+   "obj_kind": "function",
+   "param": "content_disposition_type",
+   "old_value": "positional or keyword, default='attachment'",
+   "details": "position: from 9 to 8 (-1)",
+   "file": "starlette/responses.py",
+   "lineno": 300,
+   "category": "moved_parameter",
+   "failure_mode": "soft",
+   "public_path": "starlette.responses.FileResponse.__init__",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  }
+ ]
+}

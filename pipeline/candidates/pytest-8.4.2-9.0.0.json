@@ -1,0 +1,130 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "pytest",
+ "repo": "https://github.com/pytest-dev/pytest",
+ "packages": [
+  "pytest",
+  "_pytest"
+ ],
+ "old": {
+  "tag": "8.4.2",
+  "date": "2025-09-03",
+  "src_root": "src"
+ },
+ "new": {
+  "tag": "9.0.0",
+  "date": "2025-11-08",
+  "src_root": "src"
+ },
+ "engine": "griffe",
+ "errors": [],
+ "counts": {
+  "raw": 37,
+  "kept": 6,
+  "by_category": {
+   "moved_parameter": 1,
+   "new_required_parameter": 1,
+   "parameter_now_required": 1,
+   "removed_parameter": 1,
+   "removed_symbol": 2
+  },
+  "hard_failures": 5,
+  "changelog_confirmed": 0,
+  "dropped": {
+   "attribute_changed_value": 9,
+   "object_changed_kind": 4,
+   "private": 18
+  }
+ },
+ "candidates": [
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "_pytest.config.argparsing.Parser.parse_setoption",
+   "obj_kind": "function",
+   "file": "_pytest/config/argparsing.py",
+   "lineno": 135,
+   "canonical": "_pytest.config.argparsing.Parser.parse_setoption",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "pytest.Parser.parse_setoption",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "_pytest.config.argparsing.OptionGroup.__init__",
+   "obj_kind": "function",
+   "param": "description",
+   "old_value": "positional or keyword, default=''",
+   "file": "_pytest/config/argparsing.py",
+   "lineno": 398,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "pytest.OptionGroup.__init__",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "_pytest.config.argparsing.OptionGroup.description",
+   "obj_kind": "attribute",
+   "file": "_pytest/config/argparsing.py",
+   "lineno": 383,
+   "canonical": "_pytest.config.argparsing.OptionGroup.description",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "pytest.OptionGroup.description",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_ADDED_REQUIRED",
+   "path": "_pytest.config.argparsing.OptionGroup.__init__",
+   "obj_kind": "function",
+   "param": "arggroup",
+   "file": "_pytest/config/argparsing.py",
+   "lineno": 398,
+   "category": "new_required_parameter",
+   "failure_mode": "hard",
+   "public_path": "pytest.OptionGroup.__init__",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "PARAMETER_CHANGED_REQUIRED",
+   "path": "_pytest.config.argparsing.OptionGroup.__init__",
+   "obj_kind": "function",
+   "param": "parser",
+   "old_value": "positional or keyword, default=None",
+   "file": "_pytest/config/argparsing.py",
+   "lineno": 398,
+   "category": "parameter_now_required",
+   "failure_mode": "hard",
+   "public_path": "pytest.OptionGroup.__init__",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "PARAMETER_MOVED",
+   "path": "_pytest.config.argparsing.OptionGroup.__init__",
+   "obj_kind": "function",
+   "param": "name",
+   "old_value": "positional or keyword",
+   "details": "position: from 1 to 2 (+1)",
+   "file": "_pytest/config/argparsing.py",
+   "lineno": 398,
+   "category": "moved_parameter",
+   "failure_mode": "soft",
+   "public_path": "pytest.OptionGroup.__init__",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 4.25
+  }
+ ]
+}

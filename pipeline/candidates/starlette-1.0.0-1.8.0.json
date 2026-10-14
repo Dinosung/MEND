@@ -1,0 +1,175 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "starlette",
+ "repo": "https://github.com/Kludex/starlette",
+ "packages": [
+  "starlette"
+ ],
+ "old": {
+  "tag": "1.0.0",
+  "date": "2026-03-22",
+  "src_root": "."
+ },
+ "new": {
+  "tag": "1.8.0",
+  "date": "2026-10-13",
+  "src_root": "."
+ },
+ "engine": "griffe",
+ "errors": [],
+ "counts": {
+  "raw": 12,
+  "kept": 9,
+  "by_category": {
+   "removed_symbol": 9
+  },
+  "hard_failures": 9,
+  "changelog_confirmed": 0,
+  "dropped": {
+   "attribute_changed_value": 3
+  }
+ },
+ "candidates": [
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.middleware.gzip.GZipResponder.gzip_buffer",
+   "obj_kind": "attribute",
+   "file": "starlette/middleware/gzip.py",
+   "lineno": 125,
+   "canonical": "starlette.middleware.gzip.GZipResponder.gzip_buffer",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.middleware.gzip.GZipResponder.gzip_buffer",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.middleware.gzip.GZipResponder.gzip_file",
+   "obj_kind": "attribute",
+   "file": "starlette/middleware/gzip.py",
+   "lineno": 126,
+   "canonical": "starlette.middleware.gzip.GZipResponder.gzip_file",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.middleware.gzip.GZipResponder.gzip_file",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.testclient.TestClient.delete",
+   "obj_kind": "function",
+   "file": "starlette/testclient.py",
+   "lineno": 623,
+   "canonical": "starlette.testclient.TestClient.delete",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.testclient.TestClient.delete",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.testclient.TestClient.get",
+   "obj_kind": "function",
+   "file": "starlette/testclient.py",
+   "lineno": 461,
+   "canonical": "starlette.testclient.TestClient.get",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.testclient.TestClient.get",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.testclient.TestClient.head",
+   "obj_kind": "function",
+   "file": "starlette/testclient.py",
+   "lineno": 507,
+   "canonical": "starlette.testclient.TestClient.head",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.testclient.TestClient.head",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.testclient.TestClient.options",
+   "obj_kind": "function",
+   "file": "starlette/testclient.py",
+   "lineno": 484,
+   "canonical": "starlette.testclient.TestClient.options",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.testclient.TestClient.options",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.testclient.TestClient.patch",
+   "obj_kind": "function",
+   "file": "starlette/testclient.py",
+   "lineno": 592,
+   "canonical": "starlette.testclient.TestClient.patch",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.testclient.TestClient.patch",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.testclient.TestClient.post",
+   "obj_kind": "function",
+   "file": "starlette/testclient.py",
+   "lineno": 530,
+   "canonical": "starlette.testclient.TestClient.post",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.testclient.TestClient.post",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "starlette.testclient.TestClient.put",
+   "obj_kind": "function",
+   "file": "starlette/testclient.py",
+   "lineno": 561,
+   "canonical": "starlette.testclient.TestClient.put",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "starlette.testclient.TestClient.put",
+   "flags": [
+    "may_be_inherited"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  }
+ ]
+}

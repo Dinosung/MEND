@@ -1,0 +1,52 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "pytest",
+ "repo": "https://github.com/pytest-dev/pytest",
+ "packages": [
+  "pytest",
+  "_pytest"
+ ],
+ "old": {
+  "tag": "9.0.3",
+  "date": "2026-04-07",
+  "src_root": "src"
+ },
+ "new": {
+  "tag": "9.1.0",
+  "date": "2026-06-13",
+  "src_root": "src"
+ },
+ "engine": "griffe",
+ "errors": [],
+ "counts": {
+  "raw": 76,
+  "kept": 1,
+  "by_category": {
+   "removed_symbol": 1
+  },
+  "hard_failures": 1,
+  "changelog_confirmed": 0,
+  "dropped": {
+   "attribute_changed_value": 12,
+   "duplicate": 2,
+   "private": 55,
+   "sentinel_rename": 4,
+   "variadic_parameter": 2
+  }
+ },
+ "candidates": [
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "pytest.PytestRemovedIn9Warning",
+   "obj_kind": "alias",
+   "canonical": "_pytest.warning_types.PytestRemovedIn9Warning",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "pytest.PytestRemovedIn9Warning",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  }
+ ]
+}

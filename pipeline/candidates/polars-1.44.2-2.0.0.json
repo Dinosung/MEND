@@ -1,0 +1,3410 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "polars",
+ "repo": "https://github.com/pola-rs/polars",
+ "packages": [
+  "polars"
+ ],
+ "old": {
+  "tag": "py-1.44.2",
+  "date": "2026-09-08",
+  "src_root": "py-polars/src"
+ },
+ "new": {
+  "tag": "py-2.0.0",
+  "date": "2026-10-06",
+  "src_root": "py-polars/src"
+ },
+ "engine": "griffe",
+ "errors": [],
+ "counts": {
+  "raw": 273,
+  "kept": 200,
+  "by_category": {
+   "changed_default": 10,
+   "changed_parameter_kind": 3,
+   "moved_parameter": 2,
+   "parameter_now_required": 2,
+   "removed_parameter": 117,
+   "removed_symbol": 66
+  },
+  "hard_failures": 184,
+  "changelog_confirmed": 142,
+  "dropped": {
+   "attribute_changed_value": 1,
+   "dunder": 2,
+   "duplicate": 14,
+   "over_limit": 32,
+   "private": 9,
+   "private_parameter": 3,
+   "test": 12
+  }
+ },
+ "candidates": [
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.csv.functions.read_csv",
+   "obj_kind": "function",
+   "param": "rechunk",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 49,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_csv",
+   "flags": [],
+   "changelog_mentions": [
+    "rechunk",
+    "read_csv"
+   ],
+   "score": 13.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.parquet.functions.read_parquet",
+   "obj_kind": "function",
+   "param": "allow_missing_columns",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/parquet/functions.py",
+   "lineno": 51,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_parquet",
+   "flags": [],
+   "changelog_mentions": [
+    "allow_missing_columns",
+    "read_parquet"
+   ],
+   "score": 13.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.parquet.functions.read_parquet",
+   "obj_kind": "function",
+   "param": "rechunk",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/parquet/functions.py",
+   "lineno": 51,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_parquet",
+   "flags": [],
+   "changelog_mentions": [
+    "rechunk",
+    "read_parquet"
+   ],
+   "score": 13.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.parquet.functions.read_parquet",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/parquet/functions.py",
+   "lineno": 51,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_parquet",
+   "flags": [],
+   "changelog_mentions": [
+    "retries",
+    "read_parquet"
+   ],
+   "score": 13.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.csv.functions.scan_csv",
+   "obj_kind": "function",
+   "param": "cache",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 533,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_csv",
+   "flags": [],
+   "changelog_mentions": [
+    "cache",
+    "scan_csv"
+   ],
+   "score": 13.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.csv.functions.scan_csv",
+   "obj_kind": "function",
+   "param": "file_cache_ttl",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 533,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_csv",
+   "flags": [],
+   "changelog_mentions": [
+    "file_cache_ttl",
+    "scan_csv"
+   ],
+   "score": 13.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.csv.functions.scan_csv",
+   "obj_kind": "function",
+   "param": "rechunk",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 533,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_csv",
+   "flags": [],
+   "changelog_mentions": [
+    "rechunk",
+    "scan_csv"
+   ],
+   "score": 13.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.csv.functions.scan_csv",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 533,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_csv",
+   "flags": [],
+   "changelog_mentions": [
+    "retries",
+    "scan_csv"
+   ],
+   "score": 13.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.parquet.functions.scan_parquet",
+   "obj_kind": "function",
+   "param": "allow_missing_columns",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/parquet/functions.py",
+   "lineno": 470,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_parquet",
+   "flags": [],
+   "changelog_mentions": [
+    "allow_missing_columns",
+    "scan_parquet"
+   ],
+   "score": 13.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.parquet.functions.scan_parquet",
+   "obj_kind": "function",
+   "param": "rechunk",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/parquet/functions.py",
+   "lineno": 470,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_parquet",
+   "flags": [],
+   "changelog_mentions": [
+    "rechunk",
+    "scan_parquet"
+   ],
+   "score": 13.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.parquet.functions.scan_parquet",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/parquet/functions.py",
+   "lineno": 470,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_parquet",
+   "flags": [],
+   "changelog_mentions": [
+    "retries",
+    "scan_parquet"
+   ],
+   "score": 13.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.dataframe.frame.DataFrame.approx_n_unique",
+   "obj_kind": "function",
+   "file": "polars/dataframe/frame.py",
+   "lineno": 11567,
+   "canonical": "polars.dataframe.frame.DataFrame.approx_n_unique",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.DataFrame.approx_n_unique",
+   "flags": [],
+   "changelog_mentions": [
+    "DataFrame",
+    "approx_n_unique"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.dataframe.frame.DataFrame.hash_rows",
+   "obj_kind": "function",
+   "param": "seed_1",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/dataframe/frame.py",
+   "lineno": 12366,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.DataFrame.hash_rows",
+   "flags": [],
+   "changelog_mentions": [
+    "seed_1",
+    "hash_rows"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.dataframe.frame.DataFrame.hash_rows",
+   "obj_kind": "function",
+   "param": "seed_2",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/dataframe/frame.py",
+   "lineno": 12366,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.DataFrame.hash_rows",
+   "flags": [],
+   "changelog_mentions": [
+    "seed_2",
+    "hash_rows"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.dataframe.frame.DataFrame.hash_rows",
+   "obj_kind": "function",
+   "param": "seed_3",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/dataframe/frame.py",
+   "lineno": 12366,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.DataFrame.hash_rows",
+   "flags": [],
+   "changelog_mentions": [
+    "seed_3",
+    "hash_rows"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.dataframe.frame.DataFrame.melt",
+   "obj_kind": "function",
+   "file": "polars/dataframe/frame.py",
+   "lineno": 13036,
+   "canonical": "polars.dataframe.frame.DataFrame.melt",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.DataFrame.melt",
+   "flags": [],
+   "changelog_mentions": [
+    "DataFrame",
+    "melt"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.dataframe.frame.DataFrame.to_numpy",
+   "obj_kind": "function",
+   "param": "use_pyarrow",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/dataframe/frame.py",
+   "lineno": 1907,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.DataFrame.to_numpy",
+   "flags": [],
+   "changelog_mentions": [
+    "use_pyarrow",
+    "to_numpy"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.dataframe.frame.DataFrame.with_row_count",
+   "obj_kind": "function",
+   "file": "polars/dataframe/frame.py",
+   "lineno": 7127,
+   "canonical": "polars.dataframe.frame.DataFrame.with_row_count",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.DataFrame.with_row_count",
+   "flags": [],
+   "changelog_mentions": [
+    "DataFrame",
+    "with_row_count"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.dataframe.frame.DataFrame.write_delta",
+   "obj_kind": "function",
+   "param": "overwrite_schema",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/dataframe/frame.py",
+   "lineno": 4797,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.DataFrame.write_delta",
+   "flags": [],
+   "changelog_mentions": [
+    "overwrite_schema",
+    "write_delta"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.dataframe.frame.DataFrame.write_ipc",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/dataframe/frame.py",
+   "lineno": 3920,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.DataFrame.write_ipc",
+   "flags": [],
+   "changelog_mentions": [
+    "retries",
+    "write_ipc"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.expr.expr.Expr.agg_groups",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 1360,
+   "canonical": "polars.expr.expr.Expr.agg_groups",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.agg_groups",
+   "flags": [],
+   "changelog_mentions": [
+    "Expr",
+    "agg_groups"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.expr.expr.Expr.flatten",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 5546,
+   "canonical": "polars.expr.expr.Expr.flatten",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.flatten",
+   "flags": [],
+   "changelog_mentions": [
+    "Expr",
+    "flatten"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.expr.expr.Expr.from_json",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 12752,
+   "canonical": "polars.expr.expr.Expr.from_json",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.from_json",
+   "flags": [],
+   "changelog_mentions": [
+    "Expr",
+    "from_json"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.expr.expr.Expr.hash",
+   "obj_kind": "function",
+   "param": "seed_1",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/expr/expr.py",
+   "lineno": 7395,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.hash",
+   "flags": [],
+   "changelog_mentions": [
+    "seed_1",
+    "hash"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.expr.expr.Expr.hash",
+   "obj_kind": "function",
+   "param": "seed_2",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/expr/expr.py",
+   "lineno": 7395,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.hash",
+   "flags": [],
+   "changelog_mentions": [
+    "seed_2",
+    "hash"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.expr.expr.Expr.hash",
+   "obj_kind": "function",
+   "param": "seed_3",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/expr/expr.py",
+   "lineno": 7395,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.hash",
+   "flags": [],
+   "changelog_mentions": [
+    "seed_3",
+    "hash"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.expr.expr.Expr.map_batches",
+   "obj_kind": "function",
+   "param": "agg_list",
+   "old_value": "keyword-only, default=False",
+   "file": "polars/expr/expr.py",
+   "lineno": 5534,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.map_batches",
+   "flags": [],
+   "changelog_mentions": [
+    "agg_list",
+    "map_batches"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.expr.expr.Expr.map_elements",
+   "obj_kind": "function",
+   "param": "returns_scalar",
+   "old_value": "keyword-only, default=False",
+   "file": "polars/expr/expr.py",
+   "lineno": 5684,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.map_elements",
+   "flags": [],
+   "changelog_mentions": [
+    "returns_scalar",
+    "map_elements"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.expr.expr.Expr.rechunk",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 1560,
+   "canonical": "polars.expr.expr.Expr.rechunk",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.rechunk",
+   "flags": [],
+   "changelog_mentions": [
+    "Expr",
+    "rechunk"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.expr.expr.Expr.register_plugin",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 12628,
+   "canonical": "polars.expr.expr.Expr.register_plugin",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.register_plugin",
+   "flags": [],
+   "changelog_mentions": [
+    "Expr",
+    "register_plugin"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.expr.expr.Expr.replace",
+   "obj_kind": "function",
+   "param": "default",
+   "old_value": "keyword-only, default=NO_DEFAULT",
+   "file": "polars/expr/expr.py",
+   "lineno": 12438,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.replace",
+   "flags": [],
+   "changelog_mentions": [
+    "default",
+    "replace"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.expr.expr.Expr.replace",
+   "obj_kind": "function",
+   "param": "return_dtype",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/expr/expr.py",
+   "lineno": 12438,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.replace",
+   "flags": [],
+   "changelog_mentions": [
+    "return_dtype",
+    "replace"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.expr.expr.Expr.shrink_dtype",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 11991,
+   "canonical": "polars.expr.expr.Expr.shrink_dtype",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.shrink_dtype",
+   "flags": [],
+   "changelog_mentions": [
+    "Expr",
+    "shrink_dtype"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.expr.expr.Expr.where",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 5061,
+   "canonical": "polars.expr.expr.Expr.where",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.Expr.where",
+   "flags": [],
+   "changelog_mentions": [
+    "Expr",
+    "where"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.approx_n_unique",
+   "obj_kind": "function",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 7450,
+   "canonical": "polars.lazyframe.frame.LazyFrame.approx_n_unique",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.approx_n_unique",
+   "flags": [],
+   "changelog_mentions": [
+    "LazyFrame",
+    "approx_n_unique"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.explain",
+   "obj_kind": "function",
+   "param": "cluster_with_columns",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1283,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.explain",
+   "flags": [],
+   "changelog_mentions": [
+    "cluster_with_columns",
+    "explain"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.explain",
+   "obj_kind": "function",
+   "param": "collapse_joins",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1283,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.explain",
+   "flags": [],
+   "changelog_mentions": [
+    "collapse_joins",
+    "explain"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.explain",
+   "obj_kind": "function",
+   "param": "comm_subexpr_elim",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1283,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.explain",
+   "flags": [],
+   "changelog_mentions": [
+    "comm_subexpr_elim",
+    "explain"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.explain",
+   "obj_kind": "function",
+   "param": "comm_subplan_elim",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1283,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.explain",
+   "flags": [],
+   "changelog_mentions": [
+    "comm_subplan_elim",
+    "explain"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.explain",
+   "obj_kind": "function",
+   "param": "predicate_pushdown",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1283,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.explain",
+   "flags": [],
+   "changelog_mentions": [
+    "predicate_pushdown",
+    "explain"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.explain",
+   "obj_kind": "function",
+   "param": "projection_pushdown",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1283,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.explain",
+   "flags": [],
+   "changelog_mentions": [
+    "projection_pushdown",
+    "explain"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.explain",
+   "obj_kind": "function",
+   "param": "simplify_expression",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1283,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.explain",
+   "flags": [],
+   "changelog_mentions": [
+    "simplify_expression",
+    "explain"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.explain",
+   "obj_kind": "function",
+   "param": "slice_pushdown",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1283,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.explain",
+   "flags": [],
+   "changelog_mentions": [
+    "slice_pushdown",
+    "explain"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.explain",
+   "obj_kind": "function",
+   "param": "streaming",
+   "old_value": "keyword-only, default=False",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1283,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.explain",
+   "flags": [],
+   "changelog_mentions": [
+    "streaming",
+    "explain"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.explain",
+   "obj_kind": "function",
+   "param": "tree_format",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1283,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.explain",
+   "flags": [],
+   "changelog_mentions": [
+    "tree_format",
+    "explain"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.explain",
+   "obj_kind": "function",
+   "param": "type_coercion",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1283,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.explain",
+   "flags": [],
+   "changelog_mentions": [
+    "type_coercion",
+    "explain"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.fetch",
+   "obj_kind": "function",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 4412,
+   "canonical": "polars.lazyframe.frame.LazyFrame.fetch",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.fetch",
+   "flags": [],
+   "changelog_mentions": [
+    "LazyFrame",
+    "fetch"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.map_batches",
+   "obj_kind": "function",
+   "param": "no_optimizations",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 8478,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.map_batches",
+   "flags": [],
+   "changelog_mentions": [
+    "no_optimizations",
+    "map_batches"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.melt",
+   "obj_kind": "function",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 9529,
+   "canonical": "polars.lazyframe.frame.LazyFrame.melt",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.melt",
+   "flags": [],
+   "changelog_mentions": [
+    "LazyFrame",
+    "melt"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.profile",
+   "obj_kind": "function",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 2004,
+   "canonical": "polars.lazyframe.frame.LazyFrame.profile",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.profile",
+   "flags": [],
+   "changelog_mentions": [
+    "LazyFrame",
+    "profile"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.show_graph",
+   "obj_kind": "function",
+   "param": "cluster_with_columns",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1425,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.show_graph",
+   "flags": [],
+   "changelog_mentions": [
+    "cluster_with_columns",
+    "show_graph"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.show_graph",
+   "obj_kind": "function",
+   "param": "collapse_joins",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1425,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.show_graph",
+   "flags": [],
+   "changelog_mentions": [
+    "collapse_joins",
+    "show_graph"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.show_graph",
+   "obj_kind": "function",
+   "param": "comm_subexpr_elim",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1425,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.show_graph",
+   "flags": [],
+   "changelog_mentions": [
+    "comm_subexpr_elim",
+    "show_graph"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.show_graph",
+   "obj_kind": "function",
+   "param": "comm_subplan_elim",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1425,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.show_graph",
+   "flags": [],
+   "changelog_mentions": [
+    "comm_subplan_elim",
+    "show_graph"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.show_graph",
+   "obj_kind": "function",
+   "param": "predicate_pushdown",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1425,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.show_graph",
+   "flags": [],
+   "changelog_mentions": [
+    "predicate_pushdown",
+    "show_graph"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.show_graph",
+   "obj_kind": "function",
+   "param": "projection_pushdown",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1425,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.show_graph",
+   "flags": [],
+   "changelog_mentions": [
+    "projection_pushdown",
+    "show_graph"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.show_graph",
+   "obj_kind": "function",
+   "param": "simplify_expression",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1425,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.show_graph",
+   "flags": [],
+   "changelog_mentions": [
+    "simplify_expression",
+    "show_graph"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.show_graph",
+   "obj_kind": "function",
+   "param": "slice_pushdown",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1425,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.show_graph",
+   "flags": [],
+   "changelog_mentions": [
+    "slice_pushdown",
+    "show_graph"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.show_graph",
+   "obj_kind": "function",
+   "param": "type_coercion",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1425,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.show_graph",
+   "flags": [],
+   "changelog_mentions": [
+    "type_coercion",
+    "show_graph"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.unpivot",
+   "obj_kind": "function",
+   "param": "streamable",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 8393,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.unpivot",
+   "flags": [],
+   "changelog_mentions": [
+    "streamable",
+    "unpivot"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.with_context",
+   "obj_kind": "function",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 6899,
+   "canonical": "polars.lazyframe.frame.LazyFrame.with_context",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.with_context",
+   "flags": [],
+   "changelog_mentions": [
+    "LazyFrame",
+    "with_context"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.with_row_count",
+   "obj_kind": "function",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 7562,
+   "canonical": "polars.lazyframe.frame.LazyFrame.with_row_count",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.with_row_count",
+   "flags": [],
+   "changelog_mentions": [
+    "LazyFrame",
+    "with_row_count"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.series.series.Series.has_validity",
+   "obj_kind": "function",
+   "file": "polars/series/series.py",
+   "lineno": 4127,
+   "canonical": "polars.series.series.Series.has_validity",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.Series.has_validity",
+   "flags": [],
+   "changelog_mentions": [
+    "Series",
+    "has_validity"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.series.series.Series.hash",
+   "obj_kind": "function",
+   "param": "seed_1",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/series/series.py",
+   "lineno": 8386,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Series.hash",
+   "flags": [],
+   "changelog_mentions": [
+    "seed_1",
+    "hash"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.series.series.Series.hash",
+   "obj_kind": "function",
+   "param": "seed_2",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/series/series.py",
+   "lineno": 8386,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Series.hash",
+   "flags": [],
+   "changelog_mentions": [
+    "seed_2",
+    "hash"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.series.series.Series.hash",
+   "obj_kind": "function",
+   "param": "seed_3",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/series/series.py",
+   "lineno": 8386,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Series.hash",
+   "flags": [],
+   "changelog_mentions": [
+    "seed_3",
+    "hash"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.series.series.Series.replace",
+   "obj_kind": "function",
+   "param": "default",
+   "old_value": "keyword-only, default=NO_DEFAULT",
+   "file": "polars/series/series.py",
+   "lineno": 8902,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Series.replace",
+   "flags": [],
+   "changelog_mentions": [
+    "default",
+    "replace"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.series.series.Series.replace",
+   "obj_kind": "function",
+   "param": "return_dtype",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/series/series.py",
+   "lineno": 8902,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Series.replace",
+   "flags": [],
+   "changelog_mentions": [
+    "return_dtype",
+    "replace"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.series.series.Series.to_numpy",
+   "obj_kind": "function",
+   "param": "use_pyarrow",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/series/series.py",
+   "lineno": 5047,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Series.to_numpy",
+   "flags": [],
+   "changelog_mentions": [
+    "use_pyarrow",
+    "to_numpy"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.series.series.Series.to_numpy",
+   "obj_kind": "function",
+   "param": "zero_copy_only",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/series/series.py",
+   "lineno": 5047,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Series.to_numpy",
+   "flags": [],
+   "changelog_mentions": [
+    "zero_copy_only",
+    "to_numpy"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.protocol.DataFrame",
+   "obj_kind": "class",
+   "file": "polars/interchange/protocol.py",
+   "lineno": 184,
+   "canonical": "polars.interchange.protocol.DataFrame",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.protocol.DataFrame",
+   "flags": [],
+   "changelog_mentions": [
+    "DataFrame"
+   ],
+   "score": 11.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.csv.functions.read_csv",
+   "obj_kind": "function",
+   "param": "batch_size",
+   "old_value": "keyword-only, default=8192",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 49,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_csv",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 11.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.csv.functions.read_csv",
+   "obj_kind": "function",
+   "param": "n_threads",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 49,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_csv",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 11.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.csv.functions.read_csv",
+   "obj_kind": "function",
+   "param": "sample_size",
+   "old_value": "keyword-only, default=1024",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 49,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_csv",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 11.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.expr.list.ExprListNameSpace.to_struct",
+   "obj_kind": "function",
+   "param": "n_field_strategy",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/expr/list.py",
+   "lineno": 1312,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.expr.list.ExprListNameSpace.to_struct",
+   "flags": [],
+   "changelog_mentions": [
+    "n_field_strategy",
+    "to_struct"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.expr.list.ExprListNameSpace.to_struct",
+   "obj_kind": "function",
+   "param": "upper_bound",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/expr/list.py",
+   "lineno": 1312,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.expr.list.ExprListNameSpace.to_struct",
+   "flags": [],
+   "changelog_mentions": [
+    "upper_bound",
+    "to_struct"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.series.list.ListNameSpace.to_struct",
+   "obj_kind": "function",
+   "param": "n_field_strategy",
+   "old_value": "positional or keyword, default='first_non_null'",
+   "file": "polars/series/list.py",
+   "lineno": 954,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.series.list.ListNameSpace.to_struct",
+   "flags": [],
+   "changelog_mentions": [
+    "n_field_strategy",
+    "to_struct"
+   ],
+   "score": 10.75
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "polars.io.csv.functions.read_csv",
+   "obj_kind": "function",
+   "param": "raise_if_empty",
+   "old_value": "True",
+   "new_value": "None",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 49,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "polars.read_csv",
+   "flags": [],
+   "changelog_mentions": [
+    "raise_if_empty",
+    "read_csv"
+   ],
+   "score": 10.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "polars.io.csv.functions.read_csv",
+   "obj_kind": "function",
+   "param": "truncate_ragged_lines",
+   "old_value": "False",
+   "new_value": "None",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 49,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "polars.read_csv",
+   "flags": [],
+   "changelog_mentions": [
+    "truncate_ragged_lines",
+    "read_csv"
+   ],
+   "score": 10.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "polars.io.csv.functions.scan_csv",
+   "obj_kind": "function",
+   "param": "infer_schema_files",
+   "old_value": "(1 << 64) - 1",
+   "new_value": "_N_INFER_FILES_DEFAULT",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 533,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "polars.scan_csv",
+   "flags": [],
+   "changelog_mentions": [
+    "infer_schema_files",
+    "scan_csv"
+   ],
+   "score": 10.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "polars.io.csv.functions.scan_csv",
+   "obj_kind": "function",
+   "param": "raise_if_empty",
+   "old_value": "True",
+   "new_value": "None",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 533,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "polars.scan_csv",
+   "flags": [],
+   "changelog_mentions": [
+    "raise_if_empty",
+    "scan_csv"
+   ],
+   "score": 10.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.dataframe.frame.DataFrame.write_csv",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/dataframe/frame.py",
+   "lineno": 3037,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.DataFrame.write_csv",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.dataframe.frame.DataFrame.write_parquet",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/dataframe/frame.py",
+   "lineno": 4123,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.DataFrame.write_parquet",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.sink_csv",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 3457,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.sink_csv",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.sink_ipc",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 3180,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.sink_ipc",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.sink_ndjson",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 3792,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.sink_ndjson",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.frame.LazyFrame.sink_parquet",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 2451,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.LazyFrame.sink_parquet",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.functions.lazy.collect_all",
+   "obj_kind": "function",
+   "param": "cluster_with_columns",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/functions/lazy.py",
+   "lineno": 2042,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.collect_all",
+   "flags": [],
+   "changelog_mentions": [
+    "cluster_with_columns",
+    "collect_all"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.functions.lazy.collect_all",
+   "obj_kind": "function",
+   "param": "collapse_joins",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/functions/lazy.py",
+   "lineno": 2042,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.collect_all",
+   "flags": [],
+   "changelog_mentions": [
+    "collapse_joins",
+    "collect_all"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.functions.lazy.collect_all",
+   "obj_kind": "function",
+   "param": "comm_subexpr_elim",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/functions/lazy.py",
+   "lineno": 2042,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.collect_all",
+   "flags": [],
+   "changelog_mentions": [
+    "comm_subexpr_elim",
+    "collect_all"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.functions.lazy.collect_all",
+   "obj_kind": "function",
+   "param": "comm_subplan_elim",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/functions/lazy.py",
+   "lineno": 2042,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.collect_all",
+   "flags": [],
+   "changelog_mentions": [
+    "comm_subplan_elim",
+    "collect_all"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.functions.lazy.collect_all",
+   "obj_kind": "function",
+   "param": "no_optimization",
+   "old_value": "keyword-only, default=False",
+   "file": "polars/functions/lazy.py",
+   "lineno": 2042,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.collect_all",
+   "flags": [],
+   "changelog_mentions": [
+    "no_optimization",
+    "collect_all"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.functions.lazy.collect_all",
+   "obj_kind": "function",
+   "param": "predicate_pushdown",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/functions/lazy.py",
+   "lineno": 2042,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.collect_all",
+   "flags": [],
+   "changelog_mentions": [
+    "predicate_pushdown",
+    "collect_all"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.functions.lazy.collect_all",
+   "obj_kind": "function",
+   "param": "projection_pushdown",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/functions/lazy.py",
+   "lineno": 2042,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.collect_all",
+   "flags": [],
+   "changelog_mentions": [
+    "projection_pushdown",
+    "collect_all"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.functions.lazy.collect_all",
+   "obj_kind": "function",
+   "param": "simplify_expression",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/functions/lazy.py",
+   "lineno": 2042,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.collect_all",
+   "flags": [],
+   "changelog_mentions": [
+    "simplify_expression",
+    "collect_all"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.functions.lazy.collect_all",
+   "obj_kind": "function",
+   "param": "slice_pushdown",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/functions/lazy.py",
+   "lineno": 2042,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.collect_all",
+   "flags": [],
+   "changelog_mentions": [
+    "slice_pushdown",
+    "collect_all"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.functions.lazy.collect_all",
+   "obj_kind": "function",
+   "param": "type_coercion",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/functions/lazy.py",
+   "lineno": 2042,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.collect_all",
+   "flags": [],
+   "changelog_mentions": [
+    "type_coercion",
+    "collect_all"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.functions.lazy.corr",
+   "obj_kind": "function",
+   "param": "ddof",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/functions/lazy.py",
+   "lineno": 861,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.corr",
+   "flags": [],
+   "changelog_mentions": [
+    "ddof",
+    "corr"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.convert.general.from_dataframe",
+   "obj_kind": "function",
+   "param": "allow_copy",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/convert/general.py",
+   "lineno": 1113,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.from_dataframe",
+   "flags": [],
+   "changelog_mentions": [
+    "allow_copy",
+    "from_dataframe"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ipc.functions.read_ipc",
+   "obj_kind": "function",
+   "param": "memory_map",
+   "old_value": "keyword-only, default=False",
+   "file": "polars/io/ipc/functions.py",
+   "lineno": 38,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_ipc",
+   "flags": [],
+   "changelog_mentions": [
+    "memory_map",
+    "read_ipc"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ipc.functions.read_ipc",
+   "obj_kind": "function",
+   "param": "rechunk",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/ipc/functions.py",
+   "lineno": 38,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_ipc",
+   "flags": [],
+   "changelog_mentions": [
+    "rechunk",
+    "read_ipc"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ndjson.read_ndjson",
+   "obj_kind": "function",
+   "param": "file_cache_ttl",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/ndjson.py",
+   "lineno": 25,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_ndjson",
+   "flags": [],
+   "changelog_mentions": [
+    "file_cache_ttl",
+    "read_ndjson"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ndjson.read_ndjson",
+   "obj_kind": "function",
+   "param": "rechunk",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/ndjson.py",
+   "lineno": 25,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_ndjson",
+   "flags": [],
+   "changelog_mentions": [
+    "rechunk",
+    "read_ndjson"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ndjson.read_ndjson",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/ndjson.py",
+   "lineno": 25,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_ndjson",
+   "flags": [],
+   "changelog_mentions": [
+    "retries",
+    "read_ndjson"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.functions.lazy.rolling_corr",
+   "obj_kind": "function",
+   "param": "ddof",
+   "old_value": "keyword-only, default=1",
+   "file": "polars/functions/lazy.py",
+   "lineno": 2648,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.rolling_corr",
+   "flags": [],
+   "changelog_mentions": [
+    "ddof",
+    "rolling_corr"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ipc.functions.scan_ipc",
+   "obj_kind": "function",
+   "param": "cache",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/ipc/functions.py",
+   "lineno": 349,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_ipc",
+   "flags": [],
+   "changelog_mentions": [
+    "cache",
+    "scan_ipc"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ipc.functions.scan_ipc",
+   "obj_kind": "function",
+   "param": "file_cache_ttl",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/ipc/functions.py",
+   "lineno": 349,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_ipc",
+   "flags": [],
+   "changelog_mentions": [
+    "file_cache_ttl",
+    "scan_ipc"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ipc.functions.scan_ipc",
+   "obj_kind": "function",
+   "param": "memory_map",
+   "old_value": "keyword-only, default=True",
+   "file": "polars/io/ipc/functions.py",
+   "lineno": 349,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_ipc",
+   "flags": [],
+   "changelog_mentions": [
+    "memory_map",
+    "scan_ipc"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ipc.functions.scan_ipc",
+   "obj_kind": "function",
+   "param": "rechunk",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/ipc/functions.py",
+   "lineno": 349,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_ipc",
+   "flags": [],
+   "changelog_mentions": [
+    "rechunk",
+    "scan_ipc"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ipc.functions.scan_ipc",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/ipc/functions.py",
+   "lineno": 349,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_ipc",
+   "flags": [],
+   "changelog_mentions": [
+    "retries",
+    "scan_ipc"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ndjson.scan_ndjson",
+   "obj_kind": "function",
+   "param": "file_cache_ttl",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/ndjson.py",
+   "lineno": 188,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_ndjson",
+   "flags": [],
+   "changelog_mentions": [
+    "file_cache_ttl",
+    "scan_ndjson"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ndjson.scan_ndjson",
+   "obj_kind": "function",
+   "param": "rechunk",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/ndjson.py",
+   "lineno": 188,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_ndjson",
+   "flags": [],
+   "changelog_mentions": [
+    "rechunk",
+    "scan_ndjson"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ndjson.scan_ndjson",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/ndjson.py",
+   "lineno": 188,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_ndjson",
+   "flags": [],
+   "changelog_mentions": [
+    "retries",
+    "scan_ndjson"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.type_aliases",
+   "obj_kind": "module",
+   "file": "polars/type_aliases.py",
+   "lineno": null,
+   "canonical": "polars.type_aliases",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.type_aliases",
+   "flags": [],
+   "changelog_mentions": [
+    "type_aliases"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "polars.dataframe.frame.DataFrame.explode",
+   "obj_kind": "function",
+   "param": "empty_as_null",
+   "old_value": "_Omitted",
+   "new_value": "False",
+   "file": "polars/dataframe/frame.py",
+   "lineno": 9535,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "polars.DataFrame.explode",
+   "flags": [],
+   "changelog_mentions": [
+    "empty_as_null",
+    "explode"
+   ],
+   "score": 9.75
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "polars.expr.expr.Expr.explode",
+   "obj_kind": "function",
+   "param": "empty_as_null",
+   "old_value": "_Omitted",
+   "new_value": "False",
+   "file": "polars/expr/expr.py",
+   "lineno": 5968,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "polars.Expr.explode",
+   "flags": [],
+   "changelog_mentions": [
+    "empty_as_null",
+    "explode"
+   ],
+   "score": 9.75
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "polars.lazyframe.frame.LazyFrame.explode",
+   "obj_kind": "function",
+   "param": "empty_as_null",
+   "old_value": "_Omitted",
+   "new_value": "False",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 7759,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "polars.LazyFrame.explode",
+   "flags": [],
+   "changelog_mentions": [
+    "empty_as_null",
+    "explode"
+   ],
+   "score": 9.75
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "polars.lazyframe.frame.LazyFrame.show_graph",
+   "obj_kind": "function",
+   "param": "plan_stage",
+   "old_value": "None",
+   "new_value": "'physical'",
+   "file": "polars/lazyframe/frame.py",
+   "lineno": 1425,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "polars.LazyFrame.show_graph",
+   "flags": [],
+   "changelog_mentions": [
+    "plan_stage",
+    "show_graph"
+   ],
+   "score": 9.75
+  },
+  {
+   "kind": "PARAMETER_CHANGED_REQUIRED",
+   "path": "polars.expr.list.ExprListNameSpace.to_struct",
+   "obj_kind": "function",
+   "param": "fields",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/expr/list.py",
+   "lineno": 1312,
+   "category": "parameter_now_required",
+   "failure_mode": "hard",
+   "public_path": "polars.expr.list.ExprListNameSpace.to_struct",
+   "flags": [],
+   "changelog_mentions": [
+    "fields",
+    "to_struct"
+   ],
+   "score": 9.75
+  },
+  {
+   "kind": "PARAMETER_CHANGED_REQUIRED",
+   "path": "polars.series.list.ListNameSpace.to_struct",
+   "obj_kind": "function",
+   "param": "fields",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/series/list.py",
+   "lineno": 954,
+   "category": "parameter_now_required",
+   "failure_mode": "hard",
+   "public_path": "polars.series.list.ListNameSpace.to_struct",
+   "flags": [],
+   "changelog_mentions": [
+    "fields",
+    "to_struct"
+   ],
+   "score": 9.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.datatypes.classes.Array.__init__",
+   "obj_kind": "function",
+   "param": "width",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/datatypes/classes.py",
+   "lineno": 1232,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Array.__init__",
+   "flags": [],
+   "changelog_mentions": [
+    "width",
+    "Array"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.datatypes.classes.Array.width",
+   "obj_kind": "attribute",
+   "file": "polars/datatypes/classes.py",
+   "lineno": 1283,
+   "canonical": "polars.datatypes.classes.Array.width",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.Array.width",
+   "flags": [],
+   "changelog_mentions": [
+    "Array",
+    "width"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.datatypes.classes.Categorical.__init__",
+   "obj_kind": "function",
+   "param": "ordering",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/datatypes/classes.py",
+   "lineno": 952,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Categorical.__init__",
+   "flags": [],
+   "changelog_mentions": [
+    "ordering",
+    "Categorical"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.datatypes.classes.Categorical.ordering",
+   "obj_kind": "attribute",
+   "file": "polars/datatypes/classes.py",
+   "lineno": 989,
+   "canonical": "polars.datatypes.classes.Categorical.ordering",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.Categorical.ordering",
+   "flags": [],
+   "changelog_mentions": [
+    "Categorical",
+    "ordering"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.datatypes.classes.Enum.union",
+   "obj_kind": "function",
+   "file": "polars/datatypes/classes.py",
+   "lineno": 1090,
+   "canonical": "polars.datatypes.classes.Enum.union",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.Enum.union",
+   "flags": [],
+   "changelog_mentions": [
+    "Enum",
+    "union"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.opt_flags.QueryOptFlags.__init__",
+   "obj_kind": "function",
+   "param": "collapse_joins",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/lazyframe/opt_flags.py",
+   "lineno": 21,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.QueryOptFlags.__init__",
+   "flags": [],
+   "changelog_mentions": [
+    "collapse_joins",
+    "QueryOptFlags"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.opt_flags.QueryOptFlags.none",
+   "obj_kind": "function",
+   "param": "collapse_joins",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/lazyframe/opt_flags.py",
+   "lineno": 69,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.QueryOptFlags.none",
+   "flags": [],
+   "changelog_mentions": [
+    "collapse_joins",
+    "none"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.functions.groups",
+   "obj_kind": "function",
+   "file": "polars/functions/lazy.py",
+   "lineno": 1887,
+   "canonical": "polars.functions.lazy.groups",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.functions.groups",
+   "flags": [],
+   "changelog_mentions": [
+    "groups"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.buffer",
+   "obj_kind": "module",
+   "file": "polars/interchange/buffer.py",
+   "lineno": null,
+   "canonical": "polars.interchange.buffer",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.buffer",
+   "flags": [],
+   "changelog_mentions": [
+    "buffer"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.column",
+   "obj_kind": "module",
+   "file": "polars/interchange/column.py",
+   "lineno": null,
+   "canonical": "polars.interchange.column",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.column",
+   "flags": [],
+   "changelog_mentions": [
+    "column"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.dataframe",
+   "obj_kind": "module",
+   "file": "polars/interchange/dataframe.py",
+   "lineno": null,
+   "canonical": "polars.interchange.dataframe",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.dataframe",
+   "flags": [],
+   "changelog_mentions": [
+    "dataframe"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.from_dataframe",
+   "obj_kind": "module",
+   "file": "polars/interchange/from_dataframe.py",
+   "lineno": null,
+   "canonical": "polars.interchange.from_dataframe",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.from_dataframe",
+   "flags": [],
+   "changelog_mentions": [
+    "from_dataframe"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.utils",
+   "obj_kind": "module",
+   "file": "polars/interchange/utils.py",
+   "lineno": null,
+   "canonical": "polars.interchange.utils",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.utils",
+   "flags": [],
+   "changelog_mentions": [
+    "utils"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.io.read_csv_batched",
+   "obj_kind": "function",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 778,
+   "canonical": "polars.io.csv.functions.read_csv_batched",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.io.read_csv_batched",
+   "flags": [],
+   "changelog_mentions": [
+    "read_csv_batched"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.meta.threadpool_size",
+   "obj_kind": "function",
+   "file": "polars/meta/thread_pool.py",
+   "lineno": 42,
+   "canonical": "polars.meta.thread_pool.threadpool_size",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.meta.threadpool_size",
+   "flags": [],
+   "changelog_mentions": [
+    "threadpool_size"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.dataframe.group_by.GroupBy.count",
+   "obj_kind": "function",
+   "file": "polars/dataframe/group_by.py",
+   "lineno": 616,
+   "canonical": "polars.dataframe.group_by.GroupBy.count",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.dataframe.group_by.GroupBy.count",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.expr.string.ExprStringNameSpace.concat",
+   "obj_kind": "function",
+   "file": "polars/expr/string.py",
+   "lineno": 3156,
+   "canonical": "polars.expr.string.ExprStringNameSpace.concat",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.expr.string.ExprStringNameSpace.concat",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.lazyframe.group_by.LazyGroupBy.count",
+   "obj_kind": "function",
+   "file": "polars/lazyframe/group_by.py",
+   "lineno": 426,
+   "canonical": "polars.lazyframe.group_by.LazyGroupBy.count",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.lazyframe.group_by.LazyGroupBy.count",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.series.string.StringNameSpace.concat",
+   "obj_kind": "function",
+   "file": "polars/series/string.py",
+   "lineno": 2327,
+   "canonical": "polars.series.string.StringNameSpace.concat",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.series.string.StringNameSpace.concat",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.protocol.Buffer",
+   "obj_kind": "class",
+   "file": "polars/interchange/protocol.py",
+   "lineno": 126,
+   "canonical": "polars.interchange.protocol.Buffer",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.protocol.Buffer",
+   "flags": [],
+   "changelog_mentions": [
+    "Buffer"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.protocol.Column",
+   "obj_kind": "class",
+   "file": "polars/interchange/protocol.py",
+   "lineno": 144,
+   "canonical": "polars.interchange.protocol.Column",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.protocol.Column",
+   "flags": [],
+   "changelog_mentions": [
+    "Column"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.protocol.CopyNotAllowedError",
+   "obj_kind": "class",
+   "file": "polars/interchange/protocol.py",
+   "lineno": 251,
+   "canonical": "polars.interchange.protocol.CopyNotAllowedError",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.protocol.CopyNotAllowedError",
+   "flags": [],
+   "changelog_mentions": [
+    "CopyNotAllowedError"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.protocol.DtypeKind",
+   "obj_kind": "class",
+   "file": "polars/interchange/protocol.py",
+   "lineno": 36,
+   "canonical": "polars.interchange.protocol.DtypeKind",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.protocol.DtypeKind",
+   "flags": [],
+   "changelog_mentions": [
+    "DtypeKind"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.protocol.SupportsInterchange",
+   "obj_kind": "class",
+   "file": "polars/interchange/protocol.py",
+   "lineno": 231,
+   "canonical": "polars.interchange.protocol.SupportsInterchange",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.protocol.SupportsInterchange",
+   "flags": [],
+   "changelog_mentions": [
+    "SupportsInterchange"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.io.csv.read_csv_batched",
+   "obj_kind": "function",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 778,
+   "canonical": "polars.io.csv.functions.read_csv_batched",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.io.csv.read_csv_batched",
+   "flags": [],
+   "changelog_mentions": [
+    "read_csv_batched"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "polars.io.csv.functions.scan_csv",
+   "obj_kind": "function",
+   "param": "truncate_ragged_lines",
+   "old_value": "False",
+   "new_value": "None",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 533,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "polars.scan_csv",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "polars.expr.list.ExprListNameSpace.explode",
+   "obj_kind": "function",
+   "param": "empty_as_null",
+   "old_value": "_Omitted",
+   "new_value": "False",
+   "file": "polars/expr/list.py",
+   "lineno": 1202,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "polars.expr.list.ExprListNameSpace.explode",
+   "flags": [],
+   "changelog_mentions": [
+    "empty_as_null",
+    "explode"
+   ],
+   "score": 8.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.groups",
+   "obj_kind": "function",
+   "file": "polars/functions/lazy.py",
+   "lineno": 1887,
+   "canonical": "polars.functions.lazy.groups",
+   "category": "removed_symbol",
+   "failure_mode": "shim",
+   "public_path": "polars.groups",
+   "flags": [
+    "module_getattr_shim"
+   ],
+   "changelog_mentions": [
+    "groups"
+   ],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.read_csv_batched",
+   "obj_kind": "function",
+   "file": "polars/io/csv/functions.py",
+   "lineno": 778,
+   "canonical": "polars.io.csv.functions.read_csv_batched",
+   "category": "removed_symbol",
+   "failure_mode": "shim",
+   "public_path": "polars.read_csv_batched",
+   "flags": [
+    "module_getattr_shim"
+   ],
+   "changelog_mentions": [
+    "read_csv_batched"
+   ],
+   "score": 8.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.delta.functions.read_delta",
+   "obj_kind": "function",
+   "param": "rechunk",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/delta/functions.py",
+   "lineno": 24,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_delta",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.ipc.functions.read_ipc_stream",
+   "obj_kind": "function",
+   "param": "rechunk",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/ipc/functions.py",
+   "lineno": 206,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_ipc_stream",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.parquet.functions.read_parquet_metadata",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "positional or keyword, default=None",
+   "file": "polars/io/parquet/functions.py",
+   "lineno": 400,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.read_parquet_metadata",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.io.delta.functions.scan_delta",
+   "obj_kind": "function",
+   "param": "rechunk",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/io/delta/functions.py",
+   "lineno": 166,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.scan_delta",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.threadpool_size",
+   "obj_kind": "function",
+   "file": "polars/meta/thread_pool.py",
+   "lineno": 42,
+   "canonical": "polars.meta.thread_pool.threadpool_size",
+   "category": "removed_symbol",
+   "failure_mode": "shim",
+   "public_path": "polars.threadpool_size",
+   "flags": [
+    "module_getattr_shim"
+   ],
+   "changelog_mentions": [
+    "threadpool_size"
+   ],
+   "score": 8.0
+  },
+  {
+   "kind": "PARAMETER_MOVED",
+   "path": "polars.expr.list.ExprListNameSpace.to_struct",
+   "obj_kind": "function",
+   "param": "fields",
+   "old_value": "positional or keyword, default=None",
+   "details": "position: from 2 to 1 (-1)",
+   "file": "polars/expr/list.py",
+   "lineno": 1312,
+   "category": "moved_parameter",
+   "failure_mode": "soft",
+   "public_path": "polars.expr.list.ExprListNameSpace.to_struct",
+   "flags": [],
+   "changelog_mentions": [
+    "fields",
+    "to_struct"
+   ],
+   "score": 7.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.expr.string.ExprStringNameSpace.json_decode",
+   "obj_kind": "function",
+   "param": "infer_schema_length",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/expr/string.py",
+   "lineno": 1300,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.expr.string.ExprStringNameSpace.json_decode",
+   "flags": [],
+   "changelog_mentions": [
+    "infer_schema_length",
+    "json_decode"
+   ],
+   "score": 7.75
+  },
+  {
+   "kind": "PARAMETER_MOVED",
+   "path": "polars.series.list.ListNameSpace.to_struct",
+   "obj_kind": "function",
+   "param": "fields",
+   "old_value": "positional or keyword, default=None",
+   "details": "position: from 2 to 1 (-1)",
+   "file": "polars/series/list.py",
+   "lineno": 954,
+   "category": "moved_parameter",
+   "failure_mode": "soft",
+   "public_path": "polars.series.list.ListNameSpace.to_struct",
+   "flags": [],
+   "changelog_mentions": [
+    "fields",
+    "to_struct"
+   ],
+   "score": 7.75
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.catalog.unity.client.Catalog.scan_table",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/catalog/unity/client.py",
+   "lineno": 181,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Catalog.scan_table",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine.Engine.sink_batches",
+   "obj_kind": "function",
+   "param": "lazy",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine.py",
+   "lineno": 281,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Engine.sink_batches",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine.Engine.sink_csv",
+   "obj_kind": "function",
+   "param": "lazy",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine.py",
+   "lineno": 229,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Engine.sink_csv",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine.Engine.sink_csv",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine.py",
+   "lineno": 229,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Engine.sink_csv",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine.Engine.sink_ipc",
+   "obj_kind": "function",
+   "param": "lazy",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine.py",
+   "lineno": 208,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Engine.sink_ipc",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine.Engine.sink_ipc",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine.py",
+   "lineno": 208,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Engine.sink_ipc",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine.Engine.sink_ndjson",
+   "obj_kind": "function",
+   "param": "lazy",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine.py",
+   "lineno": 262,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Engine.sink_ndjson",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine.Engine.sink_ndjson",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine.py",
+   "lineno": 262,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Engine.sink_ndjson",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine.Engine.sink_parquet",
+   "obj_kind": "function",
+   "param": "lazy",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine.py",
+   "lineno": 184,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Engine.sink_parquet",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine.Engine.sink_parquet",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine.py",
+   "lineno": 184,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.Engine.sink_parquet",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.opt_flags.QueryOptFlags.update",
+   "obj_kind": "function",
+   "param": "collapse_joins",
+   "old_value": "keyword-only, default=None",
+   "file": "polars/lazyframe/opt_flags.py",
+   "lineno": 113,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.QueryOptFlags.update",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine_remote.RemoteEngine.sink_csv",
+   "obj_kind": "function",
+   "param": "lazy",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine_remote.py",
+   "lineno": 316,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.RemoteEngine.sink_csv",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine_remote.RemoteEngine.sink_csv",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine_remote.py",
+   "lineno": 316,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.RemoteEngine.sink_csv",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine_remote.RemoteEngine.sink_ipc",
+   "obj_kind": "function",
+   "param": "lazy",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine_remote.py",
+   "lineno": 279,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.RemoteEngine.sink_ipc",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine_remote.RemoteEngine.sink_ipc",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine_remote.py",
+   "lineno": 279,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.RemoteEngine.sink_ipc",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine_remote.RemoteEngine.sink_parquet",
+   "obj_kind": "function",
+   "param": "lazy",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine_remote.py",
+   "lineno": 237,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.RemoteEngine.sink_parquet",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "polars.lazyframe.engine_remote.RemoteEngine.sink_parquet",
+   "obj_kind": "function",
+   "param": "retries",
+   "old_value": "keyword-only",
+   "file": "polars/lazyframe/engine_remote.py",
+   "lineno": 237,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "polars.RemoteEngine.sink_parquet",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.functions.arctan2d",
+   "obj_kind": "function",
+   "file": "polars/functions/lazy.py",
+   "lineno": 1768,
+   "canonical": "polars.functions.lazy.arctan2d",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.functions.arctan2d",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "polars.expr.datetime.ExprDateTimeNameSpace.add_business_days",
+   "obj_kind": "function",
+   "param": "week_mask",
+   "old_value": "positional or keyword",
+   "new_value": "keyword-only",
+   "file": "polars/expr/datetime.py",
+   "lineno": 43,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "polars.expr.datetime.ExprDateTimeNameSpace.add_business_days",
+   "flags": [],
+   "changelog_mentions": [
+    "week_mask",
+    "add_business_days"
+   ],
+   "score": 6.75
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "polars.series.datetime.DateTimeNameSpace.add_business_days",
+   "obj_kind": "function",
+   "param": "week_mask",
+   "old_value": "positional or keyword",
+   "new_value": "keyword-only",
+   "file": "polars/series/datetime.py",
+   "lineno": 41,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "polars.series.datetime.DateTimeNameSpace.add_business_days",
+   "flags": [],
+   "changelog_mentions": [
+    "week_mask",
+    "add_business_days"
+   ],
+   "score": 6.75
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "polars.series.string.StringNameSpace.to_decimal",
+   "obj_kind": "function",
+   "param": "inference_length",
+   "old_value": "positional or keyword",
+   "new_value": "keyword-only",
+   "file": "polars/series/string.py",
+   "lineno": 348,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "polars.series.string.StringNameSpace.to_decimal",
+   "flags": [],
+   "changelog_mentions": [
+    "inference_length",
+    "to_decimal"
+   ],
+   "score": 6.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.protocol.CategoricalDescription",
+   "obj_kind": "class",
+   "file": "polars/interchange/protocol.py",
+   "lineno": 114,
+   "canonical": "polars.interchange.protocol.CategoricalDescription",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.protocol.CategoricalDescription",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.protocol.ColumnBuffers",
+   "obj_kind": "class",
+   "file": "polars/interchange/protocol.py",
+   "lineno": 95,
+   "canonical": "polars.interchange.protocol.ColumnBuffers",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.protocol.ColumnBuffers",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.protocol.ColumnNullType",
+   "obj_kind": "class",
+   "file": "polars/interchange/protocol.py",
+   "lineno": 70,
+   "canonical": "polars.interchange.protocol.ColumnNullType",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.protocol.ColumnNullType",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.protocol.DlpackDeviceType",
+   "obj_kind": "class",
+   "file": "polars/interchange/protocol.py",
+   "lineno": 23,
+   "canonical": "polars.interchange.protocol.DlpackDeviceType",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.protocol.DlpackDeviceType",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.protocol.Dtype",
+   "obj_kind": "attribute",
+   "file": "polars/interchange/protocol.py",
+   "lineno": 67,
+   "canonical": "polars.interchange.protocol.Dtype",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.protocol.Dtype",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.interchange.protocol.Endianness",
+   "obj_kind": "class",
+   "file": "polars/interchange/protocol.py",
+   "lineno": 242,
+   "canonical": "polars.interchange.protocol.Endianness",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.interchange.protocol.Endianness",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.io.csv.BatchedCsvReader",
+   "obj_kind": "class",
+   "file": "polars/io/csv/batched_reader.py",
+   "lineno": 16,
+   "canonical": "polars.io.csv.batched_reader.BatchedCsvReader",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.io.csv.BatchedCsvReader",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.io.csv.batched_reader",
+   "obj_kind": "module",
+   "file": "polars/io/csv/batched_reader.py",
+   "lineno": null,
+   "canonical": "polars.io.csv.batched_reader",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.io.csv.batched_reader",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.lazyframe.opt_flags.P",
+   "obj_kind": "attribute",
+   "file": "polars/lazyframe/opt_flags.py",
+   "lineno": 21,
+   "canonical": "polars.lazyframe.opt_flags.P",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.lazyframe.opt_flags.P",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.lazyframe.opt_flags.T",
+   "obj_kind": "attribute",
+   "file": "polars/lazyframe/opt_flags.py",
+   "lineno": 22,
+   "canonical": "polars.lazyframe.opt_flags.T",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.lazyframe.opt_flags.T",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.lazyframe.opt_flags.forward_old_opt_flags",
+   "obj_kind": "function",
+   "file": "polars/lazyframe/opt_flags.py",
+   "lineno": 305,
+   "canonical": "polars.lazyframe.opt_flags.forward_old_opt_flags",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.lazyframe.opt_flags.forward_old_opt_flags",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.selectors.Selector.agg_groups",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 1360,
+   "canonical": "polars.selectors.Selector.agg_groups",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.selectors.Selector.agg_groups",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.selectors.Selector.flatten",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 5546,
+   "canonical": "polars.selectors.Selector.flatten",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.selectors.Selector.flatten",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.selectors.Selector.from_json",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 12752,
+   "canonical": "polars.selectors.Selector.from_json",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.selectors.Selector.from_json",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.selectors.Selector.rechunk",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 1560,
+   "canonical": "polars.selectors.Selector.rechunk",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.selectors.Selector.rechunk",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.selectors.Selector.register_plugin",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 12628,
+   "canonical": "polars.selectors.Selector.register_plugin",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.selectors.Selector.register_plugin",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.selectors.Selector.shrink_dtype",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 11991,
+   "canonical": "polars.selectors.Selector.shrink_dtype",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.selectors.Selector.shrink_dtype",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.selectors.Selector.where",
+   "obj_kind": "function",
+   "file": "polars/expr/expr.py",
+   "lineno": 5061,
+   "canonical": "polars.selectors.Selector.where",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.selectors.Selector.where",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.arctan2d",
+   "obj_kind": "function",
+   "file": "polars/functions/lazy.py",
+   "lineno": 1768,
+   "canonical": "polars.functions.lazy.arctan2d",
+   "category": "removed_symbol",
+   "failure_mode": "shim",
+   "public_path": "polars.arctan2d",
+   "flags": [
+    "module_getattr_shim"
+   ],
+   "changelog_mentions": [],
+   "score": 6.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.expr.categorical.ExprCatNameSpace.get_categories",
+   "obj_kind": "function",
+   "file": "polars/expr/categorical.py",
+   "lineno": 27,
+   "canonical": "polars.expr.categorical.ExprCatNameSpace.get_categories",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.expr.categorical.ExprCatNameSpace.get_categories",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.expr.datetime.ExprDateTimeNameSpace.datetime",
+   "obj_kind": "function",
+   "file": "polars/expr/datetime.py",
+   "lineno": 1471,
+   "canonical": "polars.expr.datetime.ExprDateTimeNameSpace.datetime",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.expr.datetime.ExprDateTimeNameSpace.datetime",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "polars.expr.datetime.ExprDateTimeNameSpace.with_time_unit",
+   "obj_kind": "function",
+   "file": "polars/expr/datetime.py",
+   "lineno": 1891,
+   "canonical": "polars.expr.datetime.ExprDateTimeNameSpace.with_time_unit",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "polars.expr.datetime.ExprDateTimeNameSpace.with_time_unit",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.75
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "click",
+ "repo": "https://github.com/pallets/click",
+ "packages": [
+  "click"
+ ],
+ "old": {
+  "tag": "8.2.2",
+  "date": "2025-07-29",
+  "src_root": "src"
+ },
+ "new": {
+  "tag": "8.3.0",
+  "date": "2025-09-12",
+  "src_root": "src"
+ },
+ "engine": "griffe",
+ "errors": [],
+ "counts": {
+  "raw": 4,
+  "kept": 2,
+  "by_category": {
+   "changed_default": 2
+  },
+  "hard_failures": 0,
+  "changelog_confirmed": 0,
+  "dropped": {
+   "attribute_changed_value": 2
+  }
+ },
+ "candidates": [
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "click.core.Option.__init__",
+   "obj_kind": "function",
+   "param": "flag_value",
+   "old_value": "None",
+   "new_value": "UNSET",
+   "file": "click/core.py",
+   "lineno": 2650,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "click.Option.__init__",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.75
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "click.core.Parameter.__init__",
+   "obj_kind": "function",
+   "param": "default",
+   "old_value": "None",
+   "new_value": "UNSET",
+   "file": "click/core.py",
+   "lineno": 2097,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "click.Parameter.__init__",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.75
+  }
+ ]
+}

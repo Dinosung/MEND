@@ -1,0 +1,1894 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "numpy",
+ "repo": "https://github.com/numpy/numpy",
+ "packages": [
+  "numpy"
+ ],
+ "old": {
+  "tag": "v2.3.5",
+  "date": "2025-11-16",
+  "src_root": "."
+ },
+ "new": {
+  "tag": "v2.4.0",
+  "date": "2025-12-20",
+  "src_root": "."
+ },
+ "engine": "griffe",
+ "errors": [],
+ "counts": {
+  "raw": 544,
+  "kept": 108,
+  "by_category": {
+   "changed_default": 14,
+   "changed_parameter_kind": 19,
+   "moved_parameter": 1,
+   "new_required_parameter": 8,
+   "parameter_now_required": 1,
+   "removed_parameter": 8,
+   "removed_symbol": 57
+  },
+  "hard_failures": 93,
+  "changelog_confirmed": 20,
+  "dropped": {
+   "attribute_changed_value": 190,
+   "dunder": 5,
+   "duplicate": 4,
+   "object_changed_kind": 25,
+   "private": 6,
+   "private_parameter": 26,
+   "return_changed_type": 13,
+   "stub_default": 47,
+   "test": 120
+  }
+ },
+ "candidates": [
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "numpy.lib._npyio_impl.save",
+   "obj_kind": "function",
+   "param": "fix_imports",
+   "old_value": "positional or keyword, default=np._NoValue",
+   "file": "numpy/lib/_npyio_impl.py",
+   "lineno": 504,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.save",
+   "flags": [],
+   "changelog_mentions": [
+    "fix_imports",
+    "save"
+   ],
+   "score": 13.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.fft.helper",
+   "obj_kind": "module",
+   "file": "numpy/fft/helper.py",
+   "lineno": null,
+   "canonical": "numpy.fft.helper",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.fft.helper",
+   "flags": [],
+   "changelog_mentions": [
+    "helper"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg",
+   "obj_kind": "module",
+   "file": "numpy/linalg/linalg.py",
+   "lineno": null,
+   "canonical": "numpy.linalg.linalg",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg",
+   "flags": [],
+   "changelog_mentions": [
+    "linalg"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "numpy.lib._function_base_impl.corrcoef",
+   "obj_kind": "function",
+   "param": "bias",
+   "old_value": "positional or keyword, default=np._NoValue",
+   "file": "numpy/lib/_function_base_impl.py",
+   "lineno": 2897,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.corrcoef",
+   "flags": [],
+   "changelog_mentions": [
+    "bias",
+    "corrcoef"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "numpy.lib._function_base_impl.corrcoef",
+   "obj_kind": "function",
+   "param": "ddof",
+   "old_value": "positional or keyword, default=np._NoValue",
+   "file": "numpy/lib/_function_base_impl.py",
+   "lineno": 2897,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.corrcoef",
+   "flags": [],
+   "changelog_mentions": [
+    "ddof",
+    "corrcoef"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.in1d",
+   "obj_kind": "function",
+   "file": "numpy/lib/_arraysetops_impl.py",
+   "lineno": 808,
+   "canonical": "numpy.lib._arraysetops_impl.in1d",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.in1d",
+   "flags": [],
+   "changelog_mentions": [
+    "in1d"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "numpy.lib._function_base_impl.percentile",
+   "obj_kind": "function",
+   "param": "interpolation",
+   "old_value": "keyword-only, default=None",
+   "file": "numpy/lib/_function_base_impl.py",
+   "lineno": 4052,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.percentile",
+   "flags": [],
+   "changelog_mentions": [
+    "interpolation",
+    "percentile"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "numpy.lib._function_base_impl.quantile",
+   "obj_kind": "function",
+   "param": "interpolation",
+   "old_value": "keyword-only, default=None",
+   "file": "numpy/lib/_function_base_impl.py",
+   "lineno": 4254,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.quantile",
+   "flags": [],
+   "changelog_mentions": [
+    "interpolation",
+    "quantile"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.trapz",
+   "obj_kind": "function",
+   "file": "numpy/lib/_function_base_impl.py",
+   "lineno": 5111,
+   "canonical": "numpy.lib._function_base_impl.trapz",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.trapz",
+   "flags": [],
+   "changelog_mentions": [
+    "trapz"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.where",
+   "obj_kind": "function",
+   "param": "condition",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 403,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.where",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.where",
+   "obj_kind": "function",
+   "param": "x",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 403,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.where",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.where",
+   "obj_kind": "function",
+   "param": "y",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 403,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.where",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 10.0
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "numpy.ma.extras.corrcoef",
+   "obj_kind": "function",
+   "param": "bias",
+   "old_value": "positional or keyword, default=np._NoValue",
+   "file": "numpy/ma/extras.py",
+   "lineno": 1675,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.ma.corrcoef",
+   "flags": [],
+   "changelog_mentions": [
+    "bias",
+    "corrcoef"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "numpy.ma.extras.corrcoef",
+   "obj_kind": "function",
+   "param": "ddof",
+   "old_value": "positional or keyword, default=np._NoValue",
+   "file": "numpy/ma/extras.py",
+   "lineno": 1675,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.ma.corrcoef",
+   "flags": [],
+   "changelog_mentions": [
+    "ddof",
+    "corrcoef"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.matlib.in1d",
+   "obj_kind": "function",
+   "file": "numpy/lib/_arraysetops_impl.py",
+   "lineno": 808,
+   "canonical": "numpy.lib._arraysetops_impl.in1d",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.matlib.in1d",
+   "flags": [],
+   "changelog_mentions": [
+    "in1d"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.matlib.trapz",
+   "obj_kind": "function",
+   "file": "numpy/lib/_function_base_impl.py",
+   "lineno": 5111,
+   "canonical": "numpy.lib._function_base_impl.trapz",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.matlib.trapz",
+   "flags": [],
+   "changelog_mentions": [
+    "trapz"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy.ndarray.setfield",
+   "obj_kind": "function",
+   "param": "val",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/__init__.py",
+   "lineno": 2678,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.ndarray.setfield",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 9.25
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy.ndarray.swapaxes",
+   "obj_kind": "function",
+   "param": "axis1",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/__init__.py",
+   "lineno": 2311,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.ndarray.swapaxes",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 9.25
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy.ndarray.swapaxes",
+   "obj_kind": "function",
+   "param": "axis2",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/__init__.py",
+   "lineno": 2311,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.ndarray.swapaxes",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.lib._index_tricks_impl.ndindex.ndincr",
+   "obj_kind": "function",
+   "file": "numpy/lib/_index_tricks_impl.py",
+   "lineno": 699,
+   "canonical": "numpy.lib._index_tricks_impl.ndindex.ndincr",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.ndindex.ndincr",
+   "flags": [],
+   "changelog_mentions": [
+    "ndincr"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.nditer.__new__",
+   "obj_kind": "function",
+   "file": "numpy/__init__.py",
+   "lineno": 5745,
+   "canonical": "numpy.nditer.__new__",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.nditer.__new__",
+   "flags": [],
+   "changelog_mentions": [
+    "nditer"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.concatenate",
+   "obj_kind": "function",
+   "param": "axis",
+   "old_value": "None",
+   "new_value": "0",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 197,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.concatenate",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.concatenate",
+   "obj_kind": "function",
+   "param": "casting",
+   "old_value": "None",
+   "new_value": "'same_kind'",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 197,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.concatenate",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 8.5
+  },
+  {
+   "kind": "PARAMETER_REMOVED",
+   "path": "numpy.ma.mrecords.fromtextfile",
+   "obj_kind": "function",
+   "param": "delimitor",
+   "old_value": "keyword-only, default=np._NoValue",
+   "file": "numpy/ma/mrecords.py",
+   "lineno": 659,
+   "category": "removed_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.ma.mrecords.fromtextfile",
+   "flags": [],
+   "changelog_mentions": [
+    "delimitor",
+    "fromtextfile"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.dtype",
+   "obj_kind": "alias",
+   "old_value": "numpy.dtype",
+   "canonical": "numpy.dtype",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.dtype",
+   "still_exported_as": [
+    "numpy.dtype",
+    "numpy.matlib.dtype"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [
+    "dtype"
+   ],
+   "score": 8.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.float64",
+   "obj_kind": "alias",
+   "old_value": "numpy.float64",
+   "canonical": "numpy.float64",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.float64",
+   "still_exported_as": [
+    "numpy.float64",
+    "numpy.matlib.float64"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [
+    "float64"
+   ],
+   "score": 8.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.long",
+   "obj_kind": "alias",
+   "old_value": "numpy.long",
+   "canonical": "numpy.long",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.long",
+   "still_exported_as": [
+    "numpy.long",
+    "numpy.matlib.long"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [
+    "long"
+   ],
+   "score": 8.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.matmul",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.matmul",
+   "canonical": "numpy.linalg._linalg.matmul",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.matmul",
+   "still_exported_as": [
+    "numpy.linalg.matmul"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [
+    "matmul"
+   ],
+   "score": 7.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.busdaycalendar.__new__",
+   "obj_kind": "function",
+   "file": "numpy/__init__.py",
+   "lineno": 5686,
+   "canonical": "numpy.busdaycalendar.__new__",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.busdaycalendar.__new__",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.25
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.bincount",
+   "obj_kind": "function",
+   "param": "x",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 906,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.bincount",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.inner",
+   "obj_kind": "function",
+   "param": "a",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 309,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.inner",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.inner",
+   "obj_kind": "function",
+   "param": "b",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 309,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.inner",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.may_share_memory",
+   "obj_kind": "function",
+   "param": "a",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 1397,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.may_share_memory",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.may_share_memory",
+   "obj_kind": "function",
+   "param": "b",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 1397,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.may_share_memory",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.min_scalar_type",
+   "obj_kind": "function",
+   "param": "a",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 662,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.min_scalar_type",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.packbits",
+   "obj_kind": "function",
+   "param": "a",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 1181,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.packbits",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.shares_memory",
+   "obj_kind": "function",
+   "param": "a",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 1318,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.shares_memory",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.shares_memory",
+   "obj_kind": "function",
+   "param": "b",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 1318,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.shares_memory",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.unpackbits",
+   "obj_kind": "function",
+   "param": "a",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 1238,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.unpackbits",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_REQUIRED",
+   "path": "numpy._core.multiarray.unravel_index",
+   "obj_kind": "function",
+   "param": "shape",
+   "old_value": "positional or keyword, default=None",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 1040,
+   "category": "parameter_now_required",
+   "failure_mode": "hard",
+   "public_path": "numpy.unravel_index",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.vdot",
+   "obj_kind": "function",
+   "param": "a",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 843,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.vdot",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy._core.multiarray.vdot",
+   "obj_kind": "function",
+   "param": "b",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 843,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.vdot",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 7.0
+  },
+  {
+   "kind": "PARAMETER_CHANGED_KIND",
+   "path": "numpy.generic.repeat",
+   "obj_kind": "function",
+   "param": "repeats",
+   "old_value": "positional or keyword",
+   "new_value": "positional-only",
+   "file": "numpy/__init__.py",
+   "lineno": 3840,
+   "category": "changed_parameter_kind",
+   "failure_mode": "hard",
+   "public_path": "numpy.generic.repeat",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.ArrayLike",
+   "obj_kind": "alias",
+   "old_value": "numpy._typing._array_like.ArrayLike",
+   "canonical": "numpy._typing._array_like.ArrayLike",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.ArrayLike",
+   "still_exported_as": [
+    "numpy.ArrayLike",
+    "numpy.typing.ArrayLike"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.NDArray",
+   "obj_kind": "alias",
+   "old_value": "numpy._typing._array_like.NDArray",
+   "canonical": "numpy._typing._array_like.NDArray",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.NDArray",
+   "still_exported_as": [
+    "numpy.NDArray",
+    "numpy.typing.NDArray"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.int16",
+   "obj_kind": "alias",
+   "old_value": "numpy.int16",
+   "canonical": "numpy.int16",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.int16",
+   "still_exported_as": [
+    "numpy.int16",
+    "numpy.matlib.int16"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.int32",
+   "obj_kind": "alias",
+   "old_value": "numpy.int32",
+   "canonical": "numpy.int32",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.int32",
+   "still_exported_as": [
+    "numpy.int32",
+    "numpy.matlib.int32"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.int64",
+   "obj_kind": "alias",
+   "old_value": "numpy.int64",
+   "canonical": "numpy.int64",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.int64",
+   "still_exported_as": [
+    "numpy.int64",
+    "numpy.matlib.int64"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.int8",
+   "obj_kind": "alias",
+   "old_value": "numpy.int8",
+   "canonical": "numpy.int8",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.int8",
+   "still_exported_as": [
+    "numpy.int8",
+    "numpy.matlib.int8"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.int_",
+   "obj_kind": "alias",
+   "old_value": "numpy.int_",
+   "canonical": "numpy.int_",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.int_",
+   "still_exported_as": [
+    "numpy.int_",
+    "numpy.matlib.int_"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.uint",
+   "obj_kind": "alias",
+   "old_value": "numpy.uint",
+   "canonical": "numpy.uint",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.uint",
+   "still_exported_as": [
+    "numpy.uint",
+    "numpy.matlib.uint"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.uint16",
+   "obj_kind": "alias",
+   "old_value": "numpy.uint16",
+   "canonical": "numpy.uint16",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.uint16",
+   "still_exported_as": [
+    "numpy.uint16",
+    "numpy.matlib.uint16"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.uint32",
+   "obj_kind": "alias",
+   "old_value": "numpy.uint32",
+   "canonical": "numpy.uint32",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.uint32",
+   "still_exported_as": [
+    "numpy.uint32",
+    "numpy.matlib.uint32"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.uint64",
+   "obj_kind": "alias",
+   "old_value": "numpy.uint64",
+   "canonical": "numpy.uint64",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.uint64",
+   "still_exported_as": [
+    "numpy.uint64",
+    "numpy.matlib.uint64"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.uint8",
+   "obj_kind": "alias",
+   "old_value": "numpy.uint8",
+   "canonical": "numpy.uint8",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.uint8",
+   "still_exported_as": [
+    "numpy.uint8",
+    "numpy.matlib.uint8"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random.ulong",
+   "obj_kind": "alias",
+   "old_value": "numpy.ulong",
+   "canonical": "numpy.ulong",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.ulong",
+   "still_exported_as": [
+    "numpy.ulong",
+    "numpy.matlib.ulong"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "PARAMETER_ADDED_REQUIRED",
+   "path": "numpy.ufunc.accumulate",
+   "obj_kind": "function",
+   "param": "array",
+   "file": "numpy/__init__.py",
+   "lineno": 5797,
+   "category": "new_required_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.ufunc.accumulate",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "PARAMETER_ADDED_REQUIRED",
+   "path": "numpy.ufunc.at",
+   "obj_kind": "function",
+   "param": "a",
+   "file": "numpy/__init__.py",
+   "lineno": 5827,
+   "category": "new_required_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.ufunc.at",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "PARAMETER_ADDED_REQUIRED",
+   "path": "numpy.ufunc.at",
+   "obj_kind": "function",
+   "param": "indices",
+   "file": "numpy/__init__.py",
+   "lineno": 5827,
+   "category": "new_required_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.ufunc.at",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "PARAMETER_ADDED_REQUIRED",
+   "path": "numpy.ufunc.outer",
+   "obj_kind": "function",
+   "param": "A",
+   "file": "numpy/__init__.py",
+   "lineno": 5823,
+   "category": "new_required_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.ufunc.outer",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "PARAMETER_ADDED_REQUIRED",
+   "path": "numpy.ufunc.outer",
+   "obj_kind": "function",
+   "param": "B",
+   "file": "numpy/__init__.py",
+   "lineno": 5823,
+   "category": "new_required_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.ufunc.outer",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "PARAMETER_ADDED_REQUIRED",
+   "path": "numpy.ufunc.reduce",
+   "obj_kind": "function",
+   "param": "array",
+   "file": "numpy/__init__.py",
+   "lineno": 5805,
+   "category": "new_required_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.ufunc.reduce",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "PARAMETER_ADDED_REQUIRED",
+   "path": "numpy.ufunc.reduceat",
+   "obj_kind": "function",
+   "param": "array",
+   "file": "numpy/__init__.py",
+   "lineno": 5814,
+   "category": "new_required_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.ufunc.reduceat",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "PARAMETER_ADDED_REQUIRED",
+   "path": "numpy.ufunc.reduceat",
+   "obj_kind": "function",
+   "param": "indices",
+   "file": "numpy/__init__.py",
+   "lineno": 5814,
+   "category": "new_required_parameter",
+   "failure_mode": "hard",
+   "public_path": "numpy.ufunc.reduceat",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 6.25
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.bincount",
+   "obj_kind": "function",
+   "param": "minlength",
+   "old_value": "None",
+   "new_value": "0",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 906,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.bincount",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.can_cast",
+   "obj_kind": "function",
+   "param": "casting",
+   "old_value": "None",
+   "new_value": "'safe'",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 600,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.can_cast",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.copyto",
+   "obj_kind": "function",
+   "param": "casting",
+   "old_value": "None",
+   "new_value": "'same_kind'",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 1085,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.copyto",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.copyto",
+   "obj_kind": "function",
+   "param": "where",
+   "old_value": "None",
+   "new_value": "True",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 1085,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.copyto",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.empty_like",
+   "obj_kind": "function",
+   "param": "order",
+   "old_value": "None",
+   "new_value": "'K'",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 115,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.empty_like",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.empty_like",
+   "obj_kind": "function",
+   "param": "subok",
+   "old_value": "None",
+   "new_value": "True",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 115,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.empty_like",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.lexsort",
+   "obj_kind": "function",
+   "param": "axis",
+   "old_value": "None",
+   "new_value": "-1",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 479,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.lexsort",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.LinAlgError",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.LinAlgError",
+   "canonical": "numpy.linalg._linalg.LinAlgError",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.LinAlgError",
+   "still_exported_as": [
+    "numpy.linalg.LinAlgError"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.cholesky",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.cholesky",
+   "canonical": "numpy.linalg._linalg.cholesky",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.cholesky",
+   "still_exported_as": [
+    "numpy.linalg.cholesky"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.cond",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.cond",
+   "canonical": "numpy.linalg._linalg.cond",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.cond",
+   "still_exported_as": [
+    "numpy.linalg.cond"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.cross",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.cross",
+   "canonical": "numpy.linalg._linalg.cross",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.cross",
+   "still_exported_as": [
+    "numpy.linalg.cross"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.det",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.det",
+   "canonical": "numpy.linalg._linalg.det",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.det",
+   "still_exported_as": [
+    "numpy.linalg.det"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.diagonal",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.diagonal",
+   "canonical": "numpy.linalg._linalg.diagonal",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.diagonal",
+   "still_exported_as": [
+    "numpy.linalg.diagonal"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.eig",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.eig",
+   "canonical": "numpy.linalg._linalg.eig",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.eig",
+   "still_exported_as": [
+    "numpy.linalg.eig"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.eigh",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.eigh",
+   "canonical": "numpy.linalg._linalg.eigh",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.eigh",
+   "still_exported_as": [
+    "numpy.linalg.eigh"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.eigvals",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.eigvals",
+   "canonical": "numpy.linalg._linalg.eigvals",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.eigvals",
+   "still_exported_as": [
+    "numpy.linalg.eigvals"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.eigvalsh",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.eigvalsh",
+   "canonical": "numpy.linalg._linalg.eigvalsh",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.eigvalsh",
+   "still_exported_as": [
+    "numpy.linalg.eigvalsh"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.inv",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.inv",
+   "canonical": "numpy.linalg._linalg.inv",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.inv",
+   "still_exported_as": [
+    "numpy.linalg.inv"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.lstsq",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.lstsq",
+   "canonical": "numpy.linalg._linalg.lstsq",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.lstsq",
+   "still_exported_as": [
+    "numpy.linalg.lstsq"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.matrix_norm",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.matrix_norm",
+   "canonical": "numpy.linalg._linalg.matrix_norm",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.matrix_norm",
+   "still_exported_as": [
+    "numpy.linalg.matrix_norm"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.matrix_power",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.matrix_power",
+   "canonical": "numpy.linalg._linalg.matrix_power",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.matrix_power",
+   "still_exported_as": [
+    "numpy.linalg.matrix_power"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.matrix_rank",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.matrix_rank",
+   "canonical": "numpy.linalg._linalg.matrix_rank",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.matrix_rank",
+   "still_exported_as": [
+    "numpy.linalg.matrix_rank"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.matrix_transpose",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.matrix_transpose",
+   "canonical": "numpy.linalg._linalg.matrix_transpose",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.matrix_transpose",
+   "still_exported_as": [
+    "numpy.linalg.matrix_transpose"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.multi_dot",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.multi_dot",
+   "canonical": "numpy.linalg._linalg.multi_dot",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.multi_dot",
+   "still_exported_as": [
+    "numpy.linalg.multi_dot"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.norm",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.norm",
+   "canonical": "numpy.linalg._linalg.norm",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.norm",
+   "still_exported_as": [
+    "numpy.linalg.norm"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.outer",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.outer",
+   "canonical": "numpy.linalg._linalg.outer",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.outer",
+   "still_exported_as": [
+    "numpy.linalg.outer"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.pinv",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.pinv",
+   "canonical": "numpy.linalg._linalg.pinv",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.pinv",
+   "still_exported_as": [
+    "numpy.linalg.pinv"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.qr",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.qr",
+   "canonical": "numpy.linalg._linalg.qr",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.qr",
+   "still_exported_as": [
+    "numpy.linalg.qr"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.slogdet",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.slogdet",
+   "canonical": "numpy.linalg._linalg.slogdet",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.slogdet",
+   "still_exported_as": [
+    "numpy.linalg.slogdet"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.solve",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.solve",
+   "canonical": "numpy.linalg._linalg.solve",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.solve",
+   "still_exported_as": [
+    "numpy.linalg.solve"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.svd",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.svd",
+   "canonical": "numpy.linalg._linalg.svd",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.svd",
+   "still_exported_as": [
+    "numpy.linalg.svd"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.svdvals",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.svdvals",
+   "canonical": "numpy.linalg._linalg.svdvals",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.svdvals",
+   "still_exported_as": [
+    "numpy.linalg.svdvals"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.tensordot",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.tensordot",
+   "canonical": "numpy.linalg._linalg.tensordot",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.tensordot",
+   "still_exported_as": [
+    "numpy.linalg.tensordot"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.tensorinv",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.tensorinv",
+   "canonical": "numpy.linalg._linalg.tensorinv",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.tensorinv",
+   "still_exported_as": [
+    "numpy.linalg.tensorinv"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.tensorsolve",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.tensorsolve",
+   "canonical": "numpy.linalg._linalg.tensorsolve",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.tensorsolve",
+   "still_exported_as": [
+    "numpy.linalg.tensorsolve"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.trace",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.trace",
+   "canonical": "numpy.linalg._linalg.trace",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.trace",
+   "still_exported_as": [
+    "numpy.linalg.trace"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.vecdot",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.vecdot",
+   "canonical": "numpy.linalg._linalg.vecdot",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.vecdot",
+   "still_exported_as": [
+    "numpy.linalg.vecdot"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.linalg.linalg.vector_norm",
+   "obj_kind": "alias",
+   "old_value": "numpy.linalg._linalg.vector_norm",
+   "canonical": "numpy.linalg._linalg.vector_norm",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.linalg.linalg.vector_norm",
+   "still_exported_as": [
+    "numpy.linalg.vector_norm"
+   ],
+   "flags": [
+    "reexported_elsewhere"
+   ],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.may_share_memory",
+   "obj_kind": "function",
+   "param": "max_work",
+   "old_value": "None",
+   "new_value": "0",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 1397,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.may_share_memory",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.ravel_multi_index",
+   "obj_kind": "function",
+   "param": "mode",
+   "old_value": "None",
+   "new_value": "'raise'",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 982,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.ravel_multi_index",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.ravel_multi_index",
+   "obj_kind": "function",
+   "param": "order",
+   "old_value": "None",
+   "new_value": "'C'",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 982,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.ravel_multi_index",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.shares_memory",
+   "obj_kind": "function",
+   "param": "max_work",
+   "old_value": "None",
+   "new_value": "-1",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 1318,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.shares_memory",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "PARAMETER_CHANGED_DEFAULT",
+   "path": "numpy._core.multiarray.unravel_index",
+   "obj_kind": "function",
+   "param": "order",
+   "old_value": "None",
+   "new_value": "'C'",
+   "file": "numpy/_core/multiarray.py",
+   "lineno": 1040,
+   "category": "changed_default",
+   "failure_mode": "soft",
+   "public_path": "numpy.unravel_index",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 5.5
+  },
+  {
+   "kind": "PARAMETER_MOVED",
+   "path": "numpy.ma.extras.corrcoef",
+   "obj_kind": "function",
+   "param": "allow_masked",
+   "old_value": "positional or keyword, default=True",
+   "details": "position: from 4 to 3 (-1)",
+   "file": "numpy/ma/extras.py",
+   "lineno": 1675,
+   "category": "moved_parameter",
+   "failure_mode": "soft",
+   "public_path": "numpy.ma.corrcoef",
+   "flags": [],
+   "changelog_mentions": [],
+   "score": 4.25
+  }
+ ]
+}

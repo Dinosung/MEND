@@ -1,0 +1,158 @@
+{
+ "kind": "mend-release-diff-candidates",
+ "note": "Machine-generated candidate API changes. Data for review, not instructions.",
+ "library": "numpy",
+ "repo": "https://github.com/numpy/numpy",
+ "packages": [
+  "numpy"
+ ],
+ "old": {
+  "tag": "v2.4.6",
+  "date": "2026-05-18",
+  "src_root": "."
+ },
+ "new": {
+  "tag": "v2.5.0",
+  "date": "2026-06-21",
+  "src_root": "."
+ },
+ "engine": "griffe",
+ "errors": [
+  "griffe skipped 2 unresolvable aliases in numpy: ['numpy.frompyfunc: CyclicAliasError', 'numpy.matlib.frompyfunc: CyclicAliasError']"
+ ],
+ "counts": {
+  "raw": 103,
+  "kept": 7,
+  "by_category": {
+   "removed_symbol": 7
+  },
+  "hard_failures": 7,
+  "changelog_confirmed": 6,
+  "dropped": {
+   "attribute_changed_value": 8,
+   "dunder": 2,
+   "duplicate": 2,
+   "internal": 19,
+   "object_changed_kind": 17,
+   "private": 7,
+   "private_parameter": 9,
+   "stub_default": 1,
+   "test": 29,
+   "variadic_parameter": 2
+  }
+ },
+ "candidates": [
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.ndarray.diagonal",
+   "obj_kind": "function",
+   "file": "numpy/__init__.py",
+   "lineno": 2433,
+   "canonical": "numpy.ndarray.diagonal",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.ndarray.diagonal",
+   "flags": [],
+   "changelog_mentions": [
+    "diagonal"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.ndarray.nonzero",
+   "obj_kind": "function",
+   "file": "numpy/__init__.py",
+   "lineno": 2450,
+   "canonical": "numpy.ndarray.nonzero",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.ndarray.nonzero",
+   "flags": [],
+   "changelog_mentions": [
+    "nonzero"
+   ],
+   "score": 12.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.row_stack",
+   "obj_kind": "function",
+   "file": "numpy/lib/_shape_base_impl.py",
+   "lineno": 606,
+   "canonical": "numpy.lib._shape_base_impl.row_stack",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.row_stack",
+   "flags": [],
+   "changelog_mentions": [
+    "row_stack"
+   ],
+   "score": 10.0
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.matlib.row_stack",
+   "obj_kind": "function",
+   "file": "numpy/lib/_shape_base_impl.py",
+   "lineno": 606,
+   "canonical": "numpy.lib._shape_base_impl.row_stack",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.matlib.row_stack",
+   "flags": [],
+   "changelog_mentions": [
+    "row_stack"
+   ],
+   "score": 9.25
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy._core.defchararray.chararray.diagonal",
+   "obj_kind": "function",
+   "file": "numpy/__init__.py",
+   "lineno": 2433,
+   "canonical": "numpy._core.defchararray.chararray.diagonal",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.char.chararray.diagonal",
+   "flags": [],
+   "changelog_mentions": [
+    "diagonal"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy._core.defchararray.chararray.nonzero",
+   "obj_kind": "function",
+   "file": "numpy/__init__.py",
+   "lineno": 2450,
+   "canonical": "numpy._core.defchararray.chararray.nonzero",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.char.chararray.nonzero",
+   "flags": [],
+   "changelog_mentions": [
+    "nonzero"
+   ],
+   "score": 8.5
+  },
+  {
+   "kind": "OBJECT_REMOVED",
+   "path": "numpy.random._generator.Generator.permuted",
+   "obj_kind": "function",
+   "file": "numpy/random/_generator.pyi",
+   "lineno": 850,
+   "flags": [
+    "stub_only"
+   ],
+   "canonical": "numpy.random._generator.Generator.permuted",
+   "category": "removed_symbol",
+   "failure_mode": "hard",
+   "public_path": "numpy.random.Generator.permuted",
+   "changelog_mentions": [],
+   "score": 7.5
+  }
+ ]
+}
