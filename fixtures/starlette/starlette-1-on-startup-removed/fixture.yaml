@@ -17,10 +17,12 @@ failure:
 repro:
   python: "3.13"
   deps: ["starlette==1.6.0", "httpx2==2.13.0"]
+  old_deps: ["starlette==0.52.1", "httpx==0.28.1"]
 provenance:
   sources:
     - {type: changelog, url: "https://starlette.dev/release-notes/#100rc1-february-23-2026"}
     - {type: pr, url: "https://github.com/encode/starlette/pull/3117"}
     - {type: docs, url: "https://starlette.dev/lifespan/"}
   license: "BSD-3-Clause"
+  released: "2026-03-22"
 status: verified

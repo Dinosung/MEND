@@ -16,10 +16,13 @@ failure:
 repro:
   python: "3.13"
   deps: ["fastapi==0.143.0", "starlette==1.6.0", "httpx2==2.13.0"]
+  old_python: "3.11"
+  old_deps: ["fastapi==0.86.0", "starlette==0.20.4", "pydantic==1.10.26", "anyio==3.7.1", "requests==2.32.3"]
 provenance:
   sources:
     - {type: changelog, url: "https://fastapi.tiangolo.com/release-notes/#0870-2022-11-13"}
     - {type: other, url: "https://github.com/encode/starlette/discussions/1871"}
     - {type: other, url: "https://pypi.org/project/bump-testclient/"}
   license: "MIT"
+  released: "2022-11-13"
 status: verified

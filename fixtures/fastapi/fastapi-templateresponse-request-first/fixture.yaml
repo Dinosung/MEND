@@ -16,6 +16,7 @@ failure:
 repro:
   python: "3.13"
   deps: ["fastapi==0.143.0", "starlette==1.6.0", "jinja2==3.1.6", "httpx2==2.13.0"]
+  old_deps: ["fastapi==0.132.1", "starlette==0.52.1", "jinja2==3.1.6", "httpx==0.28.1"]
 provenance:
   sources:
     - {type: changelog, url: "https://starlette.dev/release-notes/#100rc1-february-23-2026"}
@@ -23,4 +24,5 @@ provenance:
     - {type: docs, url: "https://starlette.dev/templates/"}
     - {type: issue, url: "https://github.com/pallets/jinja/issues/2180"}
   license: "BSD-3-Clause"
+  released: "2026-02-24"
 status: verified
