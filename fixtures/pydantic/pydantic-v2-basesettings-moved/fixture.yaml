@@ -1,0 +1,23 @@
+id: pydantic-v2-basesettings-moved
+title: "Importing BaseSettings from pydantic in Pydantic v2"
+summary: >
+  In Pydantic v2, BaseSettings was moved out of the core package into the separate
+  pydantic-settings distribution. `from pydantic import BaseSettings` raises
+  PydanticImportError at import time.
+ecosystem: python
+package: pydantic
+versions: ">=2.0"
+tags: [settings, config, migration, imports]
+failure:
+  kind: api-removed
+  symptom: "pydantic.errors.PydanticImportError: `BaseSettings` has been moved to the `pydantic-settings` package"
+  bad_pattern: "from pydantic import BaseSettings"
+  fix_pattern: "from pydantic_settings import BaseSettings"
+repro:
+  python: "3.12"
+  deps: ["pydantic==2.9.2", "pydantic-settings==2.5.2"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#basesettings-has-moved-to-pydantic-settings"}
+  license: "MIT"
+status: verified

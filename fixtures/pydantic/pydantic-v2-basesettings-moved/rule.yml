@@ -1,0 +1,8 @@
+rules:
+  - id: pydantic-v2-basesettings-moved
+    languages: [python]
+    severity: ERROR
+    message: "Pydantic v2 moved BaseSettings to the pydantic-settings package: use `from pydantic_settings import BaseSettings`."
+    pattern-either:
+      - pattern: from pydantic import BaseSettings
+      - pattern: pydantic.BaseSettings

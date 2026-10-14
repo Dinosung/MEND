@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mend-agent"
+version = "0.0.1"
+description = "Verified failure memory for AI coding agents: stop agents from repeating known mistakes."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "Dinosung" }]
+dependencies = [
+  "pyyaml>=6",
+  "packaging>=23",
+]
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.2"]
+check = ["semgrep>=1.80"]
+dev = ["pytest>=8", "jsonschema>=4"]
+
+[project.scripts]
+mend = "mend.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mend"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
