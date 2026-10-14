@@ -21,6 +21,9 @@ Every module exposes `main(argv: list[str]) -> int`.
 - Core package deps stay minimal: `pyyaml`, `packaging`. Everything else is an optional extra.
 - Python >= 3.10, type hints, no network in tests.
 - Tests use pytest and live in `tests/`.
+- Keep it simple: the smallest clear code that does the job. No speculative options,
+  abstractions or extra flags until a real need appears; prefer plain functions and the
+  standard library; delete code that isn't used.
 - Commit messages: imperative, small, scoped.
 - Commit size: one logical change per commit, aimed at roughly 300 changed lines or
   fewer (generated data such as candidate JSON or results excepted). Split work by
