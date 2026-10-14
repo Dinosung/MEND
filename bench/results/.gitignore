@@ -1,0 +1,2 @@
+# per-trial artifacts (transcripts, generated code) stay local; commit results.jsonl/report.md/run.json
+*/raw/
