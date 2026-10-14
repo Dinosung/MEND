@@ -27,7 +27,9 @@ from typing import Any, TextIO
 from mend.render import get, sanitize
 
 MAX_FACTS = 8            # fact lines in SessionStart context (plus header/footer)
+MAX_FINDINGS = 10        # finding lines on stderr for PostToolUse
 DEP_FILES = ("pyproject.toml", "uv.lock", "poetry.lock", "setup.cfg")
+FILE_TOOLS = {"Write", "Edit", "MultiEdit"}
 
 
 def _debug(msg: str) -> None:
@@ -335,20 +337,111 @@ def session_start(data: dict[str, Any], out: TextIO) -> int:
     return 0
 
 
-HANDLERS = {"session-start": "session_start"}
+def edited_paths(data: dict[str, Any]) -> list[Path]:
+    ti = data.get("tool_input") or {}
+    tr = data.get("tool_response") or {}
+    cands = []
+    if isinstance(ti, dict):
+        cands.append(ti.get("file_path"))
+    if isinstance(tr, dict):
+        cands.append(tr.get("filePath"))
+    base = Path(str(data.get("cwd") or os.getcwd()))
+    out: list[Path] = []
+    for c in cands:
+        if isinstance(c, str) and c:
+            p = Path(c)
+            p = p if p.is_absolute() else base / p
+            if p not in out:
+                out.append(p)
+    return out
+
+
+_LINE_RE = re.compile(r"\s+")
+
+
+def _source_line(path: Path, line: int) -> str:
+    try:
+        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+        return _LINE_RE.sub(" ", lines[line - 1]).strip() if 0 < line <= len(lines) else ""
+    except OSError:
+        return ""
+
+
+def finding_line(path: Path, line: int, m: Match, display: str) -> str:
+    fx = m.fixture
+    fid = sanitize(get(fx, "id"), max_len=100)
+    code = _code(_source_line(path, line), max_len=100)
+    symptom = _first_line(get(fx, "failure", "symptom"))
+    fix = _code(get(fx, "failure", "fix_pattern"))
+    title = sanitize(get(fx, "title"), max_len=140)
+    s = f"{display}:{line}: {code} matches a verified known failure ({title}). " if code else \
+        f"{display}:{line}: matches a verified known failure ({title}). "
+    s += _range(m) + (f", this code results in {symptom}" if symptom else ", this code fails")
+    if fix:
+        s += f"; the working form is {fix}"
+    return s + f". [mend:{fid}]"
+
+
+def post_tool_use(data: dict[str, Any], err: TextIO) -> int:
+    tool = data.get("tool_name")
+    if tool and tool not in FILE_TOOLS:
+        return 0
+    paths = [p for p in edited_paths(data) if p.suffix == ".py" and p.is_file()]
+    if not paths:
+        return 0
+    # The edited file's own project (nearest dependency files above it), else the session's.
+    root = find_project_root(paths[0].resolve().parent)
+    if not _has_dep_files(root):
+        root = _project_dir(data)
+    deps, declared = project_versions(root)
+    if not deps:
+        return 0
+    matches = relevant_fixtures(_load(fixtures_dir()), deps, declared)
+    if not matches:
+        return 0
+    from mend.check import check_paths
+
+    by_id = {str(get(m.fixture, "id")): m for m in matches}
+    use_semgrep = bool(os.environ.get("MEND_HOOK_SEMGREP"))  # semgrep is slow per edit
+    findings = check_paths(paths, [m.fixture for m in matches], use_semgrep=use_semgrep)
+    lines = []
+    for f in findings:
+        m = by_id.get(f.fixture_id)
+        if m is None:
+            continue
+        p = Path(f.path)
+        try:
+            display = str(p.resolve().relative_to(root.resolve()))
+        except ValueError:
+            display = str(p)
+        lines.append(finding_line(p, f.line, m, display))
+    if not lines:
+        return 0
+    head = (f"MEND: {len(lines)} line(s) in the edited file match verified known-failure "
+            "records for this project's dependency versions (reference data):")
+    shown = lines[:MAX_FINDINGS]
+    if len(lines) > MAX_FINDINGS:
+        shown.append(f"... and {len(lines) - MAX_FINDINGS} more.")
+    err.write("\n".join([head] + shown) + "\n")
+    return 2
+
+
+HANDLERS = {"session-start": "session_start", "post-tool-use": "post_tool_use"}
 
 
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     if not argv or argv[0] in {"-h", "--help"} or argv[0] not in HANDLERS:
-        print("usage: mend hook {session-start} < hook-input.json\n\n"
+        print("usage: mend hook {session-start|post-tool-use} < hook-input.json\n\n"
               "Claude Code hook handlers. Read hook JSON on stdin; never fail the session.",
               file=sys.stderr if argv and argv[0] not in {"-h", "--help"} else sys.stdout)
         return 0 if argv and argv[0] in {"-h", "--help"} else 2
     event = argv[0]
     try:
         data = read_input(sys.stdin)
-        return session_start(data, sys.stdout)
+        if event == "session-start":
+            return session_start(data, sys.stdout)
+        return post_tool_use(data, sys.stderr)
     except Exception:  # noqa: BLE001 - a hook must never break the session
         if os.environ.get("MEND_DEBUG"):
             traceback.print_exc()

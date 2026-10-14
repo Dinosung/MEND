@@ -173,9 +173,58 @@ def test_session_start_finds_project_root_from_subdir(tmp_path, catalog, monkeyp
 
 # --------------------------------------------------------------------------- post-tool-use
 
+def test_post_tool_use_flags(tmp_path, catalog, monkeypatch, capsys):
+    p = project(tmp_path, "numpy==2.4.1\n", TRAPZ)
+    rc, out, err = run("post-tool-use", ptu_input(p, str(p / "target.py")), monkeypatch, capsys)
+    assert rc == 2 and out == ""
+    assert "target.py:5: `return np.trapz(y, x)`" in err
+    assert "In numpy>=2.4 (project: numpy 2.4.1)" in err
+    assert "the working form is `np.trapezoid(y, x)`" in err
+    assert "[mend:numpy-trapz-removed]" in err
+    assert "use the other thing" not in err
+
+
+@pytest.mark.parametrize("tool", ["Edit", "MultiEdit"])
+def test_post_tool_use_edit_tools_relative_path(tmp_path, catalog, monkeypatch, capsys, tool):
+    p = project(tmp_path, "numpy==2.4.1\n", TRAPZ)
+    rc, _, err = run("post-tool-use", ptu_input(p, "target.py", tool), monkeypatch, capsys)
+    assert rc == 2 and "numpy-trapz-removed" in err
+
+
+def test_post_tool_use_clean_file(tmp_path, catalog, monkeypatch, capsys):
+    p = project(tmp_path, "numpy==2.4.1\n", "import numpy as np\nnp.trapezoid([1, 2])\n")
+    rc, out, err = run("post-tool-use", ptu_input(p, str(p / "target.py")), monkeypatch, capsys)
+    assert (rc, out, err) == (0, "", "")
+
+
+@pytest.mark.parametrize("reqs", ["numpy==2.3.0\n", "numpy==1.26.4\n", "numpy<2.4\n", "requests\n"])
+def test_post_tool_use_version_out_of_range(tmp_path, catalog, monkeypatch, capsys, reqs):
+    p = project(tmp_path, reqs, TRAPZ)
+    rc, out, err = run("post-tool-use", ptu_input(p, str(p / "target.py")), monkeypatch, capsys)
+    assert (rc, out, err) == (0, "", "")
+
+
+def test_post_tool_use_unknown_version_conditional(tmp_path, catalog, monkeypatch, capsys):
+    p = project(tmp_path, "numpy\n", TRAPZ)
+    rc, _, err = run("post-tool-use", ptu_input(p, str(p / "target.py")), monkeypatch, capsys)
+    assert rc == 2 and "If numpy>=2.4 (project pins no numpy version)" in err
+
+
+def test_post_tool_use_non_python(tmp_path, catalog, monkeypatch, capsys):
+    p = project(tmp_path, "numpy==2.4.1\n", "np.trapz(y, x)\n", name="notes.md")
+    rc, out, err = run("post-tool-use", ptu_input(p, str(p / "notes.md")), monkeypatch, capsys)
+    assert (rc, out, err) == (0, "", "")
+
+
+def test_post_tool_use_other_tool_ignored(tmp_path, catalog, monkeypatch, capsys):
+    p = project(tmp_path, "numpy==2.4.1\n", TRAPZ)
+    payload = ptu_input(p, str(p / "target.py"), tool="Read")
+    assert run("post-tool-use", payload, monkeypatch, capsys) == (0, "", "")
+
+
 # --------------------------------------------------------------------------- robustness
 
-@pytest.mark.parametrize("event", ["session-start"])
+@pytest.mark.parametrize("event", ["session-start", "post-tool-use"])
 @pytest.mark.parametrize("raw", ["", "not json", "[1, 2]", '{"cwd": 5, "tool_input": "x"}',
                                  '{"cwd": "/nonexistent/dir/xyz"}'])
 def test_malformed_input_exits_zero(catalog, monkeypatch, capsys, event, raw):
@@ -188,6 +237,7 @@ def test_missing_fixtures_dir_is_silent(tmp_path, monkeypatch, capsys):
     monkeypatch.setenv("MEND_FIXTURES_DIR", str(tmp_path / "nope"))
     p = project(tmp_path, "numpy==2.4.1\n", TRAPZ)
     assert run("session-start", ss_input(p), monkeypatch, capsys) == (0, "", "")
+    assert run("post-tool-use", ptu_input(p, str(p / "target.py")), monkeypatch, capsys) == (0, "", "")
 
 
 def test_fixtures_dir_ignores_project_fixtures(tmp_path, monkeypatch):
