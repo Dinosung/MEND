@@ -7,6 +7,8 @@ skip them and note it in the progress log.
 
 ## Now: MVP → Alpha
 
+- [ ] Freshness pivot (from bench findings, see bench/results/FINDINGS.md): fixture batch for breaking changes released in the last 6-12 months, i.e. after model training cutoffs (NumPy 2.3/2.4 removals, Starlette 1.x, FastAPI 0.13x, pandas 3.0 edge cases, newest majors of popular libs). Record each fixture's release date in provenance so freshness can be measured.
+- [ ] Bench: edit-in-existing-repo task mode (a small legacy codebase around the change, versions only in the lockfile) for the anthropic_api adapter.
 - [ ] Built-in `mend check` matcher: support decorator patterns (`@validator(...)`), call-with-keyword patterns (`Field(regex=...)`, `select([...])`), and `class Config:` attribute patterns, so most existing rule.yml files work without semgrep. Add tests per fixture rule.
 - [ ] Run semgrep in CI against every fixture's rule.yml: must flag `bad/`, must not flag `fixed/`.
 - [ ] Fixture batch: Pydantic `parse_raw_as`, `EmailStr` without email-validator, `const=True`, strict int/str coercion.

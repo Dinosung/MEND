@@ -1,0 +1,42 @@
+{
+  "run_id": "20261014T030708Z-anthropic_api",
+  "agent": "anthropic_api",
+  "model": "claude-haiku-5-5",
+  "arms": [
+    "baseline",
+    "mend"
+  ],
+  "trials": 3,
+  "scorer": "local",
+  "fixtures_root": "/home/claude/mend/fixtures",
+  "fixtures": [
+    "numpy-2-removed-aliases-nan-float",
+    "numpy-array-copy-false-raises",
+    "numpy-nep50-uint8-scalar-overflow",
+    "numpy-trapz-removed",
+    "pandas-cow-chained-assignment-noop",
+    "pandas-cow-inplace-on-column-noop",
+    "pandas-dataframe-append-removed",
+    "pandas-offset-alias-m-removed",
+    "pandas-series-int-key-not-positional",
+    "pandas-str-dtype-not-object",
+    "pydantic-v2-allow-mutation-ignored",
+    "pydantic-v2-allow-population-by-field-name-ignored",
+    "pydantic-v2-anystr-strip-whitespace-ignored",
+    "pydantic-v2-basesettings-moved",
+    "pydantic-v2-conlist-min-items-removed",
+    "pydantic-v2-custom-root-type-removed",
+    "pydantic-v2-field-regex-removed",
+    "pydantic-v2-json-dumps-kwargs-removed",
+    "pydantic-v2-optional-field-required",
+    "pydantic-v2-orm-mode-ignored",
+    "pydantic-v2-root-validator-skip-on-failure"
+  ],
+  "mend_mode": "mcp",
+  "mend_exclude_self": false,
+  "hide_versions": true,
+  "replay_source": null,
+  "python": "3.13.16",
+  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39",
+  "started": "2026-10-14T03:07:08.877038+00:00"
+}
