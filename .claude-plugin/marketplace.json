@@ -1,0 +1,17 @@
+{
+  "name": "mend",
+  "description": "MEND: verified failure memory for AI coding agents",
+  "owner": {
+    "name": "Dinosung",
+    "url": "https://github.com/Dinosung"
+  },
+  "plugins": [
+    {
+      "name": "mend",
+      "source": "./",
+      "description": "Version-matched facts about known Python library breakages at session start, plus a post-edit check for known bad patterns.",
+      "category": "development",
+      "tags": ["python", "dependencies", "migration", "lint"]
+    }
+  ]
+}

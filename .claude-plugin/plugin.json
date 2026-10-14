@@ -1,0 +1,20 @@
+{
+  "name": "mend",
+  "displayName": "MEND",
+  "description": "Verified failure memory for AI coding agents: version-matched facts about known library breakages at session start, and a check that flags known bad patterns after each Python edit.",
+  "author": {
+    "name": "Dinosung",
+    "url": "https://github.com/Dinosung"
+  },
+  "homepage": "https://github.com/Dinosung/MEND",
+  "repository": "https://github.com/Dinosung/MEND",
+  "license": "MIT",
+  "keywords": ["python", "dependencies", "migration", "lint", "hooks", "mcp"],
+  "hooks": "./plugin/hooks.json",
+  "mcpServers": {
+    "mend": {
+      "command": "sh",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/plugin/run-mend.sh", "serve"]
+    }
+  }
+}

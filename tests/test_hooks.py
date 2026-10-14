@@ -259,3 +259,82 @@ def test_usage_errors():
     assert hooks.main(["bogus"]) == 2
 
 
+# --------------------------------------------------------------------------- plugin files
+
+def _json(rel: str) -> dict:
+    return json.loads((REPO / rel).read_text())
+
+
+def test_marketplace_manifest():
+    mp = _json(".claude-plugin/marketplace.json")
+    assert mp["name"] == "mend" and mp["owner"]["name"]
+    (entry,) = mp["plugins"]
+    assert entry["name"] == "mend"
+    src = entry["source"]
+    assert src.startswith("./") and ".." not in src
+    plugin_root = (REPO / src).resolve()
+    assert (plugin_root / ".claude-plugin" / "plugin.json").is_file()
+    assert _json(".claude-plugin/plugin.json")["name"] == entry["name"]
+
+
+def test_plugin_manifest_paths_exist():
+    pj = _json(".claude-plugin/plugin.json")
+    assert pj["name"] == "mend"
+    hooks_path = pj["hooks"]
+    assert hooks_path.startswith("./") and (REPO / hooks_path).is_file()
+    for server in pj["mcpServers"].values():
+        for arg in server["args"]:
+            if "${CLAUDE_PLUGIN_ROOT}" in arg:
+                assert (REPO / arg.replace("${CLAUDE_PLUGIN_ROOT}/", "")).is_file()
+
+
+def test_hooks_config():
+    cfg = _json(_json(".claude-plugin/plugin.json")["hooks"][2:])  # strip leading "./"
+    events = cfg["hooks"]
+    assert set(events) == {"SessionStart", "PostToolUse"}
+    assert events["PostToolUse"][0]["matcher"] == "Edit|Write|MultiEdit"
+    for groups in events.values():
+        for group in groups:
+            for h in group["hooks"]:
+                assert h["type"] == "command"
+                cmd = h["command"]
+                assert '"${CLAUDE_PLUGIN_ROOT}/plugin/run-mend.sh"' in cmd  # quoted for spaces
+                assert (REPO / "plugin" / "run-mend.sh").is_file()
+                assert cmd.split()[-2:] in (["hook", "session-start"], ["hook", "post-tool-use"])
+
+
+# --------------------------------------------------------------------------- launcher
+
+def _launcher_env(tmp_path: Path, catalog: Path) -> dict:
+    env = {k: v for k, v in os.environ.items() if k not in {"PYTHONPATH", "MEND_DEBUG"}}
+    env.update(CLAUDE_PLUGIN_ROOT=str(REPO), MEND_FIXTURES_DIR=str(catalog))
+    return env
+
+
+@pytest.mark.skipif(shutil.which("sh") is None, reason="needs sh")
+def test_launcher_end_to_end(tmp_path, catalog):
+    probe = subprocess.run(["python3", "-c", "import yaml, packaging"], capture_output=True)
+    if probe.returncode != 0:
+        pytest.skip("system python3 lacks pyyaml/packaging")
+    p = project(tmp_path, "numpy==2.4.1\n", TRAPZ)
+    env = _launcher_env(tmp_path, catalog)
+    sh = [shutil.which("sh"), str(REPO / "plugin" / "run-mend.sh"), "hook"]
+    r = subprocess.run(sh + ["session-start"], input=json.dumps(ss_input(p)), env=env,
+                       capture_output=True, text=True, cwd=tmp_path)
+    assert r.returncode == 0
+    assert "numpy-trapz-removed" in json.loads(r.stdout)["hookSpecificOutput"]["additionalContext"]
+    r = subprocess.run(sh + ["post-tool-use"], input=json.dumps(ptu_input(p, str(p / "target.py"))),
+                       env=env, capture_output=True, text=True, cwd=tmp_path)
+    assert r.returncode == 2 and "target.py:5" in r.stderr
+    r = subprocess.run(sh + ["post-tool-use"], input="garbage", env=env,
+                       capture_output=True, text=True, cwd=tmp_path)
+    assert (r.returncode, r.stdout, r.stderr) == (0, "", "")
+
+
+@pytest.mark.skipif(shutil.which("sh") is None, reason="needs sh")
+def test_launcher_without_python_is_silent_in_hook_mode(tmp_path, catalog):
+    env = _launcher_env(tmp_path, catalog)
+    env["PATH"] = str(tmp_path / "empty-bin")  # no python3, python or uv
+    r = subprocess.run([shutil.which("sh"), str(REPO / "plugin" / "run-mend.sh"), "hook",
+                        "session-start"], input="{}", env=env, capture_output=True, text=True)
+    assert (r.returncode, r.stdout, r.stderr) == (0, "", "")

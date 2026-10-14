@@ -1,0 +1,28 @@
+{
+  "description": "MEND: inject version-matched known-failure facts at session start; flag known bad patterns after Python edits",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/plugin/run-mend.sh\" hook session-start",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/plugin/run-mend.sh\" hook post-tool-use",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
