@@ -9,6 +9,7 @@ Every paid run gets a row. Check the running total before starting any run.
 |---|---|---|---|---|---|
 | 2026-10-13 | MEND-Bench v1, single-shot, 4 runs (pre-cap, unmetered; owner's personal key) | claude-sonnet-5-5, claude-haiku-5-5 | 504 | not metered, not counted against the cap | $0.00 |
 | 2026-10-14 | Plugin end-to-end check: 2 headless `claude --plugin-dir` sessions | default | 2 | ~0.15 | $0.15 |
+| 2026-10-14 | Bench v2 smoke runs ×2 (numpy-trapz-removed, A0/A1/A4, k=1); first run's results not readable, assumed ≤$0.02 | claude-haiku-5-5 | 6 | ~0.02 | $0.17 |
 
 ## Log
 
