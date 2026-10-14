@@ -1,0 +1,27 @@
+id: stripe-paymentintent-payment-method-types-removed
+title: "Passing payment_method_types to PaymentIntent create in stripe-python 16 (API 2026-09-30.endive)"
+summary: >
+  stripe-python 16.0 pins API version 2026-09-30.endive, which made payment_method_types
+  read-only on PaymentIntents and SetupIntents. Passing it to create, update or confirm now
+  returns a 400 error (code payment_method_types_no_longer_supported). Rely on dynamic
+  payment methods, or use allowed_payment_method_types / excluded_payment_method_types.
+ecosystem: python
+package: stripe
+versions: ">=16.0.0"
+tags: [payments, payment-intents, api-version, parameter-removed]
+failure:
+  kind: signature-changed
+  symptom: "stripe.InvalidRequestError (400, code payment_method_types_no_longer_supported)"
+  bad_pattern: "client.v1.payment_intents.create(params={..., \"payment_method_types\": [\"card\"]})"
+  fix_pattern: "client.v1.payment_intents.create(params={..., \"allowed_payment_method_types\": [\"card\"]})  # or omit it"
+repro:
+  python: "3.13"
+  deps: ["stripe==16.0.0", "requests==2.32.5", "typing_extensions==4.15.0"]
+  old_deps: ["stripe==15.6.1", "requests==2.32.5", "typing_extensions==4.15.0"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.stripe.com/changelog/endive/2026-09-30/removes-the-payment-method-types-parameter-from-payment-intents-and-setup-intents"}
+    - {type: changelog, url: "https://github.com/stripe/stripe-python/blob/v16.0.0/CHANGELOG.md"}
+  license: "MIT"
+  released: "2026-09-30"
+status: verified

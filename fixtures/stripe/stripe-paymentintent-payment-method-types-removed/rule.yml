@@ -1,0 +1,10 @@
+rules:
+  - id: stripe-paymentintent-payment-method-types-removed
+    languages: [python]
+    severity: WARNING
+    message: "Stripe API 2026-09-30.endive (stripe-python 16) rejects payment_method_types on PaymentIntent/SetupIntent create, update and confirm (400). Omit it or use allowed_payment_method_types."
+    pattern-either:
+      - pattern: '$C.payment_intents.$M(..., params={..., "payment_method_types": $V, ...}, ...)'
+      - pattern: '$C.setup_intents.$M(..., params={..., "payment_method_types": $V, ...}, ...)'
+      - pattern: stripe.PaymentIntent.$M(..., payment_method_types=$V, ...)
+      - pattern: stripe.SetupIntent.$M(..., payment_method_types=$V, ...)

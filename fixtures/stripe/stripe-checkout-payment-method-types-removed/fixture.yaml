@@ -1,0 +1,27 @@
+id: stripe-checkout-payment-method-types-removed
+title: "Passing payment_method_types to Checkout Session create in stripe-python 16 (API 2026-09-30.endive)"
+summary: >
+  stripe-python 16.0 pins API version 2026-09-30.endive, which removed the
+  payment_method_types parameter from Checkout Session create. Passing it now returns a 400
+  error. Rely on dynamic payment methods, or use allowed_payment_method_types /
+  excluded_payment_method_types to restrict the methods offered.
+ecosystem: python
+package: stripe
+versions: ">=16.0.0"
+tags: [payments, checkout, api-version, parameter-removed]
+failure:
+  kind: signature-changed
+  symptom: "stripe.InvalidRequestError (400, code payment_method_types_no_longer_supported)"
+  bad_pattern: "client.v1.checkout.sessions.create(params={..., \"payment_method_types\": [\"card\"]})"
+  fix_pattern: "client.v1.checkout.sessions.create(params={..., \"allowed_payment_method_types\": [\"card\"]})  # or omit it"
+repro:
+  python: "3.13"
+  deps: ["stripe==16.0.0", "requests==2.32.5", "typing_extensions==4.15.0"]
+  old_deps: ["stripe==15.6.1", "requests==2.32.5", "typing_extensions==4.15.0"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.stripe.com/changelog/endive/2026-09-30/remove-payment-method-types-checkout-sessions"}
+    - {type: changelog, url: "https://github.com/stripe/stripe-python/blob/v16.0.0/CHANGELOG.md"}
+  license: "MIT"
+  released: "2026-09-30"
+status: verified

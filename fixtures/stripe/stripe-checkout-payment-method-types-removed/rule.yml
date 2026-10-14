@@ -1,0 +1,8 @@
+rules:
+  - id: stripe-checkout-payment-method-types-removed
+    languages: [python]
+    severity: WARNING
+    message: "Stripe API 2026-09-30.endive (stripe-python 16) rejects payment_method_types on Checkout Session create (400). Omit it (dynamic payment methods) or use allowed_payment_method_types."
+    pattern-either:
+      - pattern: '$C.checkout.sessions.create(params={..., "payment_method_types": $V, ...})'
+      - pattern: stripe.checkout.Session.create(..., payment_method_types=$V, ...)

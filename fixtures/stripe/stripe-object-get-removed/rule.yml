@@ -1,0 +1,8 @@
+rules:
+  - id: stripe-object-get-removed
+    languages: [python]
+    severity: WARNING
+    message: "stripe-python 15: StripeObject is no longer a dict, so .get() raises AttributeError. Use getattr(obj, key, None) or obj.to_dict().get(key)."
+    pattern-either:
+      - pattern: $X.metadata.get(...)
+      - pattern: $X.metadata.items()
