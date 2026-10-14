@@ -100,6 +100,29 @@ jobs:
           f="bench/results/ci-v2-${{ github.run_id }}/report.md"
           if [ -f "$f" ]; then cat "$f" >> "$GITHUB_STEP_SUMMARY"; fi
 
+      # Annotations are readable through the public API, unlike artifacts and logs.
+      - name: Publish results as annotations
+        if: always()
+        run: |
+          python - "bench/results/ci-v2-${{ github.run_id }}" <<'EOF'
+          import json, sys
+          from pathlib import Path
+          out = Path(sys.argv[1])
+          lines = []
+          if (out / "summary.json").is_file():
+              s = json.loads((out / "summary.json").read_text())
+              lines.append(f"trials={s['trials']} spend_usd={s['spend_usd']} hooks={json.dumps(s['hooks'])}")
+              lines += [f"{a['arm']}: fail {a['failures']}/{a['scored']}, other {a['other_failures']}, infra {a['infra']}"
+                        for a in s["arms"]]
+          if (out / "results.jsonl").is_file():
+              for line in (out / "results.jsonl").read_text().splitlines():
+                  r = json.loads(line)
+                  lines.append(" ".join(f"{k}={r.get(k)}" for k in
+                                        ("fixture", "arm", "trial", "outcome", "cost_usd", "num_turns", "agent_seconds", "result_subtype", "agent_error", "detail")))
+          msg = "\n".join(lines) or "no results produced"
+          print("::notice title=MEND-Bench results::" + msg.replace("%", "%25").replace("\r", "").replace("\n", "%0A"))
+          EOF
+
       - name: Upload results
         if: always()
         uses: actions/upload-artifact@v4
