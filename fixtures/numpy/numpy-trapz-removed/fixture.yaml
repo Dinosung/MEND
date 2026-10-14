@@ -16,10 +16,12 @@ failure:
 repro:
   python: "3.13"
   deps: ["numpy==2.5.3"]
+  old_deps: ["numpy==2.3.5"]
 provenance:
   sources:
     - {type: changelog, url: "https://numpy.org/devdocs/release/2.4.0-notes.html"}
     - {type: pr, url: "https://github.com/numpy/numpy/pull/29997"}
     - {type: pr, url: "https://github.com/numpy/numpy/pull/29978"}
   license: "BSD-3-Clause"
+  released: "2025-12-20"
 status: verified

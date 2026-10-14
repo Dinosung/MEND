@@ -16,9 +16,12 @@ failure:
 repro:
   python: "3.13"
   deps: ["numpy==2.5.3"]
+  old_python: "3.12"
+  old_deps: ["numpy==1.26.4"]
 provenance:
   sources:
     - {type: docs, url: "https://numpy.org/neps/nep-0050-scalar-promotion.html#table-comparing-new-and-old-behaviour"}
     - {type: docs, url: "https://numpy.org/devdocs/numpy_2_0_migration_guide.html#changes-to-numpy-data-type-promotion"}
   license: "BSD-3-Clause"
+  released: "2024-06-16"
 status: verified

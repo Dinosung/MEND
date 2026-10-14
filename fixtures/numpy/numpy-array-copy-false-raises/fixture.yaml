@@ -16,10 +16,13 @@ failure:
 repro:
   python: "3.13"
   deps: ["numpy==2.5.3"]
+  old_python: "3.12"
+  old_deps: ["numpy==1.26.4"]
 provenance:
   sources:
     - {type: docs, url: "https://numpy.org/devdocs/numpy_2_0_migration_guide.html#adapting-to-changes-in-the-copy-keyword"}
     - {type: changelog, url: "https://numpy.org/doc/stable/release/2.0.0-notes.html#new-copy-keyword-meaning-for-array-and-asarray-constructors"}
     - {type: issue, url: "https://github.com/numpy/numpy/issues/25941"}
   license: "BSD-3-Clause"
+  released: "2024-06-16"
 status: verified
