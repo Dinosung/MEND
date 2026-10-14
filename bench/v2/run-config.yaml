@@ -4,22 +4,16 @@
 # Budget: the owner's cap is $5 for ALL benchmark runs combined. Set prior_spend_usd to the
 # sum of `spend_usd` from earlier runs' summary.json before starting another one.
 agent: claude_code
-model: claude-haiku-5-5
-# Fixtures most likely to fail on current models (2025-26 breaking changes).
+model: claude-opus-5-5
+# Opus paired: the SDK fixture Opus fails without help, with vs without MEND.
 fixtures:
-  - numpy-trapz-removed
-  - starlette-1-app-route-decorator-removed
-  - starlette-1-on-startup-removed
-  - fastapi-strict-content-type-json-body
-  - fastapi-app-add-event-handler-removed
-  - pandas-cow-chained-assignment-noop
-  - pandas-str-dtype-not-object
-arms: [A0, A1, A4]
-trials: 2              # 7 fixtures x 3 arms x 2 = 42 trials
+  - anthropic-messages-sampling-params-removed
+arms: [A0, A4]
+trials: 3              # 1 fixture x 2 arms x 3 = 6 trials
 max_turns: 12
-per_trial_usd: 0.10    # passed to claude --max-budget-usd; charged in full if a trial reports no cost
-run_usd: 1.50          # this run stops launching trials before exceeding this
+per_trial_usd: 0.40    # passed to claude --max-budget-usd; charged in full if a trial reports no cost
+run_usd: 1.60          # this run stops launching trials before exceeding this
 max_usd: 5.0           # overall cap across runs
-prior_spend_usd: 0.0
+prior_spend_usd: 3.08
 max_trials: 300
 scorer: uv
