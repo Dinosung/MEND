@@ -13,6 +13,7 @@ Every paid run gets a row. Check the running total before starting any run.
 | 2026-10-14 | Bench v2 pilot: 33 fixtures, A0/A1/A4, k=3 | claude-haiku-5-5 | 297 | 0.94 | $1.11 |
 | 2026-10-14 | Bench v2 fresh pilot: 11 post-mid-2026 fixtures, A0/A1/A4, k=3 | claude-haiku-5-5 | 99 | 0.52 | $1.63 |
 | 2026-10-14 | Diagnosis: anthropic sampling-params, A0/A1/A4, k=5, ×2 (strict, then loosened check) | claude-haiku-5-5 | 30 | 0.25 | $1.88 |
+| 2026-10-14 | Opus screen: 17 SDK fixtures, A0, k=1 (stopped by cap after 6) | claude-opus-5-5 | 6 | 1.20 | $3.08 |
 
 ## Log
 
