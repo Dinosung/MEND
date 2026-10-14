@@ -236,6 +236,76 @@ def test_package_name_normalised_in_deps(tmp_path: Path) -> None:
     assert errors_for(tmp_path, meta) == []
 
 
+def old_meta(old_deps: list[str], **repro: Any) -> dict[str, Any]:
+    return base_meta(repro={"python": "3.12", "deps": ["demo==2.1.0"], "old_deps": old_deps, **repro})
+
+
+def test_load_old_deps_and_released(tmp_path: Path) -> None:
+    meta = old_meta(["demo==1.9.0", "httpx==0.28.1"], old_python="3.11")
+    meta["provenance"]["released"] = "2024-06-16"
+    fx = load_fixture(make_fixture(tmp_path, meta))
+    assert fx.repro.old_deps == ["demo==1.9.0", "httpx==0.28.1"]
+    assert fx.repro.old_python == "3.11" and fx.repro.effective_old_python == "3.11"
+    assert fx.provenance.released == "2024-06-16"
+    assert fx.to_dict()["repro"]["old_deps"] == ["demo==1.9.0", "httpx==0.28.1"]
+    assert validate(fx) == []
+
+
+def test_old_python_defaults_to_python(tmp_path: Path) -> None:
+    fx = load_fixture(make_fixture(tmp_path, old_meta(["demo==1.9.0"])))
+    assert fx.repro.old_python == "" and fx.repro.effective_old_python == "3.12"
+    assert validate(fx) == []
+
+
+def test_old_deps_may_change_co_dependencies(tmp_path: Path) -> None:
+    meta = base_meta(repro={"python": "3.12", "deps": ["demo==2.1.0", "httpx2==2.0"], "old_deps": ["demo==1.9.0", "httpx==0.28.1"]})
+    assert errors_for(tmp_path, meta) == []
+
+
+def test_old_deps_must_predate_versions(tmp_path: Path) -> None:
+    assert_error(errors_for(tmp_path, old_meta(["demo==2.0.1"])), "must NOT satisfy versions")
+
+
+def test_old_deps_must_pin_package(tmp_path: Path) -> None:
+    assert_error(errors_for(tmp_path, old_meta(["other==1.0"])), "repro.old_deps: must pin the fixture package")
+
+
+@pytest.mark.parametrize("dep", ["demo<2", "demo==1.*", "nope!!"])
+def test_old_deps_must_be_exact_pins(tmp_path: Path, dep: str) -> None:
+    assert_error(errors_for(tmp_path, old_meta([dep])), "repro.old_deps")
+
+
+def test_old_deps_duplicate_pin(tmp_path: Path) -> None:
+    assert_error(errors_for(tmp_path, old_meta(["demo==1.9.0", "Demo==1.8.0"])), "pinned more than once")
+
+
+def test_old_python_without_old_deps(tmp_path: Path) -> None:
+    meta = base_meta(repro={"python": "3.12", "deps": ["demo==2.1.0"], "old_python": "3.11"})
+    assert_error(errors_for(tmp_path, meta), "repro.old_deps is empty")
+
+
+def test_old_python_format(tmp_path: Path) -> None:
+    assert_error(errors_for(tmp_path, old_meta(["demo==1.9.0"], old_python="py3")), "repro.old_python")
+    assert_error(errors_for(tmp_path / "b", old_meta(["demo==1.9.0"], old_python=3.11)), "quoted string")
+
+
+@pytest.mark.parametrize(
+    ("released", "fragment"),
+    [("2024-6-16", "ISO date"), ("2024-02-30", "real calendar date"), ("June 2024", "ISO date")],
+)
+def test_released_must_be_iso_date(tmp_path: Path, released: str, fragment: str) -> None:
+    meta = base_meta()
+    meta["provenance"]["released"] = released
+    assert_error(errors_for(tmp_path, meta), fragment)
+
+
+def test_released_unquoted_yaml_date(tmp_path: Path) -> None:
+    d = make_fixture(tmp_path)
+    y = d / "fixture.yaml"
+    y.write_text(y.read_text().replace("  license: MIT\n", "  license: MIT\n  released: 2024-06-16\n"))
+    assert_error(validate(load_fixture(d)), "quoted ISO date")
+
+
 def test_bad_python_version(tmp_path: Path) -> None:
     meta = base_meta(repro={"python": "python3", "deps": ["demo==2.1.0"]})
     assert_error(errors_for(tmp_path, meta), "repro.python")

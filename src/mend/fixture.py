@@ -8,6 +8,7 @@ failing on the first one.
 from __future__ import annotations
 
 import argparse
+import datetime as _dt
 import json
 import os
 import re
@@ -42,6 +43,7 @@ MAX_FILE_LINES = 60
 _ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 _PYTHON_RE = re.compile(r"^3\.\d+$")
 _URL_RE = re.compile(r"^https?://[^\s/]+\.[^\s]+$")
+_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
 class FixtureError(Exception):
@@ -60,6 +62,14 @@ class Failure:
 class Repro:
     python: str = ""
     deps: list[str] = field(default_factory=list)
+    #: Exact pins of the last version(s) *before* the breaking change (differential gate).
+    old_deps: list[str] = field(default_factory=list)
+    #: Interpreter for the old_deps run; empty means "same as `python`".
+    old_python: str = ""
+
+    @property
+    def effective_old_python(self) -> str:
+        return self.old_python or self.python
 
 
 @dataclass
@@ -72,6 +82,8 @@ class Source:
 class Provenance:
     sources: list[Source] = field(default_factory=list)
     license: str = ""
+    #: ISO date (YYYY-MM-DD) the breaking release came out; optional for now.
+    released: str = ""
 
 
 @dataclass
@@ -156,9 +168,16 @@ def _str_list(value: Any) -> list[str]:
 
 def _load_errors(data: Mapping[str, Any]) -> list[str]:
     errors = [f"missing required field '{k}'" for k in _REQUIRED_KEYS if data.get(k) in (None, "", [], {})]
-    python = _mapping(data.get("repro")).get("python")
-    if python is not None and not isinstance(python, str):
-        errors.append(f"repro.python must be a quoted string (got {python!r}; 3.10 would load as 3.1)")
+    repro = _mapping(data.get("repro"))
+    for key in ("python", "old_python"):
+        value = repro.get(key)
+        if value is not None and not isinstance(value, str):
+            errors.append(f"repro.{key} must be a quoted string (got {value!r}; 3.10 would load as 3.1)")
+    if repro.get("old_deps") is not None and not isinstance(repro.get("old_deps"), list):
+        errors.append("repro.old_deps must be a list of exact pins")
+    released = _mapping(data.get("provenance")).get("released")
+    if released is not None and not isinstance(released, str):
+        errors.append(f"provenance.released must be a quoted ISO date string like \"2024-06-16\" (got {released!r})")
     for key in ("versions",):
         if data.get(key) is not None and not isinstance(data.get(key), str):
             errors.append(f"{key} must be a string")
@@ -195,8 +214,17 @@ def _from_dict(data: Mapping[str, Any], path: Path) -> Fixture:
             bad_pattern=_str(failure.get("bad_pattern")),
             fix_pattern=_str(failure.get("fix_pattern")),
         ),
-        repro=Repro(python=_str(repro.get("python")), deps=_str_list(repro.get("deps"))),
-        provenance=Provenance(sources=sources, license=_str(prov.get("license"))),
+        repro=Repro(
+            python=_str(repro.get("python")),
+            deps=_str_list(repro.get("deps")),
+            old_deps=_str_list(repro.get("old_deps")),
+            old_python=_str(repro.get("old_python")),
+        ),
+        provenance=Provenance(
+            sources=sources,
+            license=_str(prov.get("license")),
+            released=_str(prov.get("released")),
+        ),
         status=_str(data.get("status")),
         path=path,
         extra={k: v for k, v in data.items() if k not in known},
@@ -259,38 +287,75 @@ def load_all(root: str | os.PathLike[str] | None = DEFAULT_ROOT) -> list[Fixture
 # --------------------------------------------------------------------------- validation
 
 
-def _validate_deps(fx: Fixture) -> list[str]:
+def _parse_pins(deps: list[str], label: str) -> tuple[dict[str, str], list[str]]:
+    """Parse exact pins into {canonical name: version}; return (pins, errors)."""
     errors: list[str] = []
-    if not fx.repro.deps:
-        return ["repro.deps: must list at least one exact pin (name==version)"]
     pinned: dict[str, str] = {}
-    for dep in fx.repro.deps:
+    for dep in deps:
         try:
             req = Requirement(dep)
         except InvalidRequirement as exc:
-            errors.append(f"repro.deps: invalid requirement {dep!r}: {exc}")
+            errors.append(f"{label}: invalid requirement {dep!r}: {exc}")
             continue
         specs = list(req.specifier)
         if req.url or req.marker or len(specs) != 1 or specs[0].operator != "==" or "*" in specs[0].version:
-            errors.append(f"repro.deps: {dep!r} must be an exact pin like 'name==1.2.3'")
+            errors.append(f"{label}: {dep!r} must be an exact pin like 'name==1.2.3'")
             continue
         name = canonicalize_name(req.name)
         if name in pinned:
-            errors.append(f"repro.deps: {req.name!r} is pinned more than once")
+            errors.append(f"{label}: {req.name!r} is pinned more than once")
         pinned[name] = specs[0].version
+    return pinned, errors
+
+
+def _in_versions(version: str, versions: str) -> bool | None:
+    """Whether `version` satisfies `versions`; None if either does not parse."""
+    try:
+        return Version(version) in SpecifierSet(versions)
+    except (InvalidSpecifier, InvalidVersion):
+        return None
+
+
+def _validate_deps(fx: Fixture) -> list[str]:
+    if not fx.repro.deps:
+        return ["repro.deps: must list at least one exact pin (name==version)"]
+    pinned, errors = _parse_pins(fx.repro.deps, "repro.deps")
     if fx.package:
         version = pinned.get(canonicalize_name(fx.package))
         if version is None and not errors:
             errors.append(f"repro.deps: must pin the fixture package {fx.package!r}")
-        elif version is not None and fx.versions:
-            try:
-                in_range = Version(version) in SpecifierSet(fx.versions)
-            except (InvalidSpecifier, InvalidVersion):
-                in_range = True  # reported elsewhere
-            if not in_range:
-                errors.append(
-                    f"repro.deps: pinned {fx.package}=={version} is outside versions {fx.versions!r}"
-                )
+        elif version is not None and fx.versions and _in_versions(version, fx.versions) is False:
+            errors.append(f"repro.deps: pinned {fx.package}=={version} is outside versions {fx.versions!r}")
+    return errors
+
+
+def _validate_old_deps(fx: Fixture) -> list[str]:
+    """The differential gate's environment: the last release(s) before the breaking change.
+
+    Co-dependency pins may differ from `deps` (e.g. httpx on the old side vs httpx2 on the
+    new one, or numpy<2 for an old pandas), so only the fixture package is required on both
+    sides; its old pin must fall *outside* `versions`.
+    """
+    repro = fx.repro
+    if not repro.old_deps:
+        if repro.old_python:
+            return ["repro.old_python is set but repro.old_deps is empty"]
+        return []
+    errors: list[str] = []
+    if repro.old_python and not _PYTHON_RE.match(repro.old_python):
+        errors.append(f"repro.old_python {repro.old_python!r} must look like '3.12'")
+    pinned, pin_errors = _parse_pins(repro.old_deps, "repro.old_deps")
+    errors += pin_errors
+    if fx.package:
+        version = pinned.get(canonicalize_name(fx.package))
+        if version is None:
+            if not pin_errors:
+                errors.append(f"repro.old_deps: must pin the fixture package {fx.package!r}")
+        elif fx.versions and _in_versions(version, fx.versions) is True:
+            errors.append(
+                f"repro.old_deps: old pin {fx.package}=={version} must NOT satisfy versions {fx.versions!r} "
+                "(it must predate the breaking change)"
+            )
     return errors
 
 
@@ -363,7 +428,16 @@ def validate(fixture: Fixture) -> list[str]:
     elif not _PYTHON_RE.match(fx.repro.python):
         errors.append(f"repro.python {fx.repro.python!r} must look like '3.12'")
     errors += _validate_deps(fx)
+    errors += _validate_old_deps(fx)
 
+    if fx.provenance.released:
+        if not _DATE_RE.match(fx.provenance.released):
+            errors.append(f"provenance.released {fx.provenance.released!r} must be an ISO date (YYYY-MM-DD)")
+        else:
+            try:
+                _dt.date.fromisoformat(fx.provenance.released)
+            except ValueError:
+                errors.append(f"provenance.released {fx.provenance.released!r} is not a real calendar date")
     if not fx.provenance.license:
         errors.append("missing required field 'provenance.license'")
     if not fx.provenance.sources:

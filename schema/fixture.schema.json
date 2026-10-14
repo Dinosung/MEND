@@ -40,6 +40,22 @@
       "required": ["python", "deps"],
       "properties": {
         "python": {"type": "string", "pattern": "^3\\.[0-9]+$"},
+        "old_python": {
+          "type": "string",
+          "pattern": "^3\\.[0-9]+$",
+          "description": "Interpreter for the old_deps run (differential gate). Defaults to repro.python."
+        },
+        "old_deps": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Exact pins of the last release(s) BEFORE the breaking change. bad/ must pass check/ against these. Must pin the fixture package at a version outside `versions`.",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9._-]*[A-Za-z0-9])?(\\[[A-Za-z0-9._,-]+\\])?==[A-Za-z0-9.+!-]+$",
+            "description": "Exact pin: name==version."
+          }
+        },
         "deps": {
           "type": "array",
           "minItems": 1,
@@ -70,7 +86,12 @@
             }
           }
         },
-        "license": {"type": "string", "minLength": 1}
+        "license": {"type": "string", "minLength": 1},
+        "released": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "ISO date (quoted) of the first release of `package` matching `versions`, i.e. the breaking release. Optional for now; used to rank fixtures by freshness."
+        }
       }
     },
     "status": {"enum": ["draft", "verified"]}
