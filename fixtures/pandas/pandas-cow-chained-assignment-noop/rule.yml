@@ -1,0 +1,9 @@
+rules:
+  - id: pandas-cow-chained-assignment-noop
+    languages: [python]
+    severity: WARNING
+    message: "Chained assignment never updates the DataFrame under Copy-on-Write (pandas 3.0 default): use df.loc[mask, col] = value."
+    pattern-either:
+      - pattern: $DF[$COL][<... $DF ...>] = $V
+      - pattern: $DF[$COL].loc[$I] = $V
+      - pattern: $DF[$COL].iloc[$I] = $V

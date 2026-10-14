@@ -1,0 +1,24 @@
+id: pandas-series-int-key-not-positional
+title: "Indexing a Series positionally with s[0] / s[-1] in pandas 3"
+summary: >
+  pandas 3.0 makes Series.__getitem__ always treat integer keys as labels, never as
+  positions. On a Series with a DatetimeIndex or string index, `s[-1]` / `s[0]`
+  (which used to fall back to positional access) now raise KeyError.
+ecosystem: python
+package: pandas
+versions: ">=3.0"
+tags: [indexing, series, time-series, migration]
+failure:
+  kind: behavior-changed
+  symptom: "KeyError: -1"
+  bad_pattern: "closes[-1]"
+  fix_pattern: "closes.iloc[-1]"
+repro:
+  python: "3.13"
+  deps: ["pandas==3.0.5"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html"}
+    - {type: issue, url: "https://github.com/pandas-dev/pandas/issues/50617"}
+  license: "BSD-3-Clause"
+status: verified

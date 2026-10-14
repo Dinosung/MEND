@@ -1,0 +1,24 @@
+id: pandas-dataframe-append-removed
+title: "Building a DataFrame row by row with DataFrame.append in pandas 2+"
+summary: >
+  DataFrame.append and Series.append were deprecated in pandas 1.4 and removed in
+  pandas 2.0. Code that grows a frame with `df = df.append(row, ignore_index=True)`
+  raises AttributeError.
+ecosystem: python
+package: pandas
+versions: ">=2.0"
+tags: [dataframe, rows, concat, migration]
+failure:
+  kind: api-removed
+  symptom: "AttributeError: 'DataFrame' object has no attribute 'append'"
+  bad_pattern: "df = df.append(row, ignore_index=True)"
+  fix_pattern: "pd.DataFrame(list_of_rows) or pd.concat([df, pd.DataFrame([row])], ignore_index=True)"
+repro:
+  python: "3.13"
+  deps: ["pandas==3.0.5"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://pandas.pydata.org/docs/whatsnew/v2.0.0.html"}
+    - {type: issue, url: "https://github.com/pandas-dev/pandas/issues/35407"}
+  license: "BSD-3-Clause"
+status: verified

@@ -1,0 +1,25 @@
+id: pandas-offset-alias-m-removed
+title: "Using frequency aliases 'M' / 'H' with resample or date_range in pandas 3"
+summary: >
+  pandas 2.2 deprecated the month/year-end aliases 'M', 'Y', 'Q' (now 'ME', 'YE', 'QE')
+  and the uppercase 'H', 'T', 'S' aliases (now 'h', 'min', 's'). pandas 3.0 enforces
+  this: `df.resample("M")` and `pd.date_range(..., freq="H")` raise ValueError.
+ecosystem: python
+package: pandas
+versions: ">=3.0"
+tags: [time-series, resample, frequency, migration]
+failure:
+  kind: api-renamed
+  symptom: "ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")"
+  bad_pattern: "df.resample(\"M\", on=\"date\")"
+  fix_pattern: "df.resample(\"ME\", on=\"date\")  # and \"h\" instead of \"H\""
+repro:
+  python: "3.13"
+  deps: ["pandas==3.0.5"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html"}
+    - {type: changelog, url: "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html#deprecate-aliases-m-q-y-etc-in-favour-of-me-qe-ye-etc-for-offsets"}
+    - {type: pr, url: "https://github.com/pandas-dev/pandas/pull/55553"}
+  license: "BSD-3-Clause"
+status: verified

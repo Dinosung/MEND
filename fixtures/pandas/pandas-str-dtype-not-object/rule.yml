@@ -1,0 +1,12 @@
+rules:
+  - id: pandas-str-dtype-not-object
+    languages: [python]
+    severity: WARNING
+    message: "pandas 3.0 infers text columns as the `str` dtype, so `dtype == object` is False for them: use pandas.api.types.is_string_dtype(...)."
+    pattern-either:
+      - pattern: $X.dtype == object
+      - pattern: $X.dtype == "object"
+      - pattern: $X.dtype == "O"
+      - pattern: $X.dtype == numpy.object_
+      - pattern: $X.dtype != object
+      - pattern: $X.dtype != "object"

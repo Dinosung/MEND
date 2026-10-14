@@ -1,0 +1,24 @@
+id: pandas-cow-inplace-on-column-noop
+title: "df[col].fillna(..., inplace=True) silently does nothing in pandas 3"
+summary: >
+  Under Copy-on-Write (always on in pandas 3.0), `df["col"]` behaves as a copy, so
+  calling an inplace method such as fillna/replace on it never updates df. pandas only
+  emits a ChainedAssignmentError warning and the missing values remain.
+ecosystem: python
+package: pandas
+versions: ">=3.0"
+tags: [copy-on-write, inplace, fillna, missing-data, silent-failure]
+failure:
+  kind: behavior-changed
+  symptom: "ChainedAssignmentError: A value is being set on a copy of a DataFrame or Series through chained assignment using an inplace method. (warning only; df still contains NaN / 'N/A')"
+  bad_pattern: "df[\"discount\"].fillna(0.0, inplace=True)"
+  fix_pattern: "df[\"discount\"] = df[\"discount\"].fillna(0.0)"
+repro:
+  python: "3.13"
+  deps: ["pandas==3.0.5"]
+provenance:
+  sources:
+    - {type: docs, url: "https://pandas.pydata.org/docs/user_guide/copy_on_write.html#migrating-to-copy-on-write"}
+    - {type: changelog, url: "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html#consistent-copy-view-behaviour-with-copy-on-write"}
+  license: "BSD-3-Clause"
+status: verified

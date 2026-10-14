@@ -1,0 +1,6 @@
+rules:
+  - id: pandas-cow-inplace-on-column-noop
+    languages: [python]
+    severity: WARNING
+    message: "An inplace method on a selected column never updates the DataFrame under Copy-on-Write (pandas 3.0 default): assign the result back, df[col] = df[col].method(...)."
+    pattern: $DF[$COL].$METHOD(..., inplace=True, ...)

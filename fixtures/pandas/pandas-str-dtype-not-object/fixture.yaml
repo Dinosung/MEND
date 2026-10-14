@@ -1,0 +1,24 @@
+id: pandas-str-dtype-not-object
+title: "Detecting text columns with dtype == object in pandas 3"
+summary: >
+  pandas 3.0 stores strings in a dedicated `str` dtype by default instead of numpy
+  object dtype. Checks like `df[col].dtype == object` now return False for text
+  columns, so string-cleaning code silently skips them.
+ecosystem: python
+package: pandas
+versions: ">=3.0"
+tags: [dtypes, strings, data-cleaning, silent-failure]
+failure:
+  kind: behavior-changed
+  symptom: "df[\"email\"].dtype == object -> False (dtype is now 'str'); text column left unnormalized: ['  Ann@X.io', 'ann@x.io ']"
+  bad_pattern: "if df[col].dtype == object:"
+  fix_pattern: "if pd.api.types.is_string_dtype(df[col]):"
+repro:
+  python: "3.13"
+  deps: ["pandas==3.0.5"]
+provenance:
+  sources:
+    - {type: docs, url: "https://pandas.pydata.org/docs/user_guide/migration-3-strings.html#checking-the-dtype"}
+    - {type: changelog, url: "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html#dedicated-string-data-type-by-default"}
+  license: "BSD-3-Clause"
+status: verified

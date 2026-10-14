@@ -1,0 +1,25 @@
+id: numpy-trapz-removed
+title: "Calling np.trapz / np.in1d removed in NumPy 2.4"
+summary: >
+  np.trapz and np.in1d were deprecated in NumPy 2.0 and removed in NumPy 2.4
+  (np.product and np.cumproduct were already removed in 2.0). Calls raise
+  AttributeError; the replacements are np.trapezoid and np.isin.
+ecosystem: python
+package: numpy
+versions: ">=2.4"
+tags: [namespace, integration, set-operations, migration]
+failure:
+  kind: api-removed
+  symptom: "AttributeError: module 'numpy' has no attribute 'trapz'"
+  bad_pattern: "np.trapz(y, x); np.in1d(a, b)"
+  fix_pattern: "np.trapezoid(y, x); np.isin(a, b)"
+repro:
+  python: "3.13"
+  deps: ["numpy==2.5.3"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://numpy.org/devdocs/release/2.4.0-notes.html"}
+    - {type: pr, url: "https://github.com/numpy/numpy/pull/29997"}
+    - {type: pr, url: "https://github.com/numpy/numpy/pull/29978"}
+  license: "BSD-3-Clause"
+status: verified

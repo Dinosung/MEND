@@ -1,0 +1,24 @@
+id: numpy-nep50-uint8-scalar-overflow
+title: "uint8 scalar + Python int wraps around under NumPy 2 (NEP 50) promotion"
+summary: >
+  NumPy 2.0 adopted NEP 50: a Python int combined with a NumPy scalar no longer
+  upcasts based on value. `np.uint8(250) + 10` now stays uint8 and wraps to 4
+  (with only a RuntimeWarning) instead of returning 260, so clamping code breaks.
+ecosystem: python
+package: numpy
+versions: ">=2.0"
+tags: [dtypes, promotion, overflow, images, silent-failure]
+failure:
+  kind: behavior-changed
+  symptom: "RuntimeWarning: overflow encountered in scalar add; img[0, 0] + 10 == np.uint8(4) (was 260 in NumPy 1.x), so min(..., 255) returns 4"
+  bad_pattern: "min(img[r, c] + amount, 255)  # img is uint8"
+  fix_pattern: "min(int(img[r, c]) + amount, 255)"
+repro:
+  python: "3.13"
+  deps: ["numpy==2.5.3"]
+provenance:
+  sources:
+    - {type: docs, url: "https://numpy.org/neps/nep-0050-scalar-promotion.html#table-comparing-new-and-old-behaviour"}
+    - {type: docs, url: "https://numpy.org/devdocs/numpy_2_0_migration_guide.html#changes-to-numpy-data-type-promotion"}
+  license: "BSD-3-Clause"
+status: verified

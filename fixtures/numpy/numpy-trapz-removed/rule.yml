@@ -1,0 +1,11 @@
+rules:
+  - id: numpy-trapz-removed
+    languages: [python]
+    severity: ERROR
+    message: "np.trapz and np.in1d (deprecated in NumPy 2.0) were removed in NumPy 2.4; np.product/np.cumproduct in 2.0: use np.trapezoid, np.isin, np.prod, np.cumprod."
+    pattern-either:
+      - pattern: numpy.trapz
+      - pattern: numpy.in1d
+      - pattern: numpy.product
+      - pattern: numpy.cumproduct
+      - pattern: numpy.row_stack

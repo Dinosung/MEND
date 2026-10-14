@@ -1,0 +1,25 @@
+id: numpy-2-removed-aliases-nan-float
+title: "Using np.float_, np.NaN, np.Inf aliases removed in NumPy 2.0"
+summary: >
+  NumPy 2.0 (NEP 52 namespace cleanup) removed many aliases from the main namespace,
+  including np.float_, np.complex_, np.unicode_, np.string_, np.NaN, np.NAN, np.Inf,
+  np.infty and np.PINF. Accessing them raises AttributeError.
+ecosystem: python
+package: numpy
+versions: ">=2.0"
+tags: [namespace, dtypes, nan, migration]
+failure:
+  kind: api-removed
+  symptom: "AttributeError: `np.float_` was removed in the NumPy 2.0 release. Use `np.float64` instead."
+  bad_pattern: "np.asarray(values, dtype=np.float_); arr[mask] = np.NaN"
+  fix_pattern: "np.asarray(values, dtype=np.float64); arr[mask] = np.nan"
+repro:
+  python: "3.13"
+  deps: ["numpy==2.5.3"]
+provenance:
+  sources:
+    - {type: docs, url: "https://numpy.org/devdocs/numpy_2_0_migration_guide.html#main-namespace"}
+    - {type: changelog, url: "https://numpy.org/doc/stable/release/2.0.0-notes.html#numpy-2-0-python-api-removals"}
+    - {type: pr, url: "https://github.com/plotly/plotly.py/pull/4622"}
+  license: "BSD-3-Clause"
+status: verified

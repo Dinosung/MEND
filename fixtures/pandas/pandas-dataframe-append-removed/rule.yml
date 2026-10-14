@@ -1,0 +1,8 @@
+rules:
+  - id: pandas-dataframe-append-removed
+    languages: [python]
+    severity: ERROR
+    message: "DataFrame.append / Series.append were removed in pandas 2.0: collect rows in a list and build one DataFrame, or use pd.concat."
+    pattern-either:
+      - pattern: $DF = $DF.append(...)
+      - pattern: $DF.append(..., ignore_index=$I, ...)

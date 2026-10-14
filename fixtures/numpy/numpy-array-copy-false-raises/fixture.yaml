@@ -1,0 +1,25 @@
+id: numpy-array-copy-false-raises
+title: "np.array(..., copy=False) raises ValueError in NumPy 2 when a copy is needed"
+summary: >
+  NumPy 2.0 changed `copy=False` in np.array/np.asarray from "copy only if needed" to
+  "never copy". Converting a list, or an array of another dtype, with copy=False now
+  raises ValueError. np.asarray(...) gives the old copy-if-needed behavior.
+ecosystem: python
+package: numpy
+versions: ">=2.0"
+tags: [arrays, copy, conversion, migration]
+failure:
+  kind: behavior-changed
+  symptom: "ValueError: Unable to avoid copy while creating an array as requested."
+  bad_pattern: "np.array(data, dtype=np.float64, copy=False)"
+  fix_pattern: "np.asarray(data, dtype=np.float64)"
+repro:
+  python: "3.13"
+  deps: ["numpy==2.5.3"]
+provenance:
+  sources:
+    - {type: docs, url: "https://numpy.org/devdocs/numpy_2_0_migration_guide.html#adapting-to-changes-in-the-copy-keyword"}
+    - {type: changelog, url: "https://numpy.org/doc/stable/release/2.0.0-notes.html#new-copy-keyword-meaning-for-array-and-asarray-constructors"}
+    - {type: issue, url: "https://github.com/numpy/numpy/issues/25941"}
+  license: "BSD-3-Clause"
+status: verified

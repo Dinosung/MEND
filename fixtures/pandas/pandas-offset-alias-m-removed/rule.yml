@@ -1,0 +1,18 @@
+rules:
+  - id: pandas-offset-alias-m-removed
+    languages: [python]
+    severity: ERROR
+    message: "pandas 3.0 removed the offset aliases 'M', 'Y', 'Q', 'BM' (use 'ME', 'YE', 'QE', 'BME') and 'H', 'T', 'S', 'L', 'U' (use 'h', 'min', 's', 'ms', 'us')."
+    pattern-either:
+      - pattern: $X.resample("M", ...)
+      - pattern: $X.resample("Y", ...)
+      - pattern: $X.resample("Q", ...)
+      - pattern: $X.resample("H", ...)
+      - pattern: $X.resample("T", ...)
+      - pattern: $X.resample("A", ...)
+      - pattern: $F(..., freq="M", ...)
+      - pattern: $F(..., freq="Y", ...)
+      - pattern: $F(..., freq="Q", ...)
+      - pattern: $F(..., freq="H", ...)
+      - pattern: $F(..., freq="T", ...)
+      - pattern: $F(..., freq="A", ...)

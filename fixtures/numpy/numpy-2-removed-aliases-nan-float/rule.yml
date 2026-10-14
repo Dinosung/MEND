@@ -1,0 +1,17 @@
+rules:
+  - id: numpy-2-removed-aliases-nan-float
+    languages: [python]
+    severity: ERROR
+    message: "NumPy 2.0 removed these aliases: use np.float64, np.complex128, np.str_, np.bytes_, np.nan, np.inf."
+    pattern-either:
+      - pattern: numpy.float_
+      - pattern: numpy.complex_
+      - pattern: numpy.unicode_
+      - pattern: numpy.string_
+      - pattern: numpy.NaN
+      - pattern: numpy.NAN
+      - pattern: numpy.Inf
+      - pattern: numpy.Infinity
+      - pattern: numpy.infty
+      - pattern: numpy.PINF
+      - pattern: numpy.NINF

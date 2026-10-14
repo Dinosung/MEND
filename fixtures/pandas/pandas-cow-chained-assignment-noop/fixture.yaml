@@ -1,0 +1,24 @@
+id: pandas-cow-chained-assignment-noop
+title: "Chained assignment df[col][mask] = value silently does nothing in pandas 3"
+summary: >
+  pandas 3.0 enables Copy-on-Write unconditionally, so every indexing step behaves as
+  a copy. `df["col"][mask] = value` no longer modifies df: it only emits a
+  ChainedAssignmentError warning and the data stays unchanged.
+ecosystem: python
+package: pandas
+versions: ">=3.0"
+tags: [copy-on-write, indexing, assignment, silent-failure]
+failure:
+  kind: behavior-changed
+  symptom: "ChainedAssignmentError: A value is being set on a copy of a DataFrame or Series through chained assignment. (warning only; df is left unchanged, e.g. price stays [9.5, -1.0, -3.0])"
+  bad_pattern: "df[\"price\"][df[\"price\"] < 0] = 0"
+  fix_pattern: "df.loc[df[\"price\"] < 0, \"price\"] = 0"
+repro:
+  python: "3.13"
+  deps: ["pandas==3.0.5"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html#consistent-copy-view-behaviour-with-copy-on-write"}
+    - {type: docs, url: "https://pandas.pydata.org/docs/user_guide/copy_on_write.html#chained-assignment"}
+  license: "BSD-3-Clause"
+status: verified

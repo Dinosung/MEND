@@ -1,0 +1,8 @@
+rules:
+  - id: numpy-array-copy-false-raises
+    languages: [python]
+    severity: ERROR
+    message: "In NumPy 2, np.array(..., copy=False) raises ValueError whenever a copy is needed: use np.asarray(...) for copy-if-needed."
+    pattern-either:
+      - pattern: numpy.array(..., copy=False, ...)
+      - pattern: numpy.asarray(..., copy=False, ...)
