@@ -12,6 +12,7 @@ Every paid run gets a row. Check the running total before starting any run.
 | 2026-10-14 | Bench v2 smoke runs ×2 (numpy-trapz-removed, A0/A1/A4, k=1); first run's results not readable, assumed ≤$0.02 | claude-haiku-5-5 | 6 | ~0.02 | $0.17 |
 | 2026-10-14 | Bench v2 pilot: 33 fixtures, A0/A1/A4, k=3 | claude-haiku-5-5 | 297 | 0.94 | $1.11 |
 | 2026-10-14 | Bench v2 fresh pilot: 11 post-mid-2026 fixtures, A0/A1/A4, k=3 | claude-haiku-5-5 | 99 | 0.52 | $1.63 |
+| 2026-10-14 | Diagnosis: anthropic sampling-params, A0/A1/A4, k=5, ×2 (strict, then loosened check) | claude-haiku-5-5 | 30 | 0.25 | $1.88 |
 
 ## Log
 
@@ -25,3 +26,5 @@ Every paid run gets a row. Check the running total before starting any run.
 - Catalog: 33 total / 28 differential / 0 probed. Tests: 190.
 - Bench v2 pilot (297 trials, $0.94): 0/99 repeat failures in every arm. Agents fix removed APIs by running their code. Next: fresh post-cutoff fixtures from the release-diff candidates, then the pilot verdict.
 - Shipped: release-diff stage (`docs/PIPELINE.md`): 26 releases of 15 libraries, ~80% of top candidates are real breaking changes.
+- Fresh pilot: 11 post-mid-2026 fixtures (catalog now 44). Only the Anthropic SDK 1.0 sampling-params fixture fails at baseline; on it, A0 5/5 and A1 5/5 repeat the failure, A4 (MEND) 0/5 and passes 5/5. First measured effect; one fixture, one model.
+- Direction: SDK/service-API breaking changes, where agents can't run code to self-correct.
