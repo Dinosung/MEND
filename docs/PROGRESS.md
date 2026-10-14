@@ -10,6 +10,7 @@ Every paid run gets a row. Check the running total before starting any run.
 | 2026-10-13 | MEND-Bench v1, single-shot, 4 runs (pre-cap, unmetered; owner's personal key) | claude-sonnet-5-5, claude-haiku-5-5 | 504 | not metered, not counted against the cap | $0.00 |
 | 2026-10-14 | Plugin end-to-end check: 2 headless `claude --plugin-dir` sessions | default | 2 | ~0.15 | $0.15 |
 | 2026-10-14 | Bench v2 smoke runs ×2 (numpy-trapz-removed, A0/A1/A4, k=1); first run's results not readable, assumed ≤$0.02 | claude-haiku-5-5 | 6 | ~0.02 | $0.17 |
+| 2026-10-14 | Bench v2 pilot: 33 fixtures, A0/A1/A4, k=3 | claude-haiku-5-5 | 297 | 0.94 | $1.11 |
 
 ## Log
 
@@ -21,3 +22,5 @@ Every paid run gets a row. Check the running total before starting any run.
 - Shipped: linter overlap (`docs/OVERLAP.md`): 21 of 33 fixtures MEND-only, 10 covered (ruff NPY201 covers `np.trapz`), 2 partial.
 - Shipped: differential gate. 28 of 33 fixtures carry `repro.old_deps`; CI verified all 33, including all 28 three-way checks (bad passes on old, fails on new; fixed passes on new). Five Pydantic fixtures can't use the gate because their code calls v2-only APIs.
 - Catalog: 33 total / 28 differential / 0 probed. Tests: 190.
+- Bench v2 pilot (297 trials, $0.94): 0/99 repeat failures in every arm. Agents fix removed APIs by running their code. Next: fresh post-cutoff fixtures from the release-diff candidates, then the pilot verdict.
+- Shipped: release-diff stage (`docs/PIPELINE.md`): 26 releases of 15 libraries, ~80% of top candidates are real breaking changes.
