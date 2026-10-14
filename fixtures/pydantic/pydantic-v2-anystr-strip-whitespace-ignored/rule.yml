@@ -1,0 +1,15 @@
+rules:
+  - id: pydantic-v2-anystr-strip-whitespace-ignored
+    languages: [python]
+    severity: ERROR
+    message: "Pydantic v2 renamed the `anystr_*` config keys to `str_*` (`str_strip_whitespace`, `str_to_lower`, `str_to_upper`, `str_min_length`, `str_max_length`); the old keys are ignored."
+    patterns:
+      - pattern-inside: |
+          class Config:
+            ...
+      - pattern-either:
+          - pattern: anystr_strip_whitespace = $V
+          - pattern: anystr_lower = $V
+          - pattern: anystr_upper = $V
+          - pattern: min_anystr_length = $V
+          - pattern: max_anystr_length = $V

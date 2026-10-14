@@ -1,0 +1,24 @@
+id: pydantic-v2-conlist-min-items-removed
+title: "Passing `min_items` / `max_items` to conlist() in Pydantic v2"
+summary: >
+  Pydantic v2 renamed the `min_items`/`max_items` constraints to `min_length`/`max_length`.
+  `conlist(str, min_items=1)` raises TypeError as soon as the module defining the model is
+  imported.
+ecosystem: python
+package: pydantic
+versions: ">=2.0"
+tags: [validation, constrained-types, lists, migration]
+failure:
+  kind: signature-changed
+  symptom: "TypeError: conlist() got an unexpected keyword argument 'min_items'"
+  bad_pattern: "conlist(str, min_items=1, max_items=50)"
+  fix_pattern: "conlist(str, min_length=1, max_length=50)"
+repro:
+  python: "3.12"
+  deps: ["pydantic==2.9.2"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#changes-to-pydanticfield"}
+    - {type: docs, url: "https://docs.pydantic.dev/latest/api/types/#pydantic.types.conlist"}
+  license: "MIT"
+status: verified

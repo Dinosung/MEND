@@ -1,0 +1,25 @@
+id: pydantic-v2-json-dumps-kwargs-removed
+title: "Passing json.dumps kwargs (indent, ensure_ascii, sort_keys) to `.json()` in Pydantic v2"
+summary: >
+  In Pydantic v2 the deprecated `BaseModel.json()` no longer forwards extra keyword
+  arguments to `json.dumps`; `model.json(indent=2)` or `ensure_ascii=False` raises TypeError.
+  Use `model_dump_json(indent=...)` (which emits UTF-8 without escaping) or
+  `json.dumps(model.model_dump(mode="json"), ...)` for other dumps options.
+ecosystem: python
+package: pydantic
+versions: ">=2.0"
+tags: [serialization, json, models, migration]
+failure:
+  kind: signature-changed
+  symptom: "TypeError: `dumps_kwargs` keyword arguments are no longer supported."
+  bad_pattern: "model.json(indent=2, ensure_ascii=False)"
+  fix_pattern: "model.model_dump_json(indent=2)"
+repro:
+  python: "3.12"
+  deps: ["pydantic==2.9.2"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#changes-to-pydanticbasemodel"}
+    - {type: docs, url: "https://docs.pydantic.dev/latest/api/base_model/#pydantic.BaseModel.model_dump_json"}
+  license: "MIT"
+status: verified

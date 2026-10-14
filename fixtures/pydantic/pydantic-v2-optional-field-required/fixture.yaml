@@ -1,0 +1,24 @@
+id: pydantic-v2-optional-field-required
+title: "Expecting `Optional[X]` fields without a default to be optional in Pydantic v2"
+summary: >
+  In Pydantic v1 a field annotated `Optional[X]` with no default implicitly defaulted to
+  None. In v2 such a field is required (it merely allows None), so omitting it raises a
+  "Field required" ValidationError. An explicit `= None` default is needed.
+ecosystem: python
+package: pydantic
+versions: ">=2.0"
+tags: [fields, optional, defaults, api-models, migration]
+failure:
+  kind: behavior-changed
+  symptom: "pydantic_core._pydantic_core.ValidationError: 2 validation errors for UserProfileUpdate\ndisplay_name\n  Field required [type=missing, input_value={'bio': 'hello'}, input_type=dict]"
+  bad_pattern: "display_name: Optional[str]"
+  fix_pattern: "display_name: Optional[str] = None"
+repro:
+  python: "3.12"
+  deps: ["pydantic==2.9.2"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#required-optional-and-nullable-fields"}
+    - {type: issue, url: "https://github.com/tortoise/tortoise-orm/issues/1551"}
+  license: "MIT"
+status: verified

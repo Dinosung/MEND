@@ -1,0 +1,10 @@
+rules:
+  - id: pydantic-v2-field-regex-removed
+    languages: [python]
+    severity: ERROR
+    message: "Pydantic v2 removed `regex=` from Field()/constr(); use `pattern=`."
+    pattern-either:
+      - pattern: Field(..., regex=$R, ...)
+      - pattern: pydantic.Field(..., regex=$R, ...)
+      - pattern: constr(..., regex=$R, ...)
+      - pattern: pydantic.constr(..., regex=$R, ...)

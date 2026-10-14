@@ -1,0 +1,25 @@
+id: pydantic-v2-orm-mode-ignored
+title: "Using `orm_mode = True` to validate ORM objects in Pydantic v2"
+summary: >
+  Pydantic v2 renamed the `orm_mode` config key to `from_attributes`. A v1-style
+  `class Config: orm_mode = True` only emits a UserWarning, so `model_validate(orm_obj)`
+  rejects the ORM instance with a `model_type` ValidationError (and `from_orm` raises
+  PydanticUserError).
+ecosystem: python
+package: pydantic
+versions: ">=2.0"
+tags: [orm, sqlalchemy, config, serialization, migration]
+failure:
+  kind: api-renamed
+  symptom: "pydantic_core._pydantic_core.ValidationError: 1 validation error for UserOut\n  Input should be a valid dictionary or instance of UserOut [type=model_type, input_value=<FakeOrmUser object>, input_type=FakeOrmUser]"
+  bad_pattern: "class Config:\n    orm_mode = True"
+  fix_pattern: "model_config = ConfigDict(from_attributes=True)"
+repro:
+  python: "3.12"
+  deps: ["pydantic==2.9.2"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#changes-to-config"}
+    - {type: other, url: "https://github.com/tiangolo/fastapi/pull/11031"}
+  license: "MIT"
+status: verified

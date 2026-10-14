@@ -1,0 +1,23 @@
+id: pydantic-v2-anystr-strip-whitespace-ignored
+title: "Using `anystr_strip_whitespace` / `anystr_lower` config in Pydantic v2"
+summary: >
+  Pydantic v2 renamed the `anystr_*` config keys to `str_*` (`str_strip_whitespace`,
+  `str_to_lower`, `str_max_length`, ...). The v1 keys only emit a UserWarning, so input
+  strings are silently left unstripped and un-normalized.
+ecosystem: python
+package: pydantic
+versions: ">=2.0"
+tags: [config, strings, normalization, forms, migration]
+failure:
+  kind: api-renamed
+  symptom: "No error: SignupForm(username='  Ada  ').username == '  Ada  ' (whitespace kept, case unchanged); only `UserWarning: Valid config keys have changed in V2: * 'anystr_strip_whitespace' has been renamed to 'str_strip_whitespace'`"
+  bad_pattern: "class Config:\n    anystr_strip_whitespace = True"
+  fix_pattern: "model_config = ConfigDict(str_strip_whitespace=True)"
+repro:
+  python: "3.12"
+  deps: ["pydantic==2.9.2"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#changes-to-config"}
+  license: "MIT"
+status: verified

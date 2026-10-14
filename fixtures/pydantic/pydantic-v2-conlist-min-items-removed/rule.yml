@@ -1,0 +1,12 @@
+rules:
+  - id: pydantic-v2-conlist-min-items-removed
+    languages: [python]
+    severity: ERROR
+    message: "Pydantic v2 renamed conlist/conset/Field `min_items`/`max_items` to `min_length`/`max_length`."
+    pattern-either:
+      - pattern: conlist(..., min_items=$N, ...)
+      - pattern: conlist(..., max_items=$N, ...)
+      - pattern: pydantic.conlist(..., min_items=$N, ...)
+      - pattern: pydantic.conlist(..., max_items=$N, ...)
+      - pattern: conset(..., min_items=$N, ...)
+      - pattern: conset(..., max_items=$N, ...)

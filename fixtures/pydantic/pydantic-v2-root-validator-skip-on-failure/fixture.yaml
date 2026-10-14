@@ -1,0 +1,24 @@
+id: pydantic-v2-root-validator-skip-on-failure
+title: "Using bare `@root_validator` for cross-field validation in Pydantic v2"
+summary: >
+  In Pydantic v2 `@root_validator` is deprecated, and using it with the default pre=False
+  without `skip_on_failure=True` raises PydanticUserError when the class is defined. The
+  replacement is `@model_validator(mode="after")`, which receives the model instance.
+ecosystem: python
+package: pydantic
+versions: ">=2.0"
+tags: [validation, validators, models, migration]
+failure:
+  kind: deprecated-broken
+  symptom: "pydantic.errors.PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`."
+  bad_pattern: "@root_validator\ndef check(cls, values): ..."
+  fix_pattern: "@model_validator(mode='after')\ndef check(self): ...; return self"
+repro:
+  python: "3.12"
+  deps: ["pydantic==2.9.2"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#validator-and-root_validator-are-deprecated"}
+    - {type: docs, url: "https://docs.pydantic.dev/latest/errors/usage_errors/#root-validator-pre-skip"}
+  license: "MIT"
+status: verified

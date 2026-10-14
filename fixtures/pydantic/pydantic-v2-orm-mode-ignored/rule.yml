@@ -1,0 +1,10 @@
+rules:
+  - id: pydantic-v2-orm-mode-ignored
+    languages: [python]
+    severity: ERROR
+    message: "Pydantic v2 renamed the `orm_mode` config key to `from_attributes`; `orm_mode` alone does not enable attribute-based validation. Use `model_config = ConfigDict(from_attributes=True)`."
+    patterns:
+      - pattern-inside: |
+          class Config:
+            ...
+      - pattern: orm_mode = $V

@@ -1,0 +1,10 @@
+rules:
+  - id: pydantic-v2-allow-mutation-ignored
+    languages: [python]
+    severity: ERROR
+    message: "Pydantic v2 removed the `allow_mutation` config key (it is ignored with a UserWarning). Use `model_config = ConfigDict(frozen=True)` (or `Field(frozen=True)` per field)."
+    patterns:
+      - pattern-inside: |
+          class Config:
+            ...
+      - pattern: allow_mutation = $V

@@ -1,0 +1,23 @@
+id: pydantic-v2-allow-population-by-field-name-ignored
+title: "Using `allow_population_by_field_name` to populate aliased fields by name in Pydantic v2"
+summary: >
+  Pydantic v2 renamed the `allow_population_by_field_name` config key to `populate_by_name`
+  (and `validate_by_name` from 2.11). The v1 key only triggers a UserWarning, so constructing
+  a model with field names instead of aliases fails with "Field required" errors.
+ecosystem: python
+package: pydantic
+versions: ">=2.0"
+tags: [aliases, config, api-models, camelcase, migration]
+failure:
+  kind: api-renamed
+  symptom: "pydantic_core._pydantic_core.ValidationError: 2 validation errors for Customer\ncustomerId\n  Field required [type=missing, input_value={'customer_id': 42, 'display_name': 'Ada'}, input_type=dict]"
+  bad_pattern: "class Config:\n    allow_population_by_field_name = True"
+  fix_pattern: "model_config = ConfigDict(populate_by_name=True)"
+repro:
+  python: "3.12"
+  deps: ["pydantic==2.9.2"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#changes-to-config"}
+  license: "MIT"
+status: verified

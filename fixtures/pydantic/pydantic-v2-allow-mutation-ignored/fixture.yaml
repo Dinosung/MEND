@@ -1,0 +1,24 @@
+id: pydantic-v2-allow-mutation-ignored
+title: "Using `allow_mutation = False` to make a model immutable in Pydantic v2"
+summary: >
+  Pydantic v2 removed the `allow_mutation` config key in favor of `frozen`. A v1-style
+  `class Config: allow_mutation = False` only emits a UserWarning, so attribute assignment
+  silently succeeds and the "immutable" model can be mutated.
+ecosystem: python
+package: pydantic
+versions: ">=2.0"
+tags: [config, immutability, frozen, settings, migration]
+failure:
+  kind: api-removed
+  symptom: "No error: `creds.region = 'eu-west-1'` succeeds; only `UserWarning: Valid config keys have changed in V2: * 'allow_mutation' has been removed`"
+  bad_pattern: "class Config:\n    allow_mutation = False"
+  fix_pattern: "model_config = ConfigDict(frozen=True)"
+repro:
+  python: "3.12"
+  deps: ["pydantic==2.9.2"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#changes-to-config"}
+    - {type: docs, url: "https://docs.pydantic.dev/latest/concepts/models/#faux-immutability"}
+  license: "MIT"
+status: verified

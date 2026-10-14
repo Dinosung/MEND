@@ -1,0 +1,24 @@
+id: pydantic-v2-field-regex-removed
+title: "Passing `regex=` to Field() in Pydantic v2"
+summary: >
+  Pydantic v2 removed the `regex` keyword of `Field()` in favor of `pattern`. Using
+  `Field(regex=...)` raises PydanticUserError when the model class is defined
+  (`constr(regex=...)` raises TypeError).
+ecosystem: python
+package: pydantic
+versions: ">=2.0"
+tags: [validation, fields, strings, regex, migration]
+failure:
+  kind: api-renamed
+  symptom: "pydantic.errors.PydanticUserError: `regex` is removed. use `pattern` instead"
+  bad_pattern: "Field(..., regex=r'^[A-Z]+$')"
+  fix_pattern: "Field(..., pattern=r'^[A-Z]+$')"
+repro:
+  python: "3.12"
+  deps: ["pydantic==2.9.2"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#changes-to-pydanticfield"}
+    - {type: other, url: "https://github.com/tiangolo/sqlmodel/discussions/735"}
+  license: "MIT"
+status: verified

@@ -1,0 +1,10 @@
+rules:
+  - id: pydantic-v2-allow-population-by-field-name-ignored
+    languages: [python]
+    severity: ERROR
+    message: "Pydantic v2 renamed `allow_population_by_field_name` to `populate_by_name` (`validate_by_name` in 2.11+); the old key is ignored. Use `model_config = ConfigDict(populate_by_name=True)`."
+    patterns:
+      - pattern-inside: |
+          class Config:
+            ...
+      - pattern: allow_population_by_field_name = $V

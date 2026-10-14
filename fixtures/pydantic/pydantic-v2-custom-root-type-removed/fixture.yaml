@@ -1,0 +1,24 @@
+id: pydantic-v2-custom-root-type-removed
+title: "Declaring a `__root__` field for a custom root type in Pydantic v2"
+summary: >
+  Pydantic v2 removed v1 custom root types declared with a `__root__` field; they are
+  replaced by `pydantic.RootModel`, whose value lives in `.root`. Defining a BaseModel with
+  a `__root__` annotation raises TypeError at class creation.
+ecosystem: python
+package: pydantic
+versions: ">=2.0"
+tags: [root-model, models, json, api-models, migration]
+failure:
+  kind: api-removed
+  symptom: "TypeError: To define root models, use `pydantic.RootModel` rather than a field called '__root__'"
+  bad_pattern: "class TagList(BaseModel):\n    __root__: List[Tag]"
+  fix_pattern: "class TagList(RootModel[List[Tag]]): ...  # access via .root"
+repro:
+  python: "3.12"
+  deps: ["pydantic==2.9.2"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#changes-to-pydanticbasemodel"}
+    - {type: docs, url: "https://docs.pydantic.dev/latest/concepts/models/#rootmodel-and-custom-root-types"}
+  license: "MIT"
+status: verified

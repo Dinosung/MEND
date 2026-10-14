@@ -1,0 +1,18 @@
+rules:
+  - id: pydantic-v2-root-validator-skip-on-failure
+    languages: [python]
+    severity: ERROR
+    message: "In Pydantic v2 a bare `@root_validator` (pre=False, no skip_on_failure=True) raises PydanticUserError at class definition. Use `@model_validator(mode='after')`."
+    pattern-either:
+      - pattern: |
+          @root_validator
+          def $F(...):
+            ...
+      - pattern: |
+          @pydantic.root_validator
+          def $F(...):
+            ...
+      - pattern: |
+          @root_validator()
+          def $F(...):
+            ...
