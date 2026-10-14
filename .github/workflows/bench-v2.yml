@@ -1,0 +1,109 @@
+name: MEND-Bench v2 pilot
+
+# Agentic pilot: Claude Code in small task repos, arms A0/A1/A4, hidden tests, source-only
+# scoring. Needs the repository secret ANTHROPIC_API_KEY. See docs/BENCH_V2.md.
+#
+# Start a run either way:
+#   * Actions tab -> "MEND-Bench v2 pilot" -> Run workflow (blank inputs = run-config.yaml)
+#   * push a branch named bench-run/<anything>; parameters come from bench/v2/run-config.yaml
+on:
+  workflow_dispatch:
+    inputs:
+      fixtures:
+        description: "Fixture globs, comma-separated (blank = run-config.yaml)"
+        default: ""
+      arms:
+        description: "Arms, e.g. A0,A1,A4 (blank = run-config.yaml)"
+        default: ""
+      trials:
+        description: "Trials per fixture per arm (blank = run-config.yaml)"
+        default: ""
+      model:
+        description: "Model (blank = run-config.yaml)"
+        default: ""
+      max_turns:
+        description: "Max agent turns per trial (blank = run-config.yaml)"
+        default: ""
+      run_usd:
+        description: "Spend cap for this run in USD (blank = run-config.yaml)"
+        default: ""
+      max_usd:
+        description: "Overall cap across all runs in USD"
+        default: "5"
+      prior_spend_usd:
+        description: "USD already spent by earlier runs (counts against max_usd)"
+        default: "0"
+  push:
+    branches: ["bench-run/**"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bench-v2
+  cancel-in-progress: false
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v5
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Claude Code and MEND
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          claude --version
+          pip install -e .
+
+      - name: Run pilot
+        timeout-minutes: 100
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          IN_FIXTURES: ${{ inputs.fixtures }}
+          IN_ARMS: ${{ inputs.arms }}
+          IN_TRIALS: ${{ inputs.trials }}
+          IN_MODEL: ${{ inputs.model }}
+          IN_MAX_TURNS: ${{ inputs.max_turns }}
+          IN_RUN_USD: ${{ inputs.run_usd }}
+          IN_MAX_USD: ${{ inputs.max_usd }}
+          IN_PRIOR: ${{ inputs.prior_spend_usd }}
+          OUT: bench/results/ci-v2-${{ github.run_id }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::Repository secret ANTHROPIC_API_KEY is not set"; exit 1
+          fi
+          args=(--config bench/v2/run-config.yaml --out "$OUT")
+          [ -n "$IN_FIXTURES" ] && args+=(--fixtures "$IN_FIXTURES")
+          [ -n "$IN_ARMS" ] && args+=(--arms "$IN_ARMS")
+          [ -n "$IN_TRIALS" ] && args+=(--trials "$IN_TRIALS")
+          [ -n "$IN_MODEL" ] && args+=(--model "$IN_MODEL")
+          [ -n "$IN_MAX_TURNS" ] && args+=(--max-turns "$IN_MAX_TURNS")
+          [ -n "$IN_RUN_USD" ] && args+=(--run-usd "$IN_RUN_USD")
+          [ -n "$IN_MAX_USD" ] && args+=(--max-usd "$IN_MAX_USD")
+          [ -n "$IN_PRIOR" ] && args+=(--prior-spend-usd "$IN_PRIOR")
+          python -m bench.v2.run "${args[@]}"
+
+      - name: Publish report to job summary
+        if: always()
+        run: |
+          f="bench/results/ci-v2-${{ github.run_id }}/report.md"
+          if [ -f "$f" ]; then cat "$f" >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-v2-${{ github.run_id }}
+          path: bench/results/ci-v2-${{ github.run_id }}/
+          if-no-files-found: warn
