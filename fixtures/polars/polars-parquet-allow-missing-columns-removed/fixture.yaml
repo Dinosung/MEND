@@ -23,4 +23,4 @@ provenance:
     - {type: changelog, url: "https://github.com/pola-rs/polars/releases/tag/py-2.0.0"}
   license: "MIT"
   released: "2026-10-06"
-status: draft
+status: verified
