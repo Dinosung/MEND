@@ -26,4 +26,5 @@ def test_classify_sentiment():
     sent = []
     assert target.classify_sentiment(make_client(sent), "Arrived early, works great.") == "positive"
     assert len(sent) == 1
-    assert sent[0]["messages"][0]["content"] == "Arrived early, works great."
+    # The review must reach the model; wrapping it in a prompt is fine.
+    assert "Arrived early, works great." in json.dumps(sent[0]["messages"])
