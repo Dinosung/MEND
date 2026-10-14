@@ -16,9 +16,12 @@ failure:
 repro:
   python: "3.13"
   deps: ["pandas==3.0.5"]
+  old_python: "3.11"
+  old_deps: ["pandas==1.5.3", "numpy==1.26.4"]
 provenance:
   sources:
     - {type: changelog, url: "https://pandas.pydata.org/docs/whatsnew/v2.0.0.html"}
     - {type: issue, url: "https://github.com/pandas-dev/pandas/issues/35407"}
   license: "BSD-3-Clause"
+  released: "2023-04-03"
 status: verified
