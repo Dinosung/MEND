@@ -1,0 +1,27 @@
+id: anthropic-beta-output-format-removed
+title: "Passing output_format= to client.beta.messages.create() in anthropic 1.0"
+summary: >
+  anthropic 1.0 removed the deprecated output_format parameter from beta.messages.create()
+  and beta.messages.count_tokens(); passing it raises TypeError. Structured outputs are
+  requested with output_config={"format": {...}}, or with the parse() helper, whose
+  output_format= still takes a type (no longer a schema dict).
+ecosystem: python
+package: anthropic
+versions: ">=1.0.0"
+tags: [llm, structured-output, json-schema, signature, migration]
+failure:
+  kind: signature-changed
+  symptom: "TypeError: Messages.create() got an unexpected keyword argument 'output_format'"
+  bad_pattern: "client.beta.messages.create(..., output_format={\"type\": \"json_schema\", \"schema\": ...})"
+  fix_pattern: "client.beta.messages.create(..., output_config={\"format\": {\"type\": \"json_schema\", \"schema\": ...}})"
+repro:
+  python: "3.13"
+  deps: ["anthropic==1.0.0", "httpx2==2.13.0"]
+  old_deps: ["anthropic==0.125.0", "httpx==0.28.1"]
+provenance:
+  sources:
+    - {type: docs, url: "https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/MIGRATION.md#removed-deprecated-request-parameters"}
+    - {type: changelog, url: "https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/CHANGELOG.md"}
+  license: "MIT"
+  released: "2026-08-20"
+status: verified

@@ -1,0 +1,27 @@
+id: anthropic-completions-api-removed
+title: "Using client.completions / HUMAN_PROMPT / AI_PROMPT with anthropic 1.0"
+summary: >
+  anthropic 1.0 removed the legacy Text Completions API: client.completions (the
+  /v1/complete endpoint), its Completion types and the anthropic.HUMAN_PROMPT /
+  anthropic.AI_PROMPT prompt constants. Importing the constants raises ImportError and
+  client.completions raises AttributeError; use client.messages.create() instead.
+ecosystem: python
+package: anthropic
+versions: ">=1.0.0"
+tags: [llm, completions, messages, migration]
+failure:
+  kind: api-removed
+  symptom: "ImportError: cannot import name 'AI_PROMPT' from 'anthropic'"
+  bad_pattern: "client.completions.create(prompt=f\"{HUMAN_PROMPT} ...{AI_PROMPT}\", max_tokens_to_sample=...)"
+  fix_pattern: "client.messages.create(messages=[{\"role\": \"user\", \"content\": ...}], max_tokens=...)"
+repro:
+  python: "3.13"
+  deps: ["anthropic==1.0.0", "httpx2==2.13.0"]
+  old_deps: ["anthropic==0.125.0", "httpx==0.28.1"]
+provenance:
+  sources:
+    - {type: docs, url: "https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/MIGRATION.md#removed-the-legacy-text-completions-api"}
+    - {type: changelog, url: "https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/CHANGELOG.md"}
+  license: "MIT"
+  released: "2026-08-20"
+status: verified

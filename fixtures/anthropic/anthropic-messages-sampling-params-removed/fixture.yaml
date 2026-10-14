@@ -1,0 +1,28 @@
+id: anthropic-messages-sampling-params-removed
+title: "Passing temperature/top_p/top_k to client.messages.create() in anthropic 1.0"
+summary: >
+  anthropic 1.0 removed the deprecated sampling parameters temperature, top_p and top_k
+  from messages.create(), messages.stream(), messages.parse() and their beta counterparts.
+  Passing any of them raises TypeError before a request is sent; drop them (current models
+  ignore sampling settings) or, for an older model, pass them through extra_body.
+ecosystem: python
+package: anthropic
+versions: ">=1.0.0"
+tags: [llm, sampling, messages, signature, migration]
+failure:
+  kind: signature-changed
+  symptom: "TypeError: Messages.create() got an unexpected keyword argument 'temperature'"
+  bad_pattern: "client.messages.create(..., temperature=0)"
+  fix_pattern: "client.messages.create(...)  # or extra_body={\"temperature\": 0}"
+repro:
+  python: "3.13"
+  deps: ["anthropic==1.0.0", "httpx2==2.13.0"]
+  old_deps: ["anthropic==0.125.0", "httpx==0.28.1"]
+provenance:
+  sources:
+    - {type: docs, url: "https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/MIGRATION.md#removed-deprecated-request-parameters"}
+    - {type: changelog, url: "https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/CHANGELOG.md"}
+    - {type: other, url: "https://github.com/anthropics/anthropic-sdk-python/commit/33e296749dda59c3b9af85d9bee37ae241b92a28"}
+  license: "MIT"
+  released: "2026-08-20"
+status: verified

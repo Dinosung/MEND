@@ -1,0 +1,8 @@
+rules:
+  - id: anthropic-beta-output-format-removed
+    languages: [python]
+    severity: ERROR
+    message: "anthropic 1.0 removed output_format= from beta.messages.create()/count_tokens() (TypeError): pass output_config={\"format\": {...}} instead."
+    pattern-either:
+      - pattern: $C.beta.messages.create(..., output_format=$F, ...)
+      - pattern: $C.beta.messages.count_tokens(..., output_format=$F, ...)

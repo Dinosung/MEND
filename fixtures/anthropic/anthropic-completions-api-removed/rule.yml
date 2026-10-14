@@ -1,0 +1,11 @@
+rules:
+  - id: anthropic-completions-api-removed
+    languages: [python]
+    severity: ERROR
+    message: "anthropic 1.0 removed the legacy Text Completions API (client.completions, HUMAN_PROMPT, AI_PROMPT): use client.messages.create()."
+    pattern-either:
+      - pattern: anthropic.HUMAN_PROMPT
+      - pattern: anthropic.AI_PROMPT
+      - pattern: from anthropic import HUMAN_PROMPT
+      - pattern: from anthropic import AI_PROMPT
+      - pattern: $C.completions.create(..., max_tokens_to_sample=$N, ...)

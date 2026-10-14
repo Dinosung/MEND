@@ -1,0 +1,16 @@
+rules:
+  - id: anthropic-messages-sampling-params-removed
+    languages: [python]
+    severity: ERROR
+    message: "anthropic 1.0 removed temperature/top_p/top_k from messages.create/stream/parse (TypeError): drop them, or pass them via extra_body for an older model."
+    patterns:
+      - pattern-either:
+          - pattern: $C.messages.$M(..., temperature=$V, ...)
+          - pattern: $C.messages.$M(..., top_p=$V, ...)
+          - pattern: $C.messages.$M(..., top_k=$V, ...)
+          - pattern: $C.beta.messages.$M(..., temperature=$V, ...)
+          - pattern: $C.beta.messages.$M(..., top_p=$V, ...)
+          - pattern: $C.beta.messages.$M(..., top_k=$V, ...)
+      - metavariable-regex:
+          metavariable: $M
+          regex: ^(create|stream|parse|tool_runner)$
