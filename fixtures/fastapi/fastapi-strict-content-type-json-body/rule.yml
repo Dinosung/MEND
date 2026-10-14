@@ -1,0 +1,13 @@
+rules:
+  - id: fastapi-strict-content-type-json-body
+    languages: [python]
+    severity: WARNING
+    message: "`data=json.dumps(...)` sends no JSON Content-Type; FastAPI >= 0.132 rejects such bodies (422). Use `json=payload` or set `Content-Type: application/json`."
+    patterns:
+      - pattern-either:
+          - pattern: $CLIENT.$METHOD(..., data=json.dumps(...), ...)
+          - pattern: $CLIENT.$METHOD(..., content=json.dumps(...), ...)
+      - pattern-not: $CLIENT.$METHOD(..., headers=$H, ...)
+      - metavariable-regex:
+          metavariable: $METHOD
+          regex: ^(post|put|patch|delete|request)$

@@ -1,0 +1,10 @@
+rules:
+  - id: fastapi-app-add-event-handler-removed
+    languages: [python]
+    severity: ERROR
+    message: "Starlette 1.0 removed add_event_handler() from the app; use a `lifespan` context manager (`FastAPI(lifespan=...)`)."
+    patterns:
+      - pattern: $APP.add_event_handler($EVENT, $FN)
+      - metavariable-regex:
+          metavariable: $EVENT
+          regex: ^["'](startup|shutdown)["']$

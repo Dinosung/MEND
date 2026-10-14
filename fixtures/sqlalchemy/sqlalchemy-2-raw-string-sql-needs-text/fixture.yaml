@@ -1,0 +1,23 @@
+id: sqlalchemy-2-raw-string-sql-needs-text
+title: "Passing a plain SQL string to Connection.execute() in SQLAlchemy 2.0"
+summary: >
+  SQLAlchemy 2.0 no longer accepts a raw string in Connection.execute(). Textual SQL must
+  be wrapped in sqlalchemy.text() (or sent with exec_driver_sql()); a bare string raises
+  ObjectNotExecutableError.
+ecosystem: python
+package: sqlalchemy
+versions: ">=2.0"
+tags: [core, connection, text, migration]
+failure:
+  kind: signature-changed
+  symptom: "sqlalchemy.exc.ObjectNotExecutableError: Not an executable object: 'SELECT email FROM users ORDER BY id'"
+  bad_pattern: "conn.execute(\"SELECT email FROM users\")"
+  fix_pattern: "conn.execute(text(\"SELECT email FROM users\"))"
+repro:
+  python: "3.13"
+  deps: ["sqlalchemy==2.0.36"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#execute-method-more-strict-execution-options-are-more-prominent"}
+  license: "MIT"
+status: verified

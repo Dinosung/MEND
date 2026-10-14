@@ -1,0 +1,25 @@
+id: sqlalchemy-2-row-string-key-access
+title: "Indexing a result Row by column name (row['col']) in SQLAlchemy 2.0"
+summary: >
+  In SQLAlchemy 2.0, Row behaves like a named tuple: integer indexes and attribute access
+  work, but string keys do not. row["email"] raises TypeError; use row.email or
+  row._mapping["email"] (and dict(row._mapping) instead of dict(row)).
+ecosystem: python
+package: sqlalchemy
+versions: ">=2.0"
+tags: [core, result, row, migration]
+failure:
+  kind: behavior-changed
+  symptom: "TypeError: tuple indices must be integers or slices, not str"
+  bad_pattern: "row[\"email\"]"
+  fix_pattern: "row._mapping[\"email\"]  # or row.email"
+repro:
+  python: "3.13"
+  deps: ["sqlalchemy==2.0.36"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#result-rows-act-like-named-tuples"}
+    - {type: docs, url: "https://docs.sqlalchemy.org/en/20/changelog/migration_14.html#rowproxy-is-no-longer-a-proxy-is-now-called-row-and-behaves-like-an-enhanced-named-tuple"}
+    - {type: issue, url: "https://github.com/sqlalchemy/sqlalchemy/issues/6218"}
+  license: "MIT"
+status: verified

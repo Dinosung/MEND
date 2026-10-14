@@ -1,0 +1,8 @@
+rules:
+  - id: fastapi-templateresponse-request-first
+    languages: [python]
+    severity: ERROR
+    message: "Starlette 1.0 removed TemplateResponse(name, context): pass the request first, `TemplateResponse(request, name, context)`."
+    pattern-either:
+      - pattern: $T.TemplateResponse("...", ...)
+      - pattern: $T.TemplateResponse(name="...", ...)

@@ -1,0 +1,26 @@
+id: fastapi-strict-content-type-json-body
+title: "Sending a JSON body as data=json.dumps(...) without Content-Type to FastAPI >= 0.132"
+summary: >
+  FastAPI 0.132.0 enabled strict Content-Type checking by default: a JSON body is only
+  parsed when the request carries a JSON Content-Type. Posting data=json.dumps(payload)
+  (the old requests idiom) sends no Content-Type, so the body is treated as a raw string
+  and validation fails with 422 instead of creating the item.
+ecosystem: python
+package: fastapi
+versions: ">=0.132.0"
+tags: [request-body, json, content-type, testclient, behavior-change]
+failure:
+  kind: behavior-changed
+  symptom: "422 Unprocessable Content: {\"detail\":[{\"type\":\"model_attributes_type\",\"loc\":[\"body\"],\"msg\":\"Input should be a valid dictionary or object to extract fields from\",...}]}"
+  bad_pattern: "client.post(\"/items\", data=json.dumps(payload))"
+  fix_pattern: "client.post(\"/items\", json=payload)  # or send Content-Type: application/json"
+repro:
+  python: "3.13"
+  deps: ["fastapi==0.143.0", "starlette==1.6.0", "httpx2==2.13.0"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://fastapi.tiangolo.com/release-notes/#01320-2026-02-23"}
+    - {type: pr, url: "https://github.com/fastapi/fastapi/pull/14978"}
+    - {type: docs, url: "https://fastapi.tiangolo.com/advanced/strict-content-type/"}
+  license: "MIT"
+status: verified

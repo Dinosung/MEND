@@ -1,0 +1,22 @@
+id: sqlalchemy-2-select-list-argument
+title: "Passing a list of columns to select() in SQLAlchemy 2.0"
+summary: >
+  In SQLAlchemy 2.0, select() takes columns positionally; the 1.x form select([col, ...])
+  was removed. Passing a list raises ArgumentError when the statement is constructed.
+ecosystem: python
+package: sqlalchemy
+versions: ">=2.0"
+tags: [core, select, query, migration]
+failure:
+  kind: signature-changed
+  symptom: "sqlalchemy.exc.ArgumentError: Column expression, FROM clause, or other columns clause element expected, got [Column('email', String(), table=<users>)]. Did you mean to say select(Column('email', String(), table=<users>))?"
+  bad_pattern: "select([users.c.email])"
+  fix_pattern: "select(users.c.email)"
+repro:
+  python: "3.13"
+  deps: ["sqlalchemy==2.0.36"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#select-no-longer-accepts-varied-constructor-arguments-columns-are-passed-positionally"}
+  license: "MIT"
+status: verified

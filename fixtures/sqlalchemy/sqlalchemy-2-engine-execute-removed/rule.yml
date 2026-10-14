@@ -1,0 +1,12 @@
+rules:
+  - id: sqlalchemy-2-engine-execute-removed
+    languages: [python]
+    severity: ERROR
+    message: "SQLAlchemy 2.0 removed Engine.execute(): run statements on a connection, e.g. `with engine.connect() as conn: conn.execute(...)`."
+    patterns:
+      - pattern-either:
+          - pattern: $ENGINE.execute(...)
+          - pattern: create_engine(...).execute(...)
+      - metavariable-regex:
+          metavariable: $ENGINE
+          regex: (?i)^(\w+\.)*\w*engine$

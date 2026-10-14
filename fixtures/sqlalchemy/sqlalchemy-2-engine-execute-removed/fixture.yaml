@@ -1,0 +1,25 @@
+id: sqlalchemy-2-engine-execute-removed
+title: "Calling engine.execute() directly in SQLAlchemy 2.0"
+summary: >
+  SQLAlchemy 2.0 removed "connectionless" execution: Engine no longer has an execute()
+  method. Statements must run on a Connection obtained from engine.connect() or
+  engine.begin(), so engine.execute(...) raises AttributeError.
+ecosystem: python
+package: sqlalchemy
+versions: ">=2.0"
+tags: [core, engine, connection, migration]
+failure:
+  kind: api-removed
+  symptom: "AttributeError: 'Engine' object has no attribute 'execute'"
+  bad_pattern: "engine.execute(text(\"SELECT ...\"))"
+  fix_pattern: "with engine.connect() as conn: conn.execute(text(\"SELECT ...\"))"
+repro:
+  python: "3.13"
+  deps: ["sqlalchemy==2.0.36"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#implicit-and-connectionless-execution-bound-metadata-removed"}
+    - {type: other, url: "https://github.com/dagster-io/dagster/discussions/11881"}
+    - {type: issue, url: "https://github.com/kvesteri/sqlalchemy-utils/issues/676"}
+  license: "MIT"
+status: verified

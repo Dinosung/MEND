@@ -1,0 +1,24 @@
+id: sqlalchemy-2-connection-autocommit-removed
+title: "Expecting INSERT/UPDATE on engine.connect() to autocommit in SQLAlchemy 2.0"
+summary: >
+  SQLAlchemy 2.0 removed library-level autocommit. DML executed on a connection from
+  engine.connect() runs inside an implicit transaction that is rolled back when the
+  connection closes unless conn.commit() is called, so writes silently disappear.
+ecosystem: python
+package: sqlalchemy
+versions: ">=2.0"
+tags: [core, transactions, commit, silent-failure, migration]
+failure:
+  kind: behavior-changed
+  symptom: "No exception; the INSERT is rolled back when the connection closes and the row is missing (assert [] == ['a@x.io'])"
+  bad_pattern: "with engine.connect() as conn: conn.execute(insert_stmt)"
+  fix_pattern: "with engine.begin() as conn: conn.execute(insert_stmt)  # or call conn.commit()"
+repro:
+  python: "3.13"
+  deps: ["sqlalchemy==2.0.36"]
+provenance:
+  sources:
+    - {type: docs, url: "https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#library-level-but-not-driver-level-autocommit-removed-from-both-core-and-orm"}
+    - {type: docs, url: "https://docs.sqlalchemy.org/en/20/tutorial/dbapi_transactions.html#committing-changes"}
+  license: "MIT"
+status: verified

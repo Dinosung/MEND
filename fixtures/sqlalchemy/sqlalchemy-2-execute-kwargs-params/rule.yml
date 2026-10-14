@@ -1,0 +1,10 @@
+rules:
+  - id: sqlalchemy-2-execute-kwargs-params
+    languages: [python]
+    severity: ERROR
+    message: "SQLAlchemy 2.0 Connection.execute() does not accept bind parameters as keyword arguments: pass a dict, e.g. `conn.execute(stmt, {\"id\": 1})`."
+    patterns:
+      - pattern: $CONN.execute(sqlalchemy.text(...), $KW=$V, ...)
+      - metavariable-regex:
+          metavariable: $KW
+          regex: ^(?!execution_options$|_parameters$)\w+$

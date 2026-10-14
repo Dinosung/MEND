@@ -1,0 +1,26 @@
+id: fastapi-templateresponse-request-first
+title: "Calling TemplateResponse(name, {\"request\": request}) with Starlette 1.0+"
+summary: >
+  Starlette 1.0 removed the deprecated TemplateResponse(name, context) signature; the
+  request is now the first positional argument. With the old call the context dict lands
+  in the template-name slot and rendering fails inside Jinja2, returning a 500.
+ecosystem: python
+package: fastapi
+versions: ">=0.133.0"
+tags: [templates, jinja2, starlette, html, migration]
+failure:
+  kind: signature-changed
+  symptom: "TypeError: unhashable type: 'dict' (raised from jinja2 Environment._load_template; endpoint returns 500)"
+  bad_pattern: "templates.TemplateResponse(\"page.html\", {\"request\": request, ...})"
+  fix_pattern: "templates.TemplateResponse(request, \"page.html\", {...})"
+repro:
+  python: "3.13"
+  deps: ["fastapi==0.143.0", "starlette==1.6.0", "jinja2==3.1.6", "httpx2==2.13.0"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://starlette.dev/release-notes/#100rc1-february-23-2026"}
+    - {type: pr, url: "https://github.com/encode/starlette/pull/3118"}
+    - {type: docs, url: "https://starlette.dev/templates/"}
+    - {type: issue, url: "https://github.com/pallets/jinja/issues/2180"}
+  license: "BSD-3-Clause"
+status: verified

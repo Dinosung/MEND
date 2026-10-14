@@ -1,0 +1,26 @@
+id: starlette-1-on-startup-removed
+title: "Passing on_startup/on_shutdown (or using @app.on_event) with Starlette 1.0+"
+summary: >
+  Starlette 1.0 removed the on_startup/on_shutdown constructor parameters, the
+  @app.on_event() decorator and add_event_handler() from Starlette and Router. Startup and
+  shutdown logic must live in a lifespan async context manager; the old parameters raise
+  TypeError when the app is constructed.
+ecosystem: python
+package: starlette
+versions: ">=1.0.0"
+tags: [lifespan, startup, shutdown, events, migration]
+failure:
+  kind: api-removed
+  symptom: "TypeError: Starlette.__init__() got an unexpected keyword argument 'on_startup'"
+  bad_pattern: "Starlette(routes=[...], on_startup=[warm_cache])"
+  fix_pattern: "Starlette(routes=[...], lifespan=lifespan)  # @asynccontextmanager async def lifespan(app): ...; yield"
+repro:
+  python: "3.13"
+  deps: ["starlette==1.6.0", "httpx2==2.13.0"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://starlette.dev/release-notes/#100rc1-february-23-2026"}
+    - {type: pr, url: "https://github.com/encode/starlette/pull/3117"}
+    - {type: docs, url: "https://starlette.dev/lifespan/"}
+  license: "BSD-3-Clause"
+status: verified

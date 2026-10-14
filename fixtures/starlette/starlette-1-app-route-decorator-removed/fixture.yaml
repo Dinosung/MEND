@@ -1,0 +1,25 @@
+id: starlette-1-app-route-decorator-removed
+title: "Registering endpoints with @app.route() on Starlette 1.0+"
+summary: >
+  Starlette 1.0 removed the @app.route(), @app.websocket_route(), @app.middleware() and
+  @app.exception_handler() decorators. Routes must be declared up front with
+  Starlette(routes=[Route(...)]); the decorator raises AttributeError at import time.
+ecosystem: python
+package: starlette
+versions: ">=1.0.0"
+tags: [routing, decorators, migration]
+failure:
+  kind: api-removed
+  symptom: "AttributeError: 'Starlette' object has no attribute 'route'. Did you mean: 'router'?"
+  bad_pattern: "@app.route(\"/health\")"
+  fix_pattern: "Starlette(routes=[Route(\"/health\", health)])"
+repro:
+  python: "3.13"
+  deps: ["starlette==1.6.0", "httpx2==2.13.0"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://starlette.dev/release-notes/#100rc1-february-23-2026"}
+    - {type: pr, url: "https://github.com/encode/starlette/pull/3117"}
+    - {type: docs, url: "https://starlette.dev/routing/"}
+  license: "BSD-3-Clause"
+status: verified

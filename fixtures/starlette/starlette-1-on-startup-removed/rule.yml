@@ -1,0 +1,10 @@
+rules:
+  - id: starlette-1-on-startup-removed
+    languages: [python]
+    severity: ERROR
+    message: "Starlette 1.0 removed on_startup/on_shutdown/on_event/add_event_handler; use `Starlette(lifespan=...)`."
+    pattern-either:
+      - pattern: starlette.applications.Starlette(..., on_startup=$X, ...)
+      - pattern: starlette.applications.Starlette(..., on_shutdown=$X, ...)
+      - pattern: starlette.routing.Router(..., on_startup=$X, ...)
+      - pattern: starlette.routing.Router(..., on_shutdown=$X, ...)

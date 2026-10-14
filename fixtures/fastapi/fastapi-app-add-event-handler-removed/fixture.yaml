@@ -1,0 +1,26 @@
+id: fastapi-app-add-event-handler-removed
+title: "Registering startup/shutdown hooks with app.add_event_handler() on Starlette 1.0+"
+summary: >
+  Starlette 1.0 removed add_event_handler() (along with on_startup/on_shutdown) from the
+  application class, and FastAPI's app object no longer has it when running on
+  Starlette >= 1.0. app.add_event_handler("startup", fn) raises AttributeError at import
+  time; use a lifespan context manager instead.
+ecosystem: python
+package: fastapi
+versions: ">=0.133.0"
+tags: [lifespan, startup, shutdown, events, starlette, migration]
+failure:
+  kind: api-removed
+  symptom: "AttributeError: 'FastAPI' object has no attribute 'add_event_handler'. Did you mean: 'add_exception_handler'?"
+  bad_pattern: "app.add_event_handler(\"startup\", open_pool)"
+  fix_pattern: "app = FastAPI(lifespan=lifespan)  # @asynccontextmanager async def lifespan(app): ...; yield; ..."
+repro:
+  python: "3.13"
+  deps: ["fastapi==0.143.0", "starlette==1.6.0", "httpx2==2.13.0"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://starlette.dev/release-notes/#100rc1-february-23-2026"}
+    - {type: pr, url: "https://github.com/encode/starlette/pull/3117"}
+    - {type: docs, url: "https://fastapi.tiangolo.com/advanced/events/"}
+  license: "MIT"
+status: verified

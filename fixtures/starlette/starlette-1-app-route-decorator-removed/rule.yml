@@ -1,0 +1,19 @@
+rules:
+  - id: starlette-1-app-route-decorator-removed
+    languages: [python]
+    severity: ERROR
+    message: "Starlette 1.0 removed the @app.route/@app.websocket_route/@app.middleware/@app.exception_handler decorators; pass `routes=`, `middleware=` and `exception_handlers=` to Starlette(...)."
+    patterns:
+      - pattern-inside: |
+          $APP = starlette.applications.Starlette(...)
+          ...
+      - pattern-either:
+          - pattern: |
+              @$APP.$DECO(...)
+              async def $F(...): ...
+          - pattern: |
+              @$APP.$DECO(...)
+              def $F(...): ...
+      - metavariable-regex:
+          metavariable: $DECO
+          regex: ^(route|websocket_route|middleware|exception_handler)$

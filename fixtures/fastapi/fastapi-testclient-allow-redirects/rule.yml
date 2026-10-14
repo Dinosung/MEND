@@ -1,0 +1,20 @@
+rules:
+  - id: fastapi-testclient-allow-redirects
+    languages: [python]
+    severity: ERROR
+    message: "The Starlette/FastAPI TestClient is httpx-based: use `follow_redirects=` instead of requests' `allow_redirects=`."
+    patterns:
+      - pattern: $CLIENT.$METHOD(..., allow_redirects=$V, ...)
+      - metavariable-regex:
+          metavariable: $METHOD
+          regex: ^(get|post|put|patch|delete|head|options|request)$
+      - pattern-either:
+          - pattern-inside: |
+              from fastapi import $X
+              ...
+          - pattern-inside: |
+              from fastapi.$SUB import $X
+              ...
+          - pattern-inside: |
+              from starlette.$SUB import $X
+              ...

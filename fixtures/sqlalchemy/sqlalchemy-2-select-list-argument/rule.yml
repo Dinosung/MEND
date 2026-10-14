@@ -1,0 +1,9 @@
+rules:
+  - id: sqlalchemy-2-select-list-argument
+    languages: [python]
+    severity: ERROR
+    message: "SQLAlchemy 2.0 select() takes columns positionally: use `select(a, b)` instead of `select([a, b])`."
+    pattern-either:
+      - pattern: sqlalchemy.select([...], ...)
+      - pattern: sqlalchemy.sql.select([...], ...)
+      - pattern: sqlalchemy.future.select([...], ...)

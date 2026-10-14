@@ -1,0 +1,19 @@
+rules:
+  - id: sqlalchemy-2-raw-string-sql-needs-text
+    languages: [python]
+    severity: ERROR
+    message: "SQLAlchemy 2.0 does not execute plain strings: wrap the SQL in `sqlalchemy.text(...)` or use `conn.exec_driver_sql(...)`."
+    patterns:
+      - pattern-either:
+          - pattern-inside: |
+              with $ENGINE.connect() as $CONN:
+                ...
+          - pattern-inside: |
+              with $ENGINE.begin() as $CONN:
+                ...
+          - pattern-inside: |
+              with sqlalchemy.orm.Session(...) as $CONN:
+                ...
+      - pattern-either:
+          - pattern: $CONN.execute("...", ...)
+          - pattern: $CONN.execute(f"...", ...)
