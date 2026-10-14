@@ -1,0 +1,25 @@
+id: numpy-row-stack-removed
+title: "Calling np.row_stack removed in NumPy 2.5"
+summary: >
+  np.row_stack, an alias of np.vstack, was deprecated in NumPy 2.0 and removed in NumPy 2.5.
+  Calls raise AttributeError; np.vstack is the drop-in replacement.
+ecosystem: python
+package: numpy
+versions: ">=2.5"
+tags: [namespace, stacking, arrays, migration]
+failure:
+  kind: api-removed
+  symptom: "AttributeError: module 'numpy' has no attribute 'row_stack'"
+  bad_pattern: "np.row_stack(rows)"
+  fix_pattern: "np.vstack(rows)"
+repro:
+  python: "3.13"
+  deps: ["numpy==2.5.3"]
+  old_deps: ["numpy==2.4.6"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://numpy.org/doc/stable/release/2.5.0-notes.html"}
+    - {type: pr, url: "https://github.com/numpy/numpy/pull/30463"}
+  license: "BSD-3-Clause"
+  released: "2026-06-21"
+status: draft

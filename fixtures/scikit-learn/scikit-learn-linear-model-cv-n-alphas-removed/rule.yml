@@ -1,0 +1,10 @@
+rules:
+  - id: scikit-learn-linear-model-cv-n-alphas-removed
+    languages: [python]
+    severity: ERROR
+    message: "n_alphas was removed from LassoCV/ElasticNetCV (and MultiTask variants) in scikit-learn 1.9: pass the number of alphas as alphas=<int>."
+    pattern-either:
+      - pattern: sklearn.linear_model.LassoCV(..., n_alphas=$N, ...)
+      - pattern: sklearn.linear_model.ElasticNetCV(..., n_alphas=$N, ...)
+      - pattern: sklearn.linear_model.MultiTaskLassoCV(..., n_alphas=$N, ...)
+      - pattern: sklearn.linear_model.MultiTaskElasticNetCV(..., n_alphas=$N, ...)

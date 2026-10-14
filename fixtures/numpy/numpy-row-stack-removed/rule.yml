@@ -1,0 +1,6 @@
+rules:
+  - id: numpy-row-stack-removed
+    languages: [python]
+    severity: ERROR
+    message: "np.row_stack (deprecated in NumPy 2.0) was removed in NumPy 2.5: use np.vstack."
+    pattern: numpy.row_stack

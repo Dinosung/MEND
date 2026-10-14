@@ -1,0 +1,27 @@
+id: scikit-learn-linear-model-cv-n-alphas-removed
+title: "Passing n_alphas to LassoCV / ElasticNetCV removed in scikit-learn 1.9"
+summary: >
+  The n_alphas parameter of LassoCV, ElasticNetCV, MultiTaskLassoCV and MultiTaskElasticNetCV
+  was deprecated in scikit-learn 1.7 and removed in 1.9. Passing it raises TypeError; the
+  number of automatically generated alphas is now given as an integer to alphas.
+ecosystem: python
+package: scikit-learn
+versions: ">=1.9"
+tags: [linear-models, cross-validation, regularization, migration]
+failure:
+  kind: signature-changed
+  symptom: "TypeError: LassoCV.__init__() got an unexpected keyword argument 'n_alphas'"
+  bad_pattern: "LassoCV(n_alphas=30, cv=5)"
+  fix_pattern: "LassoCV(alphas=30, cv=5)"
+repro:
+  python: "3.13"
+  deps: ["scikit-learn==1.9.1", "numpy==2.5.3", "scipy==1.18.1"]
+  old_deps: ["scikit-learn==1.8.0", "numpy==2.3.5", "scipy==1.16.3"]
+provenance:
+  sources:
+    - {type: pr, url: "https://github.com/scikit-learn/scikit-learn/pull/33753"}
+    - {type: changelog, url: "https://scikit-learn.org/stable/whats_new/v1.7.html"}
+    - {type: pr, url: "https://github.com/scikit-learn/scikit-learn/pull/30616"}
+  license: "BSD-3-Clause"
+  released: "2026-06-02"
+status: draft
