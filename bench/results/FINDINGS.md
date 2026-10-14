@@ -33,3 +33,32 @@ SQLAlchemy / FastAPI / Starlette fixtures were not run (need the CI benchmark).
 - **Realistic tasks:** add an edit-in-existing-repo task mode (legacy code around the
   change, lockfile not mentioned), which is how agents actually meet these APIs.
 - Run the CI benchmark on `sqlalchemy/*,fastapi/*,starlette/*` next.
+
+## 2026-10-14: MEND-Bench v2 pilot (agentic, implicit versions)
+
+Setup: Claude Code headless (`claude-haiku-5-5`, max 12 turns) working inside a small repo
+per fixture; versions only in `pyproject.toml`; hidden check scored on source only. All 33
+verified fixtures, arms A0 (no help) / A1 (versions line in CLAUDE.md) / A4 (MEND hooks),
+k=3: 297 trials, $0.94 (CI run 38582038736; summary in
+`2026-10-14-v2-pilot-haiku/annotation.txt`).
+
+| Arm | Repeat failures | Other failures | Infra |
+|---|---|---|---|
+| A0 | 0/99 | 0 | 0 |
+| A1 | 0/99 | 0 | 0 |
+| A4 | 0/99 | 0 | 0 |
+
+A4 hooks: SessionStart injected in 100% of trials, PostToolUse ran in 100%, blocked 0 times
+(the agent never wrote a known-bad pattern).
+
+### What this says
+
+1. **In an agentic loop, the current catalog produces no baseline failures.** The agent can
+   run its code against the pinned versions, so removed APIs surface as errors it fixes
+   itself; on these tasks it also avoided the silent pandas 3.0 behaviour changes.
+2. **This is the opposite of the single-shot result** (Sonnet repeated `np.trapz` 3/3 when it
+   could not run code). Execution feedback, not knowledge, is doing the work.
+3. **By the pilot's own criterion** (continue only if A0 shows failures), the existing
+   fixtures give no effect to build on. The remaining pilot test is fresh post-cutoff
+   changes found by the release-diff stage (`docs/PIPELINE.md`), which models are least
+   likely to know.

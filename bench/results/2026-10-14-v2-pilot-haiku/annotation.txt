@@ -1,0 +1,46 @@
+trials=297 spend_usd=0.9404 hooks={"trials": 99, "session_start_injected": 1.0, "post_tool_use_fired": 1.0, "blocked": 0.0, "total_blocks": 0, "hook_errors": 0}
+A0: fail 0/99, other 0, infra 0
+A1: fail 0/99, other 0, infra 0
+A4: fail 0/99, other 0, infra 0
+fixture=fastapi-app-add-event-handler-removed arm=A0 trial=0 outcome=pass num_turns=5 usd=0.0027
+fixture=fastapi-app-add-event-handler-removed arm=A1 trial=0 outcome=pass num_turns=6 usd=0.0031
+fixture=fastapi-app-add-event-handler-removed arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0028
+fixture=fastapi-strict-content-type-json-body arm=A0 trial=0 outcome=pass num_turns=5 usd=0.0026
+fixture=fastapi-strict-content-type-json-body arm=A1 trial=0 outcome=pass num_turns=5 usd=0.0028
+fixture=fastapi-strict-content-type-json-body arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0031
+fixture=fastapi-templateresponse-request-first arm=A0 trial=0 outcome=pass num_turns=8 usd=0.0046
+fixture=fastapi-templateresponse-request-first arm=A1 trial=0 outcome=pass num_turns=8 usd=0.0045
+fixture=fastapi-templateresponse-request-first arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0031
+fixture=fastapi-testclient-allow-redirects arm=A0 trial=0 outcome=pass num_turns=5 usd=0.0028
+fixture=fastapi-testclient-allow-redirects arm=A1 trial=0 outcome=pass num_turns=5 usd=0.0033
+fixture=fastapi-testclient-allow-redirects arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0030
+fixture=numpy-2-removed-aliases-nan-float arm=A0 trial=0 outcome=pass num_turns=4 usd=0.0025
+fixture=numpy-2-removed-aliases-nan-float arm=A1 trial=0 outcome=pass num_turns=5 usd=0.0026
+fixture=numpy-2-removed-aliases-nan-float arm=A4 trial=0 outcome=pass num_turns=6 usd=0.0035
+fixture=numpy-array-copy-false-raises arm=A0 trial=0 outcome=pass num_turns=7 usd=0.0037
+fixture=numpy-array-copy-false-raises arm=A1 trial=0 outcome=pass num_turns=7 usd=0.0034
+fixture=numpy-array-copy-false-raises arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0030
+fixture=numpy-nep50-uint8-scalar-overflow arm=A0 trial=0 outcome=pass num_turns=5 usd=0.0027
+fixture=numpy-nep50-uint8-scalar-overflow arm=A1 trial=0 outcome=pass num_turns=5 usd=0.0026
+fixture=numpy-nep50-uint8-scalar-overflow arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0030
+fixture=numpy-trapz-removed arm=A0 trial=0 outcome=pass num_turns=5 usd=0.0025
+fixture=numpy-trapz-removed arm=A1 trial=0 outcome=pass num_turns=5 usd=0.0029
+fixture=numpy-trapz-removed arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0028
+fixture=pandas-cow-chained-assignment-noop arm=A0 trial=0 outcome=pass num_turns=9 usd=0.0041
+fixture=pandas-cow-chained-assignment-noop arm=A1 trial=0 outcome=pass num_turns=6 usd=0.0029
+fixture=pandas-cow-chained-assignment-noop arm=A4 trial=0 outcome=pass num_turns=6 usd=0.0030
+fixture=pandas-cow-inplace-on-column-noop arm=A0 trial=0 outcome=pass num_turns=5 usd=0.0027
+fixture=pandas-cow-inplace-on-column-noop arm=A1 trial=0 outcome=pass num_turns=6 usd=0.0032
+fixture=pandas-cow-inplace-on-column-noop arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0030
+fixture=pandas-dataframe-append-removed arm=A0 trial=0 outcome=pass num_turns=6 usd=0.0026
+fixture=pandas-dataframe-append-removed arm=A1 trial=0 outcome=pass num_turns=5 usd=0.0029
+fixture=pandas-dataframe-append-removed arm=A4 trial=0 outcome=pass num_turns=6 usd=0.0032
+fixture=pandas-offset-alias-m-removed arm=A0 trial=0 outcome=pass num_turns=5 usd=0.0027
+fixture=pandas-offset-alias-m-removed arm=A1 trial=0 outcome=pass num_turns=9 usd=0.0046
+fixture=pandas-offset-alias-m-removed arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0029
+fixture=pandas-series-int-key-not-positional arm=A0 trial=0 outcome=pass num_turns=6 usd=0.0027
+fixture=pandas-series-int-key-not-positional arm=A1 trial=0 outcome=pass num_turns=6 usd=0.0027
+fixture=pandas-series-int-key-not-positional arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0026
+fixture=pandas-str-dtype-not-object arm=A0 trial=0 outcome=pass num_turns=8 usd=0.0048
+fixture=pandas-str-dtype-not-object arm=A1 trial=0 outcome=pass num_turns=5 usd=0.0031
+fixture=pandas-str-dtype-not-object arm=A4 trial=0 outco
