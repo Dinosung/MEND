@@ -76,7 +76,47 @@ python -m bench.run --agent claude_code   --arms baseline,mend --trials 3
 python -m bench.run --agent anthropic_api --arms baseline,mend --trials 5 --model <model>
 ```
 
-## Quickstart (30 seconds)
+## Install in Claude Code
+
+Inside Claude Code:
+
+```text
+/plugin marketplace add Dinosung/MEND
+/plugin install mend@mend
+```
+
+On Claude Code 2.1.275 or later, `/plugin install mend --marketplace Dinosung/MEND` does both
+in one step. From a shell, run `claude plugin marketplace add Dinosung/MEND && claude plugin
+install mend@mend`. You don't need pip. The plugin runs MEND from its own copy of the repo
+with any `python3` (3.10 or later) that has `pyyaml` and `packaging`. If no such Python is
+found it falls back to `uv`. If neither is available, MEND does nothing and never blocks a
+session.
+
+What you get:
+
+- **At session start** Claude receives a few lines of facts about verified failures that match
+  your project's pinned, locked or installed dependency versions. Nothing is added when no
+  fixture is relevant.
+
+  ```text
+  - In numpy>=2.4 (project: numpy 2.4.1), `np.trapz(y, x); np.in1d(a, b)` results in
+    "AttributeError: module 'numpy' has no attribute 'trapz'"; the working form is
+    `np.trapezoid(y, x); np.isin(a, b)`. [mend:numpy-trapz-removed]
+  ```
+- **After every Python edit** (`Edit`/`Write`) the edited file is checked. Matches go back to
+  Claude straight away:
+
+  ```text
+  calc.py:2: `print(np.trapz([1, 2, 3]))` matches a verified known failure (...). In numpy>=2.4
+  (project: numpy 2.4.1), this code results in "AttributeError: ..."; the working form is
+  `np.trapezoid(y, x); np.isin(a, b)`. [mend:numpy-trapz-removed]
+  ```
+- **The `mend` MCP server** provides the full record behind each id (`mend_get_fixture`). It
+  needs the `mcp` package, or `uv`.
+
+Details and troubleshooting: [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md#claude-code-plugin-recommended).
+
+## Quickstart: CLI (30 seconds)
 
 ```bash
 # install: PyPI release coming soon (pipx install mend-agent)
@@ -84,7 +124,7 @@ git clone https://github.com/Dinosung/MEND mend && cd mend
 pipx install -e ".[mcp]"
 export MEND_FIXTURES_DIR="$PWD/fixtures"   # until the catalog ships inside the package
 
-# give Claude Code the MCP server
+# MCP server only (any MCP client; in Claude Code prefer the plugin above)
 claude mcp add mend -e MEND_FIXTURES_DIR="$MEND_FIXTURES_DIR" -- mend serve
 
 # or use it directly
