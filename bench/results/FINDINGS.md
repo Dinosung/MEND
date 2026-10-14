@@ -95,3 +95,35 @@ had failed correct MEND-arm solutions which wrapped the review in a prompt):
 Target the niche where execution feedback is absent: client SDKs and service APIs (LLM
 providers, payments, cloud, SaaS clients) with breaking changes after model cutoffs. Next:
 a fixture batch of such changes, then a pilot on Haiku and one stronger model.
+
+## 2026-10-14: SDK batch and Opus 5.5 (checkpoint)
+
+14 new fixtures for 2026 breaking changes in client SDKs (Anthropic SDK 1.0 ×3 more, Together
+2.0, Hugging Face Hub 2.0, Mistral 2.0, Stripe 15/16, Azure SDKs), all verified three ways in CI.
+Catalog: 58 fixtures.
+
+**Opus screen** (no help, k=1, $1.20; the cap stopped it after 6 of 17 fixtures, all
+Anthropic): Opus 5.5 failed only `anthropic-messages-sampling-params-removed`; it handled the
+other five Anthropic SDK changes.
+
+**Opus paired** on that fixture (A0 vs A4, k=3, $0.81):
+
+| Arm | Repeat failure | Pass | No target.py (hit turn/budget cap) |
+|---|---|---|---|
+| A0 no help | 2 | 0 | 1 |
+| A4 MEND hooks | 0 | 1 | 2 |
+
+Inconclusive: half the Opus trials ran out of turns (12) or per-trial budget ($0.40) before
+writing the file. Of completed trials, same direction as Haiku (A0 2/2 repeat, A4 1/1 pass).
+A fair Opus run needs higher limits (~$0.50+/trial).
+
+### Checkpoint summary (all runs, 2026-10-14)
+
+- Agents in a runnable repo self-correct removed APIs: 0 baseline repeats on 43 of 44
+  library fixtures (Haiku, 396 trials).
+- The exception is code calling an external service, which agents can't run: the Anthropic
+  SDK 1.0 `temperature` removal. Haiku: A0 5/5, A1 5/5 repeat; A4 0/5 (5/5 pass). Opus: A0
+  2/2 repeat on completed trials; A4 1/1 pass.
+- Opus 5.5 already knows most of the 2026 Anthropic SDK changes we tested (5 of 6).
+- Evidence for MEND's effect rests on a single fixture. The kill/continue bar (≥50
+  baseline-failing tasks) is far away. Spend: $3.89 of $5.

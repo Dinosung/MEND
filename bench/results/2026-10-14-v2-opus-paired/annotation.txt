@@ -1,0 +1,168 @@
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A4 t2 other-failure no target.py
+--- score_output.txt
+
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A0 t2 other-failure no target.py
+--- score_output.txt
+
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A4 t1 other-failure no target.py
+--- score_output.txt
+
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A0 t1 known-failure 
+--- target.py
+"""Sentiment tagging for customer reviews using Claude."""
+
+from __future__ import annotations
+
+import re
+
+MODEL = "claude-sonnet-4-6"
+LABELS = ("positive", "negative", "neutral")
+
+SYSTEM_PROMPT = (
+    "You classify the sentiment of customer reviews. "
+    "Answer with exactly one word: positive, negative, or neutral. "
+    "Do not add punctuation or explanation."
+)
+
+
+def classify_sentiment(client, text):
+    """Return "positive", "negative" or "neutral" for a review."""
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=16,
+        # Sonnet 4.6 still accepts sampling params; temperature 0 makes the
+        # label as repeatable as the API allows. Thinking is left off (the
+        # default when omitted on this model) so there's no extra variance.
+        temperature=0,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": f"Review:\n{text}"}],
+    )
+    answer = "".join(
+        block.text for block in response.content if block.type == "text"
+    )
+    match = re.search(r"[a-z]+", answer.strip().lower())
+    word = match.group(0) if match else ""
+    return word if word in LABELS else "neutral"
+
+--- score_output.txt
+             given_params.add(positional[i])
+            except IndexError:
+                raise TypeError(
+                    f"{func.__name__}() takes {len(positional)} argument(s) but {len(args)} were given"
+                ) from None
+    
+        for key in kwargs.keys():
+            given_params.add(key)
+    
+        for variant in variants:
+            matches = all((param in given_params for param in variant))
+            if matches:
+                break
+        else:  # no break
+            if len(variants) > 1:
+                variations = human_join(
+                    ["(" + human_join([quote(arg) for arg in variant], final="and") + ")" for variant in variants]
+                )
+                msg = f"Missing required arguments; Expected either {variations} arguments to be given"
+            else:
+                assert len(variants) > 0
+    
+                # TODO: this error message is not deterministic
+                missing = list(set(variants[0]) - given_params)
+                if len(missing) > 1:
+                    msg = f"Missing required arguments: {human_join([quote(arg) for arg in missing])}"
+                else:
+                    msg = f"Missing required argument: {quote(missing[0])}"
+            raise TypeError(msg)
+>       return func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+
+/home/runner/work/_temp/setup-uv-cache/archive-v0/qxm9xwlV7-e6XRoW/lib/python3.13/site-packages/anthropic/_utils/_utils.py:294: TypeError
+=========================== short test summary info ============================
+FAILED check/test_check.py::test_classify_sentiment - TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+1 failed in 0.96s
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A0 t0 known-failure 
+--- target.py
+"""Sentiment tagging for customer reviews using Claude."""
+
+from __future__ import annotations
+
+import re
+
+MODEL = "claude-sonnet-4-6"
+LABELS = ("positive", "negative", "neutral")
+
+SYSTEM_PROMPT = (
+    "You classify the sentiment of customer reviews. "
+    "Reply with exactly one word: positive, negative, or neutral. "
+    "Do not add punctuation or explanation."
+)
+
+
+def classify_sentiment(client, text):
+    """Return "positive", "negative" or "neutral" for a review."""
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=16,
+        # temperature=0 makes the output as repeatable as possible. Sonnet 4.6
+        # still accepts sampling parameters; newer models (Sonnet 5.5, Opus 5.5,
+        # ...) reject them, so revisit this if MODEL changes.
+        temperature=0,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": f"Review:\n{text}"}],
+    )
+    answer = "".join(
+        block.text for block in response.content if block.type == "text"
+    )
+    word = re.sub(r"[^a-z]", "", answer.strip().lower())
+    return word if word in LABELS else "neutral"
+
+--- score_output.txt
+             given_params.add(positional[i])
+            except IndexError:
+                raise TypeError(
+                    f"{func.__name__}() takes {len(positional)} argument(s) but {len(args)} were given"
+                ) from None
+    
+        for key in kwargs.keys():
+            given_params.add(key)
+    
+        for variant in variants:
+            matches = all((param in given_params for param in variant))
+            if matches:
+                break
+        else:  # no break
+            if len(variants) > 1:
+                variations = human_join(
+                    ["(" + human_join([quote(arg) for arg in variant], final="and") + ")" for variant in variants]
+                )
+                msg = f"Missing required arguments; Expected either {variations} arguments to be given"
+            else:
+                assert len(variants) > 0
+    
+                # TODO: this error message is not deterministic
+                missing = list(set(variants[0]) - given_params)
+                if len(missing) > 1:
+                    msg = f"Missing required arguments: {human_join([quote(arg) for arg in missing])}"
+                else:
+                    msg = f"Missing required argument: {quote(missing[0])}"
+            raise TypeError(msg)
+>       return func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+
+/home/runner/work/_temp/setup-uv-cache/archive-v0/qxm9xwlV7-e6XRoW/lib/python3.13/site-packages/anthropic/_utils/_utils.py:294: TypeError
+=========================== short test summary info ============================
+FAILED check/test_check.py::test_classify_sentiment - TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+1 failed in 0.94s
+===== MEND-Bench results
+trials=6 spend_usd=0.808 hooks={"trials": 3, "session_start_injected": 1.0, "post_tool_use_fired": 0.3333333333333333, "blocked": 0.0, "total_blocks": 0, "hook_errors": 0}
+A0: fail 2/3, other 1, infra 0
+A4: fail 0/3, other 2, infra 0
+anthropic-messages-sampling-params-removed: A0 3/3 A4 2/3
