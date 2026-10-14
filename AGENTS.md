@@ -22,3 +22,7 @@ Every module exposes `main(argv: list[str]) -> int`.
 - Python >= 3.10, type hints, no network in tests.
 - Tests use pytest and live in `tests/`.
 - Commit messages: imperative, small, scoped.
+- Commit size: one logical change per commit, aimed at roughly 300 changed lines or
+  fewer (generated data such as candidate JSON or results excepted). Split work by
+  concern: library code, its tests, CLI wiring, workflows, docs, and fixtures in batches
+  of about 3-5. Each commit must leave the test suite passing.
