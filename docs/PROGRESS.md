@@ -11,6 +11,7 @@ Every paid run gets a row. Check the running total before starting any run.
 | 2026-10-14 | Plugin end-to-end check: 2 headless `claude --plugin-dir` sessions | default | 2 | ~0.15 | $0.15 |
 | 2026-10-14 | Bench v2 smoke runs ×2 (numpy-trapz-removed, A0/A1/A4, k=1); first run's results not readable, assumed ≤$0.02 | claude-haiku-5-5 | 6 | ~0.02 | $0.17 |
 | 2026-10-14 | Bench v2 pilot: 33 fixtures, A0/A1/A4, k=3 | claude-haiku-5-5 | 297 | 0.94 | $1.11 |
+| 2026-10-14 | Bench v2 fresh pilot: 11 post-mid-2026 fixtures, A0/A1/A4, k=3 | claude-haiku-5-5 | 99 | 0.52 | $1.63 |
 
 ## Log
 

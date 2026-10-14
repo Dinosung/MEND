@@ -1,0 +1,45 @@
+trials=99 spend_usd=0.5194 hooks={"trials": 33, "session_start_injected": 1.0, "post_tool_use_fired": 1.0, "blocked": 0.0, "total_blocks": 0, "hook_errors": 0}
+A0: fail 3/33, other 0, infra 0
+A1: fail 3/33, other 1, infra 0
+A4: fail 0/33, other 3, infra 0
+fixture=anthropic-beta-output-format-removed arm=A0 trial=0 outcome=pass num_turns=9 usd=0.0137
+fixture=anthropic-beta-output-format-removed arm=A1 trial=0 outcome=pass num_turns=13 usd=0.0079
+fixture=anthropic-beta-output-format-removed arm=A4 trial=0 outcome=pass num_turns=6 usd=0.0035
+fixture=anthropic-completions-api-removed arm=A0 trial=0 outcome=pass num_turns=7 usd=0.0106
+fixture=anthropic-completions-api-removed arm=A1 trial=0 outcome=pass num_turns=5 usd=0.0088
+fixture=anthropic-completions-api-removed arm=A4 trial=0 outcome=pass num_turns=6 usd=0.0036
+fixture=anthropic-messages-sampling-params-removed arm=A0 trial=0 outcome=known-failure num_turns=7 usd=0.0108
+fixture=anthropic-messages-sampling-params-removed arm=A1 trial=0 outcome=known-failure num_turns=8 usd=0.0106
+fixture=anthropic-messages-sampling-params-removed arm=A4 trial=0 outcome=other-failure num_turns=6 usd=0.0034
+fixture=matplotlib-axes-plot-date-removed arm=A0 trial=0 outcome=pass num_turns=8 usd=0.0047
+fixture=matplotlib-axes-plot-date-removed arm=A1 trial=0 outcome=pass num_turns=8 usd=0.0044
+fixture=matplotlib-axes-plot-date-removed arm=A4 trial=0 outcome=pass num_turns=6 usd=0.0039
+fixture=matplotlib-cm-get-cmap-removed arm=A0 trial=0 outcome=pass num_turns=7 usd=0.0040
+fixture=matplotlib-cm-get-cmap-removed arm=A1 trial=0 outcome=pass num_turns=6 usd=0.0032
+fixture=matplotlib-cm-get-cmap-removed arm=A4 trial=0 outcome=pass num_turns=6 usd=0.0036
+fixture=numpy-row-stack-removed arm=A0 trial=0 outcome=pass num_turns=6 usd=0.0035
+fixture=numpy-row-stack-removed arm=A1 trial=0 outcome=pass num_turns=5 usd=0.0028
+fixture=numpy-row-stack-removed arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0029
+fixture=polars-melt-removed arm=A0 trial=0 outcome=pass num_turns=7 usd=0.0039
+fixture=polars-melt-removed arm=A1 trial=0 outcome=pass num_turns=9 usd=0.0045
+fixture=polars-melt-removed arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0034
+fixture=polars-parquet-allow-missing-columns-removed arm=A0 trial=0 outcome=pass num_turns=7 usd=0.0048
+fixture=polars-parquet-allow-missing-columns-removed arm=A1 trial=0 outcome=pass num_turns=8 usd=0.0050
+fixture=polars-parquet-allow-missing-columns-removed arm=A4 trial=0 outcome=pass num_turns=10 usd=0.0057
+fixture=scikit-learn-linear-model-cv-n-alphas-removed arm=A0 trial=0 outcome=pass num_turns=7 usd=0.0047
+fixture=scikit-learn-linear-model-cv-n-alphas-removed arm=A1 trial=0 outcome=pass num_turns=10 usd=0.0059
+fixture=scikit-learn-linear-model-cv-n-alphas-removed arm=A4 trial=0 outcome=pass num_turns=7 usd=0.0046
+fixture=sqlalchemy-21-implicit-subquery-removed arm=A0 trial=0 outcome=pass num_turns=8 usd=0.0045
+fixture=sqlalchemy-21-implicit-subquery-removed arm=A1 trial=0 outcome=pass num_turns=5 usd=0.0028
+fixture=sqlalchemy-21-implicit-subquery-removed arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0031
+fixture=sqlalchemy-21-session-close-all-removed arm=A0 trial=0 outcome=pass num_turns=6 usd=0.0033
+fixture=sqlalchemy-21-session-close-all-removed arm=A1 trial=0 outcome=pass num_turns=5 usd=0.0034
+fixture=sqlalchemy-21-session-close-all-removed arm=A4 trial=0 outcome=pass num_turns=5 usd=0.0030
+fixture=anthropic-beta-output-format-removed arm=A0 trial=1 outcome=pass num_turns=8 usd=0.0112
+fixture=anthropic-beta-output-format-removed arm=A1 trial=1 outcome=pass num_turns=8 usd=0.0118
+fixture=anthropic-beta-output-format-removed arm=A4 trial=1 outcome=pass num_turns=6 usd=0.0042
+fixture=anthropic-completions-api-removed arm=A0 trial=1 outcome=pass num_turns=7 usd=0.0101
+fixture=anthropic-completions-api-removed arm=A1 trial=1 outcome=pass num_turns=5 usd=0.0088
+fixture=anthropic-completions-api-removed arm=A4 trial=1 outcome=pass num_turns=5 usd=0.0030
+fixture=anthropic-messages-sampling-params-removed arm=A0 trial=1 outcome=known-failure num_turns=10 usd=0.0108
+fi
