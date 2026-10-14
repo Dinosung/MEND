@@ -1,0 +1,663 @@
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A0 t4 known-failure 
+--- target.py
+"""Customer review sentiment tagging with Claude."""
+
+from __future__ import annotations
+
+import anthropic
+
+MODEL = "claude-sonnet-4-6"
+LABELS = ("positive", "negative", "neutral")
+FALLBACK = "neutral"
+
+SYSTEM_PROMPT = (
+    "You classify the sentiment of customer reviews. "
+    "Reply with exactly one word: positive, negative, or neutral. "
+    "Do not add any other text."
+)
+
+
+def classify_sentiment(client: anthropic.Anthropic, text: str) -> str:
+    """Return "positive", "negative" or "neutral" for a customer review.
+
+    temperature=0 keeps the label stable for the same review across runs.
+    Anything the model returns that is not one of the three labels falls
+    back to "neutral".
+    """
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=8,
+        temperature=0,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": text}],
+    )
+    answer = "".join(block.text for block in response.content if block.type == "text")
+    label = answer.strip().strip(".!,\"'").lower()
+    return label if label in LABELS else FALLBACK
+
+--- score_output.txt
+             given_params.add(positional[i])
+            except IndexError:
+                raise TypeError(
+                    f"{func.__name__}() takes {len(positional)} argument(s) but {len(args)} were given"
+                ) from None
+    
+        for key in kwargs.keys():
+            given_params.add(key)
+    
+        for variant in variants:
+            matches = all((param in given_params for param in variant))
+            if matches:
+                break
+        else:  # no break
+            if len(variants) > 1:
+                variations = human_join(
+                    ["(" + human_join([quote(arg) for arg in variant], final="and") + ")" for variant in variants]
+                )
+                msg = f"Missing required arguments; Expected either {variations} arguments to be given"
+            else:
+                assert len(variants) > 0
+    
+                # TODO: this error message is not deterministic
+                missing = list(set(variants[0]) - given_params)
+                if len(missing) > 1:
+                    msg = f"Missing required arguments: {human_join([quote(arg) for arg in missing])}"
+                else:
+                    msg = f"Missing required argument: {quote(missing[0])}"
+            raise TypeError(msg)
+>       return func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+
+/home/runner/work/_temp/setup-uv-cache/archive-v0/3CNjAir7keljZVKU/lib/python3.13/site-packages/anthropic/_utils/_utils.py:294: TypeError
+=========================== short test summary info ============================
+FAILED check/test_check.py::test_classify_sentiment - TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+1 failed in 1.15s
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A1 t3 known-failure 
+--- target.py
+"""Tag customer reviews with a sentiment label using Claude."""
+
+from __future__ import annotations
+
+import anthropic
+
+MODEL = "claude-sonnet-4-6"
+LABELS = ("positive", "negative", "neutral")
+FALLBACK = "neutral"
+
+SYSTEM_PROMPT = (
+    "You classify the sentiment of customer reviews. "
+    "Reply with exactly one word: positive, negative, or neutral. "
+    "Do not add any other text."
+)
+
+
+def classify_sentiment(client: anthropic.Anthropic, text: str) -> str:
+    """Return "positive", "negative" or "neutral" for a customer review.
+
+    Temperature is pinned to 0 so the same review gets the same label on
+    repeated runs. Any reply that is not one of the three labels falls back
+    to "neutral".
+    """
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=10,
+        temperature=0,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": text}],
+    )
+    reply = "".join(
+        block.text for block in response.content if block.type == "text"
+    )
+    label = reply.strip().strip(".").lower()
+    return label if label in LABELS else FALLBACK
+
+--- score_output.txt
+             given_params.add(positional[i])
+            except IndexError:
+                raise TypeError(
+                    f"{func.__name__}() takes {len(positional)} argument(s) but {len(args)} were given"
+                ) from None
+    
+        for key in kwargs.keys():
+            given_params.add(key)
+    
+        for variant in variants:
+            matches = all((param in given_params for param in variant))
+            if matches:
+                break
+        else:  # no break
+            if len(variants) > 1:
+                variations = human_join(
+                    ["(" + human_join([quote(arg) for arg in variant], final="and") + ")" for variant in variants]
+                )
+                msg = f"Missing required arguments; Expected either {variations} arguments to be given"
+            else:
+                assert len(variants) > 0
+    
+                # TODO: this error message is not deterministic
+                missing = list(set(variants[0]) - given_params)
+                if len(missing) > 1:
+                    msg = f"Missing required arguments: {human_join([quote(arg) for arg in missing])}"
+                else:
+                    msg = f"Missing required argument: {quote(missing[0])}"
+            raise TypeError(msg)
+>       return func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+
+/home/runner/work/_temp/setup-uv-cache/archive-v0/3CNjAir7keljZVKU/lib/python3.13/site-packages/anthropic/_utils/_utils.py:294: TypeError
+=========================== short test summary info ============================
+FAILED check/test_check.py::test_classify_sentiment - TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+1 failed in 1.14s
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A0 t3 known-failure 
+--- target.py
+"""Sentiment tagging for incoming customer reviews."""
+
+from __future__ import annotations
+
+import anthropic
+
+MODEL = "claude-sonnet-4-6"
+LABELS = frozenset({"positive", "negative", "neutral"})
+FALLBACK_LABEL = "neutral"
+
+SYSTEM_PROMPT = (
+    "You classify the sentiment of customer reviews. "
+    "Reply with exactly one word: positive, negative, or neutral. "
+    "Do not add any other text."
+)
+
+
+def classify_sentiment(client: anthropic.Anthropic, text: str) -> str:
+    """Return "positive", "negative" or "neutral" for a customer review."""
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=8,
+        # Sampling at temperature 0 makes the label as repeatable as the API allows.
+        temperature=0,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": f"Review:\n{text}"}],
+    )
+    answer = next((block.text for block in response.content if block.type == "text"), "")
+    label = answer.strip().strip(".!,;:\"'").lower()
+    return label if label in LABELS else FALLBACK_LABEL
+
+--- score_output.txt
+             given_params.add(positional[i])
+            except IndexError:
+                raise TypeError(
+                    f"{func.__name__}() takes {len(positional)} argument(s) but {len(args)} were given"
+                ) from None
+    
+        for key in kwargs.keys():
+            given_params.add(key)
+    
+        for variant in variants:
+            matches = all((param in given_params for param in variant))
+            if matches:
+                break
+        else:  # no break
+            if len(variants) > 1:
+                variations = human_join(
+                    ["(" + human_join([quote(arg) for arg in variant], final="and") + ")" for variant in variants]
+                )
+                msg = f"Missing required arguments; Expected either {variations} arguments to be given"
+            else:
+                assert len(variants) > 0
+    
+                # TODO: this error message is not deterministic
+                missing = list(set(variants[0]) - given_params)
+                if len(missing) > 1:
+                    msg = f"Missing required arguments: {human_join([quote(arg) for arg in missing])}"
+                else:
+                    msg = f"Missing required argument: {quote(missing[0])}"
+            raise TypeError(msg)
+>       return func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+
+/home/runner/work/_temp/setup-uv-cache/archive-v0/3CNjAir7keljZVKU/lib/python3.13/site-packages/anthropic/_utils/_utils.py:294: TypeError
+=========================== short test summary info ============================
+FAILED check/test_check.py::test_classify_sentiment - TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+1 failed in 1.13s
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A1 t2 known-failure 
+--- target.py
+"""Customer review sentiment classification via Claude."""
+
+from __future__ import annotations
+
+MODEL = "claude-sonnet-4-6"
+LABELS = ("positive", "negative", "neutral")
+
+SYSTEM_PROMPT = (
+    "You classify the sentiment of customer reviews. "
+    "Reply with exactly one word: positive, negative, or neutral. "
+    "Do not add any other text."
+)
+
+
+def classify_sentiment(client, text):
+    """Return "positive", "negative" or "neutral" for a customer review.
+
+    Temperature 0 and a one-word token budget keep repeated calls on the same
+    review as stable as the API allows. Any reply outside the three labels
+    falls back to "neutral".
+    """
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=8,
+        temperature=0,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": text}],
+    )
+
+    reply = next(
+        (block.text for block in response.content if block.type == "text"), ""
+    )
+    label = reply.strip().strip(".!,;:\"'").lower()
+    return label if label in LABELS else "neutral"
+
+--- score_output.txt
+             given_params.add(positional[i])
+            except IndexError:
+                raise TypeError(
+                    f"{func.__name__}() takes {len(positional)} argument(s) but {len(args)} were given"
+                ) from None
+    
+        for key in kwargs.keys():
+            given_params.add(key)
+    
+        for variant in variants:
+            matches = all((param in given_params for param in variant))
+            if matches:
+                break
+        else:  # no break
+            if len(variants) > 1:
+                variations = human_join(
+                    ["(" + human_join([quote(arg) for arg in variant], final="and") + ")" for variant in variants]
+                )
+                msg = f"Missing required arguments; Expected either {variations} arguments to be given"
+            else:
+                assert len(variants) > 0
+    
+                # TODO: this error message is not deterministic
+                missing = list(set(variants[0]) - given_params)
+                if len(missing) > 1:
+                    msg = f"Missing required arguments: {human_join([quote(arg) for arg in missing])}"
+                else:
+                    msg = f"Missing required argument: {quote(missing[0])}"
+            raise TypeError(msg)
+>       return func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+
+/home/runner/work/_temp/setup-uv-cache/archive-v0/3CNjAir7keljZVKU/lib/python3.13/site-packages/anthropic/_utils/_utils.py:294: TypeError
+=========================== short test summary info ============================
+FAILED check/test_check.py::test_classify_sentiment - TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+1 failed in 1.15s
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A0 t2 known-failure 
+--- target.py
+import anthropic
+
+MODEL = "claude-sonnet-4-6"
+LABELS = {"positive", "negative", "neutral"}
+
+SYSTEM_PROMPT = (
+    "You classify the sentiment of customer reviews. "
+    "Reply with exactly one word: positive, negative, or neutral. "
+    "Do not include any other text."
+)
+
+
+def classify_sentiment(client: anthropic.Anthropic, text: str) -> str:
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=8,
+        temperature=0,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": text}],
+    )
+
+    answer = next((b.text for b in response.content if b.type == "text"), "")
+    label = answer.strip().strip(".!,;:\"'").lower()
+
+    return label if label in LABELS else "neutral"
+
+--- score_output.txt
+             given_params.add(positional[i])
+            except IndexError:
+                raise TypeError(
+                    f"{func.__name__}() takes {len(positional)} argument(s) but {len(args)} were given"
+                ) from None
+    
+        for key in kwargs.keys():
+            given_params.add(key)
+    
+        for variant in variants:
+            matches = all((param in given_params for param in variant))
+            if matches:
+                break
+        else:  # no break
+            if len(variants) > 1:
+                variations = human_join(
+                    ["(" + human_join([quote(arg) for arg in variant], final="and") + ")" for variant in variants]
+                )
+                msg = f"Missing required arguments; Expected either {variations} arguments to be given"
+            else:
+                assert len(variants) > 0
+    
+                # TODO: this error message is not deterministic
+                missing = list(set(variants[0]) - given_params)
+                if len(missing) > 1:
+                    msg = f"Missing required arguments: {human_join([quote(arg) for arg in missing])}"
+                else:
+                    msg = f"Missing required argument: {quote(missing[0])}"
+            raise TypeError(msg)
+>       return func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+
+/home/runner/work/_temp/setup-uv-cache/archive-v0/3CNjAir7keljZVKU/lib/python3.13/site-packages/anthropic/_utils/_utils.py:294: TypeError
+=========================== short test summary info ============================
+FAILED check/test_check.py::test_classify_sentiment - TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+1 failed in 1.14s
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A1 t1 known-failure 
+--- target.py
+"""Customer review sentiment classification with Claude."""
+
+from __future__ import annotations
+
+import anthropic
+
+MODEL = "claude-sonnet-4-6"
+LABELS = frozenset({"positive", "negative", "neutral"})
+FALLBACK = "neutral"
+
+SYSTEM_PROMPT = (
+    "You classify the sentiment of customer reviews. "
+    "Reply with exactly one word: positive, negative, or neutral. "
+    "Do not add any other text."
+)
+
+
+def classify_sentiment(client: anthropic.Anthropic, text: str) -> str:
+    """Return "positive", "negative" or "neutral" for a customer review."""
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=8,
+        temperature=0,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": text}],
+    )
+    answer = "".join(block.text for block in response.content if block.type == "text")
+    label = answer.strip().strip(".!,;:\"'").lower()
+    return label if label in LABELS else FALLBACK
+
+--- score_output.txt
+             given_params.add(positional[i])
+            except IndexError:
+                raise TypeError(
+                    f"{func.__name__}() takes {len(positional)} argument(s) but {len(args)} were given"
+                ) from None
+    
+        for key in kwargs.keys():
+            given_params.add(key)
+    
+        for variant in variants:
+            matches = all((param in given_params for param in variant))
+            if matches:
+                break
+        else:  # no break
+            if len(variants) > 1:
+                variations = human_join(
+                    ["(" + human_join([quote(arg) for arg in variant], final="and") + ")" for variant in variants]
+                )
+                msg = f"Missing required arguments; Expected either {variations} arguments to be given"
+            else:
+                assert len(variants) > 0
+    
+                # TODO: this error message is not deterministic
+                missing = list(set(variants[0]) - given_params)
+                if len(missing) > 1:
+                    msg = f"Missing required arguments: {human_join([quote(arg) for arg in missing])}"
+                else:
+                    msg = f"Missing required argument: {quote(missing[0])}"
+            raise TypeError(msg)
+>       return func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+
+/home/runner/work/_temp/setup-uv-cache/archive-v0/3CNjAir7keljZVKU/lib/python3.13/site-packages/anthropic/_utils/_utils.py:294: TypeError
+=========================== short test summary info ============================
+FAILED check/test_check.py::test_classify_sentiment - TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+1 failed in 1.15s
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A0 t1 known-failure 
+--- target.py
+"""Customer review sentiment classification with Claude."""
+
+from __future__ import annotations
+
+import anthropic
+
+MODEL = "claude-sonnet-4-6"
+LABELS = ("positive", "negative", "neutral")
+FALLBACK_LABEL = "neutral"
+
+SYSTEM_PROMPT = (
+    "You classify the sentiment of customer reviews. "
+    "Reply with exactly one word: positive, negative, or neutral. "
+    "Do not add any other text."
+)
+
+
+def classify_sentiment(client: anthropic.Anthropic, text: str) -> str:
+    """Return "positive", "negative" or "neutral" for a customer review."""
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=8,
+        # temperature=0 makes sampling as close to greedy as the API allows,
+        # so the same review gets the same label across runs.
+        temperature=0,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": text}],
+    )
+    answer = "".join(block.text for block in response.content if block.type == "text")
+    label = answer.strip().strip(".!,;:\"'").lower()
+    return label if label in LABELS else FALLBACK_LABEL
+
+--- score_output.txt
+             given_params.add(positional[i])
+            except IndexError:
+                raise TypeError(
+                    f"{func.__name__}() takes {len(positional)} argument(s) but {len(args)} were given"
+                ) from None
+    
+        for key in kwargs.keys():
+            given_params.add(key)
+    
+        for variant in variants:
+            matches = all((param in given_params for param in variant))
+            if matches:
+                break
+        else:  # no break
+            if len(variants) > 1:
+                variations = human_join(
+                    ["(" + human_join([quote(arg) for arg in variant], final="and") + ")" for variant in variants]
+                )
+                msg = f"Missing required arguments; Expected either {variations} arguments to be given"
+            else:
+                assert len(variants) > 0
+    
+                # TODO: this error message is not deterministic
+                missing = list(set(variants[0]) - given_params)
+                if len(missing) > 1:
+                    msg = f"Missing required arguments: {human_join([quote(arg) for arg in missing])}"
+                else:
+                    msg = f"Missing required argument: {quote(missing[0])}"
+            raise TypeError(msg)
+>       return func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+
+/home/runner/work/_temp/setup-uv-cache/archive-v0/3CNjAir7keljZVKU/lib/python3.13/site-packages/anthropic/_utils/_utils.py:294: TypeError
+=========================== short test summary info ============================
+FAILED check/test_check.py::test_classify_sentiment - TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+1 failed in 1.18s
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A1 t0 known-failure 
+--- target.py
+"""Tag customer reviews with a sentiment label using Claude."""
+
+from __future__ import annotations
+
+import anthropic
+
+MODEL = "claude-sonnet-4-6"
+LABELS = ("positive", "negative", "neutral")
+SYSTEM_PROMPT = (
+    "You classify the sentiment of customer reviews. "
+    "Reply with exactly one word: positive, negative, or neutral."
+)
+
+
+def classify_sentiment(client: anthropic.Anthropic, text: str) -> str:
+    """Return "positive", "negative" or "neutral" for a customer review."""
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=8,
+        # Greedy-ish decoding so the same review gets the same label each run.
+        temperature=0,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": f"<review>\n{text}\n</review>"}],
+    )
+    answer = "".join(block.text for block in response.content if block.type == "text")
+    label = answer.strip().strip(".!,\"'").lower()
+    return label if label in LABELS else "neutral"
+
+--- score_output.txt
+             given_params.add(positional[i])
+            except IndexError:
+                raise TypeError(
+                    f"{func.__name__}() takes {len(positional)} argument(s) but {len(args)} were given"
+                ) from None
+    
+        for key in kwargs.keys():
+            given_params.add(key)
+    
+        for variant in variants:
+            matches = all((param in given_params for param in variant))
+            if matches:
+                break
+        else:  # no break
+            if len(variants) > 1:
+                variations = human_join(
+                    ["(" + human_join([quote(arg) for arg in variant], final="and") + ")" for variant in variants]
+                )
+                msg = f"Missing required arguments; Expected either {variations} arguments to be given"
+            else:
+                assert len(variants) > 0
+    
+                # TODO: this error message is not deterministic
+                missing = list(set(variants[0]) - given_params)
+                if len(missing) > 1:
+                    msg = f"Missing required arguments: {human_join([quote(arg) for arg in missing])}"
+                else:
+                    msg = f"Missing required argument: {quote(missing[0])}"
+            raise TypeError(msg)
+>       return func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+
+/home/runner/work/_temp/setup-uv-cache/archive-v0/3CNjAir7keljZVKU/lib/python3.13/site-packages/anthropic/_utils/_utils.py:294: TypeError
+=========================== short test summary info ============================
+FAILED check/test_check.py::test_classify_sentiment - TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+1 failed in 1.14s
+===== MEND-Bench failure
+anthropic-messages-sampling-params-removed A0 t0 known-failure 
+--- target.py
+"""Tag customer reviews with a sentiment label using Claude."""
+
+from __future__ import annotations
+
+import anthropic
+
+MODEL = "claude-sonnet-4-6"
+LABELS = ("positive", "negative", "neutral")
+
+SYSTEM_PROMPT = (
+    "You classify the sentiment of customer reviews. "
+    "Reply with exactly one word: positive, negative, or neutral."
+)
+
+
+def classify_sentiment(client: anthropic.Anthropic, text: str) -> str:
+    """Return "positive", "negative" or "neutral" for a customer review.
+
+    Anything Claude returns outside those three words falls back to "neutral".
+    """
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=8,
+        # Greedy decoding: the same review should get the same label each run.
+        temperature=0,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": text}],
+    )
+    answer = next(
+        (block.text for block in response.content if block.type == "text"), ""
+    )
+    label = answer.strip().strip(".!\"'").lower()
+    return label if label in LABELS else "neutral"
+
+--- score_output.txt
+             given_params.add(positional[i])
+            except IndexError:
+                raise TypeError(
+                    f"{func.__name__}() takes {len(positional)} argument(s) but {len(args)} were given"
+                ) from None
+    
+        for key in kwargs.keys():
+            given_params.add(key)
+    
+        for variant in variants:
+            matches = all((param in given_params for param in variant))
+            if matches:
+                break
+        else:  # no break
+            if len(variants) > 1:
+                variations = human_join(
+                    ["(" + human_join([quote(arg) for arg in variant], final="and") + ")" for variant in variants]
+                )
+                msg = f"Missing required arguments; Expected either {variations} arguments to be given"
+            else:
+                assert len(variants) > 0
+    
+                # TODO: this error message is not deterministic
+                missing = list(set(variants[0]) - given_params)
+                if len(missing) > 1:
+                    msg = f"Missing required arguments: {human_join([quote(arg) for arg in missing])}"
+                else:
+                    msg = f"Missing required argument: {quote(missing[0])}"
+            raise TypeError(msg)
+>       return func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+
+/home/runner/work/_temp/setup-uv-cache/archive-v0/3CNjAir7keljZVKU/lib/python3.13/site-packages/anthropic/_utils/_utils.py:294: TypeError
+=========================== short test summary info ============================
+FAILED check/test_check.py::test_classify_sentiment - TypeError: Messages.create() got an unexpected keyword argument 'temperature'
+1 failed in 1.15s
+===== MEND-Bench results
+trials=15 spend_usd=0.1291 hooks={"trials": 5, "session_start_injected": 1.0, "post_tool_use_fired": 1.0, "blocked": 0.0, "total_blocks": 0, "hook_errors": 0}
+A0: fail 5/5, other 0, infra 0
+A1: fail 5/5, other 0, infra 0
+A4: fail 0/5, other 0, infra 0
+anthropic-messages-sampling-params-removed: A0 5/5 A1 5/5 A4 0/5

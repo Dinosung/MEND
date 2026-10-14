@@ -62,3 +62,36 @@ A4 hooks: SessionStart injected in 100% of trials, PostToolUse ran in 100%, bloc
    fixtures give no effect to build on. The remaining pilot test is fresh post-cutoff
    changes found by the release-diff stage (`docs/PIPELINE.md`), which models are least
    likely to know.
+
+## 2026-10-14: fresh pilot (breaking changes released 2026-06 to 2026-10)
+
+Same harness, 11 new fixtures (Anthropic SDK 1.0, polars 2.0, SQLAlchemy 2.1, matplotlib
+3.11, scikit-learn 1.9, NumPy 2.5), k=3: 99 trials, $0.52. Repeat failures: A0 3/33, A1 3/33,
+A4 0/33. All baseline failures were one fixture: `anthropic-messages-sampling-params-removed`
+(`messages.create(temperature=...)` removed in anthropic 1.0, 2026-08-20).
+
+Diagnosis on that fixture, k=5 (15 trials, $0.13, after loosening an over-strict check that
+had failed correct MEND-arm solutions which wrapped the review in a prompt):
+
+| Arm | Repeat failures | Pass |
+|---|---|---|
+| A0 no help | 5/5 | 0/5 |
+| A1 versions line | 5/5 | 0/5 |
+| A4 MEND hooks | 0/5 | 5/5 |
+
+### What this says
+
+1. **The first measured effect.** On a post-cutoff SDK change, the agent repeated the mistake
+   every time without MEND, stating the version did not help, and MEND fixed it every time.
+   The PostToolUse hook never had to block: the SessionStart facts were enough.
+2. **Why this fixture and not the others:** the agent cannot run code that calls an external
+   API, so there is no execution feedback to self-correct from. The 10 other fresh fixtures
+   (local libraries the agent can run) produced no baseline failures.
+3. **Limits:** one fixture, one model (Haiku 5.5), 5 trials per arm. This is a lead, not a
+   result; the kill/continue bar is ≥50 baseline-failing tasks.
+
+### Direction
+
+Target the niche where execution feedback is absent: client SDKs and service APIs (LLM
+providers, payments, cloud, SaaS clients) with breaking changes after model cutoffs. Next:
+a fixture batch of such changes, then a pilot on Haiku and one stronger model.
