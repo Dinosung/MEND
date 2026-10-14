@@ -1,0 +1,26 @@
+id: sqlalchemy-21-implicit-subquery-removed
+title: "Selecting from a Select without .subquery() in SQLAlchemy 2.1"
+summary: >
+  SQLAlchemy 2.1 removed the implicit conversion of a Select into a subquery, deprecated
+  since 1.4. select_stmt.select() raises AttributeError and select(...).select_from(select_stmt)
+  raises ArgumentError; call select_stmt.subquery() first and select from that.
+ecosystem: python
+package: sqlalchemy
+versions: ">=2.1"
+tags: [core, select, subquery, pagination, migration]
+failure:
+  kind: api-removed
+  symptom: "AttributeError: 'Select' object has no attribute 'select' / ArgumentError: FROM expression, such as a Table or alias() object expected, got <...Select object ...>"
+  bad_pattern: "stmt.select(); select(func.count()).select_from(stmt)"
+  fix_pattern: "stmt.subquery().select(); select(func.count()).select_from(stmt.subquery())"
+repro:
+  python: "3.13"
+  deps: ["sqlalchemy==2.1.4"]
+  old_deps: ["sqlalchemy==2.0.54"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://docs.sqlalchemy.org/en/21/changelog/changelog_21.html"}
+    - {type: issue, url: "https://github.com/sqlalchemy/sqlalchemy/issues/10236"}
+  license: "MIT"
+  released: "2026-09-24"
+status: verified

@@ -1,0 +1,26 @@
+id: sqlalchemy-21-session-close-all-removed
+title: "Calling Session.close_all() / sessionmaker.close_all() removed in SQLAlchemy 2.1"
+summary: >
+  The Session.close_all() class method (also reachable as sessionmaker.close_all() and
+  scoped_session.close_all()) was deprecated in SQLAlchemy 1.3 and removed in 2.1. Calls
+  raise AttributeError; the replacement is the function sqlalchemy.orm.close_all_sessions().
+ecosystem: python
+package: sqlalchemy
+versions: ">=2.1"
+tags: [orm, session, teardown, migration]
+failure:
+  kind: api-removed
+  symptom: "AttributeError: type object 'Session' has no attribute 'close_all'"
+  bad_pattern: "Session.close_all()"
+  fix_pattern: "from sqlalchemy.orm import close_all_sessions; close_all_sessions()"
+repro:
+  python: "3.13"
+  deps: ["sqlalchemy==2.1.4"]
+  old_deps: ["sqlalchemy==2.0.54"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://docs.sqlalchemy.org/en/21/changelog/changelog_21.html"}
+    - {type: issue, url: "https://github.com/sqlalchemy/sqlalchemy/issues/12441"}
+  license: "MIT"
+  released: "2026-09-24"
+status: verified

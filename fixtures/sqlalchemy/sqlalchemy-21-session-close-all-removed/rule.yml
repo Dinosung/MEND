@@ -1,0 +1,12 @@
+rules:
+  - id: sqlalchemy-21-session-close-all-removed
+    languages: [python]
+    severity: ERROR
+    message: "Session.close_all() / sessionmaker.close_all() were removed in SQLAlchemy 2.1: call sqlalchemy.orm.close_all_sessions() instead."
+    pattern-either:
+      - pattern: sqlalchemy.orm.Session.close_all(...)
+      - patterns:
+          - pattern: $S.close_all()
+          - metavariable-regex:
+              metavariable: $S
+              regex: (?i)session
