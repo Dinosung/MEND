@@ -1,0 +1,251 @@
+# MEND release-diff watchlist (pipeline stage "Detect").
+#
+# Libraries agents use heavily that shipped major/minor releases with breaking
+# changes between Oct 2025 and Oct 2026. Dates are the tag commit dates from the
+# upstream repos (git), checked 2026-10-14.
+#
+# Per library:
+#   repo               git URL (cloned shallow/sparse/blob-less; never executed)
+#   tag_pattern        regex matching release tags (for the future RSS/tag poller)
+#   packages           import names to diff
+#   src_root           repo dir containing the package; src_root_overrides per tag
+#   changelog          repo paths (files or dirs) of release notes in the NEW tag, used
+#                      to corroborate candidates (changelog_mentions)
+#   hot_symbols        names agents use a lot; candidates touching them rank higher
+#   internal_segments  extra module names treated as non-public
+#   releases           old -> new tag pairs to diff (old = last patch of the previous
+#                      minor released before `new`)
+
+libraries:
+  - name: numpy
+    repo: https://github.com/numpy/numpy
+    tag_pattern: '^v(\d+)\.(\d+)\.(\d+)$'
+    packages: [numpy]
+    src_root: .
+    changelog: [doc/source/release/2.4.0-notes.rst, doc/source/release/2.5.0-notes.rst]
+    hot_symbols: [array, asarray, ndarray, linspace, arange, zeros, ones, mean, sum, dot, matmul, where,
+                  concatenate, stack, reshape, random, linalg, fft, unique, sort, argsort, clip, round,
+                  trapezoid, isin, histogram, save, load, savetxt, loadtxt, fromstring, frombuffer, dtype]
+    internal_segments: [core, _core, distutils, f2py, _pyinstaller, conftest]
+    releases:
+      - {old: v2.3.5, old_date: 2025-11-16, new: v2.4.0, new_date: 2025-12-20}
+      - {old: v2.4.6, old_date: 2026-05-18, new: v2.5.0, new_date: 2026-06-21}
+
+  - name: pandas
+    repo: https://github.com/pandas-dev/pandas
+    tag_pattern: '^v(\d+)\.(\d+)\.(\d+)$'
+    packages: [pandas]
+    src_root: .
+    changelog: [doc/source/whatsnew/v3.0.0.rst]
+    hot_symbols: [DataFrame, Series, read_csv, read_excel, read_json, read_parquet, to_csv, to_datetime,
+                  concat, merge, groupby, pivot_table, apply, applymap, map, fillna, replace, astype,
+                  to_dict, resample, rolling, date_range, Timestamp, Index, loc, iloc, value_counts,
+                  sort_values, drop, read_sql, to_sql, melt, get_dummies, cut, qcut, api]
+    internal_segments: [core, _libs, _config, io.formats, util]
+    releases:
+      - {old: v2.3.3, old_date: 2025-09-30, new: v3.0.0, new_date: 2026-01-21}
+
+  - name: pydantic
+    repo: https://github.com/pydantic/pydantic
+    tag_pattern: '^v(\d+)\.(\d+)\.(\d+)$'
+    packages: [pydantic]
+    src_root: .
+    changelog: [HISTORY.md]
+    hot_symbols: [BaseModel, Field, field_validator, model_validator, ConfigDict, TypeAdapter, model_dump,
+                  model_validate, model_dump_json, model_validate_json, computed_field, validate_call,
+                  ValidationError, create_model, RootModel, dataclasses, AliasChoices, field_serializer]
+    internal_segments: [v1, deprecated, plugin, experimental]
+    releases:
+      - {old: v2.12.5, old_date: 2025-11-26, new: v2.13.0, new_date: 2026-04-13}
+      - {old: v2.13.5, old_date: 2026-08-28, new: v2.14.0, new_date: 2026-10-08}
+
+  - name: fastapi
+    repo: https://github.com/fastapi/fastapi
+    tag_pattern: '^(\d+)\.(\d+)\.(\d+)$'
+    packages: [fastapi]
+    src_root: .
+    changelog: [docs/en/docs/release-notes.md]
+    hot_symbols: [FastAPI, APIRouter, Depends, HTTPException, Query, Path, Body, Form, File, UploadFile,
+                  Request, Response, JSONResponse, TestClient, BackgroundTasks, Header, Cookie, Security,
+                  include_router, add_middleware, get, post, put, delete, websocket, status, encoders,
+                  jsonable_encoder, OAuth2PasswordBearer, StreamingResponse]
+    # FastAPI documents these as internals; their churn is real but not user API.
+    internal_segments: [dependencies, utils, openapi.utils, temp_pydantic_v1_params]
+    releases:
+      - {old: 0.119.1, old_date: 2025-10-20, new: 0.143.0, new_date: 2026-10-08}
+
+  - name: starlette
+    repo: https://github.com/Kludex/starlette
+    tag_pattern: '^(\d+)\.(\d+)\.(\d+)$'
+    packages: [starlette]
+    src_root: .
+    changelog: [docs/release-notes.md]
+    hot_symbols: [Starlette, Request, Response, JSONResponse, HTMLResponse, StreamingResponse, FileResponse,
+                  RedirectResponse, Route, Mount, WebSocketRoute, Router, TestClient, Middleware,
+                  BaseHTTPMiddleware, CORSMiddleware, StaticFiles, Jinja2Templates, TemplateResponse,
+                  BackgroundTasks, WebSocket, HTTPException, lifespan, url_for]
+    releases:
+      - {old: 0.52.1, old_date: 2026-01-18, new: 1.0.0, new_date: 2026-03-22}
+      - {old: 1.0.0, old_date: 2026-03-22, new: 1.8.0, new_date: 2026-10-13}
+
+  - name: sqlalchemy
+    repo: https://github.com/sqlalchemy/sqlalchemy
+    tag_pattern: '^rel_(\d+)_(\d+)_(\d+)$'
+    packages: [sqlalchemy]
+    src_root: lib
+    changelog: [doc/build/changelog/changelog_21.rst, doc/build/changelog/migration_21.rst]
+    hot_symbols: [create_engine, Session, sessionmaker, select, insert, update, delete, text, Column,
+                  DeclarativeBase, declarative_base, Mapped, mapped_column, relationship, ForeignKey,
+                  Integer, String, MetaData, Table, execute, scalars, scalar, commit, query, join,
+                  create_async_engine, AsyncSession, async_sessionmaker, func, and_, or_]
+    internal_segments: [testing, util, cyextension, orm.sync, connectors]
+    releases:
+      - {old: rel_2_0_54, old_date: 2026-09-15, new: rel_2_1_0, new_date: 2026-09-24}
+
+  - name: django
+    repo: https://github.com/django/django
+    tag_pattern: '^(\d+)\.(\d+)(\.(\d+))?$'
+    packages: [django]
+    src_root: .
+    changelog: [docs/releases/6.0.txt, docs/releases/6.1.txt]
+    hot_symbols: [models, Model, CharField, ForeignKey, QuerySet, Manager, forms, Form, ModelForm, views,
+                  View, TemplateView, ListView, render, redirect, HttpResponse, JsonResponse, path, include,
+                  admin, ModelAdmin, settings, reverse, get_object_or_404, serializers, migrations, Q, F,
+                  urls, auth, login_required, timezone, send_mail]
+    internal_segments: [contrib.gis, db.backends, utils.deprecation, core.management.commands]
+    releases:
+      - {old: 5.2.7, old_date: 2025-10-01, new: '6.0', new_date: 2025-12-03}
+      - {old: 6.0.8, old_date: 2026-08-04, new: '6.1', new_date: 2026-08-05}
+
+  - name: langchain-core
+    repo: https://github.com/langchain-ai/langchain
+    tag_pattern: '^langchain-core==(\d+)\.(\d+)\.(\d+)$'
+    packages: [langchain_core]
+    src_root: libs/core
+    changelog: [libs/core/README.md]
+    hot_symbols: [BaseMessage, HumanMessage, AIMessage, SystemMessage, ToolMessage, ChatPromptTemplate,
+                  PromptTemplate, MessagesPlaceholder, Runnable, RunnableLambda, RunnablePassthrough,
+                  RunnableParallel, StrOutputParser, JsonOutputParser, PydanticOutputParser, tool,
+                  BaseTool, StructuredTool, Document, BaseRetriever, Embeddings, VectorStore,
+                  BaseChatModel, invoke, ainvoke, stream, batch, bind_tools, with_structured_output]
+    releases:
+      - {old: langchain-core==0.3.79, old_date: 2025-10-09, new: langchain-core==1.0.0, new_date: 2025-10-17}
+      - {old: langchain-core==1.0.0, old_date: 2025-10-17, new: langchain-core==1.6.0, new_date: 2026-08-19}
+
+  - name: langchain
+    repo: https://github.com/langchain-ai/langchain
+    tag_pattern: '^langchain==(\d+)\.(\d+)\.(\d+)$'
+    packages: [langchain]
+    src_root: libs/langchain_v1
+    src_root_overrides: {"langchain==0.3.27": libs/langchain}
+    changelog: [libs/langchain_v1/README.md]
+    hot_symbols: [chains, LLMChain, RetrievalQA, ConversationChain, agents, AgentExecutor, initialize_agent,
+                  create_react_agent, create_agent, create_tool_calling_agent, memory, ConversationBufferMemory,
+                  text_splitter, RecursiveCharacterTextSplitter, document_loaders, vectorstores, embeddings,
+                  chat_models, init_chat_model, prompts, tools, retrievers, hub]
+    releases:
+      - {old: langchain==0.3.27, old_date: 2025-07-24, new: langchain==1.0.0, new_date: 2025-10-17}
+
+  - name: openai
+    repo: https://github.com/openai/openai-python
+    tag_pattern: '^v(\d+)\.(\d+)\.(\d+)$'
+    packages: [openai]
+    src_root: src
+    changelog: [CHANGELOG.md]
+    hot_symbols: [OpenAI, AsyncOpenAI, AzureOpenAI, chat, completions, create, parse, responses, embeddings,
+                  images, audio, files, beta, assistants, threads, runs, ChatCompletion, stream,
+                  OpenAIError, APIError, RateLimitError, with_raw_response, moderations, fine_tuning]
+    internal_segments: [lib._old_api, cli]
+    releases:
+      - {old: v1.109.0, old_date: 2025-09-23, new: v2.0.0, new_date: 2025-09-30}
+      - {old: v2.54.0, old_date: 2026-08-11, new: v3.0.0, new_date: 2026-08-12}
+
+  - name: anthropic
+    repo: https://github.com/anthropics/anthropic-sdk-python
+    tag_pattern: '^v(\d+)\.(\d+)\.(\d+)$'
+    packages: [anthropic]
+    src_root: src
+    changelog: [CHANGELOG.md, MIGRATION.md]
+    hot_symbols: [Anthropic, AsyncAnthropic, messages, create, stream, count_tokens, beta, batches, tools,
+                  Message, MessageParam, ToolParam, APIError, RateLimitError, AnthropicBedrock,
+                  AnthropicVertex, with_raw_response, completions, models]
+    releases:
+      - {old: v0.125.0, old_date: 2026-08-19, new: v1.0.0, new_date: 2026-08-20}
+
+  - name: pytest
+    repo: https://github.com/pytest-dev/pytest
+    tag_pattern: '^(\d+)\.(\d+)\.(\d+)$'
+    packages: [pytest, _pytest]
+    src_root: src
+    changelog: [CHANGELOG.rst, doc/en/changelog.rst]
+    hot_symbols: [fixture, raises, mark, parametrize, approx, skip, xfail, warns, MonkeyPatch, monkeypatch,
+                  tmp_path, capsys, caplog, main, param, importorskip, fail, Config, Item, FixtureRequest,
+                  hookimpl, Parser, addoption, getoption, CaptureFixture, LogCaptureFixture]
+    # _pytest is pytest's implementation package; most public names are re-exported from `pytest`.
+    internal_segments: [_py, _code, _io]
+    releases:
+      - {old: 8.4.2, old_date: 2025-09-04, new: 9.0.0, new_date: 2025-11-08}
+      - {old: 9.0.3, old_date: 2026-04-07, new: 9.1.0, new_date: 2026-06-13}
+
+  - name: click
+    repo: https://github.com/pallets/click
+    tag_pattern: '^(\d+)\.(\d+)\.(\d+)$'
+    packages: [click]
+    src_root: src
+    changelog: [CHANGES.md, CHANGES.rst]
+    hot_symbols: [command, group, option, argument, Context, Command, Group, echo, secho, style, Choice,
+                  Path, File, IntRange, prompt, confirm, pass_context, pass_obj, ClickException,
+                  BadParameter, UsageError, CliRunner, invoke, Parameter, Option, Argument, MultiCommand,
+                  BaseCommand, get_current_context, version_option]
+    releases:
+      - {old: 8.2.2, old_date: 2025-07-29, new: 8.3.0, new_date: 2025-09-12}
+      - {old: 8.3.3, old_date: 2026-04-17, new: 8.4.0, new_date: 2026-05-16}
+      - {old: 8.4.2, old_date: 2026-06-23, new: 8.5.0, new_date: 2026-08-21}
+
+  - name: scikit-learn
+    repo: https://github.com/scikit-learn/scikit-learn
+    tag_pattern: '^(\d+)\.(\d+)\.(\d+)$'
+    packages: [sklearn]
+    src_root: .
+    changelog: [doc/whats_new/v1.8.rst, doc/whats_new/v1.9.rst]
+    hot_symbols: [train_test_split, cross_val_score, GridSearchCV, Pipeline, make_pipeline, ColumnTransformer,
+                  StandardScaler, OneHotEncoder, LabelEncoder, SimpleImputer, LogisticRegression,
+                  LinearRegression, RandomForestClassifier, RandomForestRegressor, GradientBoostingClassifier,
+                  KMeans, PCA, SVC, accuracy_score, f1_score, roc_auc_score, mean_squared_error,
+                  classification_report, confusion_matrix, fit, predict, transform, fit_transform]
+    internal_segments: [externals, utils._testing, _build_utils, conftest, fixes]
+    releases:
+      - {old: 1.7.2, old_date: 2025-09-08, new: 1.8.0, new_date: 2025-12-10}
+      - {old: 1.8.0, old_date: 2025-12-10, new: 1.9.0, new_date: 2026-06-02}
+
+  - name: polars
+    repo: https://github.com/pola-rs/polars
+    tag_pattern: '^py-(\d+)\.(\d+)\.(\d+)$'
+    packages: [polars]
+    src_root: py-polars/src
+    changelog: [docs/source/releases/upgrade/2.md]
+    hot_symbols: [DataFrame, LazyFrame, Series, col, lit, when, read_csv, scan_csv, read_parquet,
+                  scan_parquet, group_by, agg, with_columns, filter, select, join, sort, collect, Expr,
+                  pivot, unpivot, melt, concat, from_pandas, to_pandas, str, dt, list, struct, over]
+    releases:
+      - {old: py-1.44.2, old_date: 2026-09-08, new: py-2.0.0, new_date: 2026-10-06}
+
+  - name: matplotlib
+    repo: https://github.com/matplotlib/matplotlib
+    tag_pattern: '^v(\d+)\.(\d+)\.(\d+)$'
+    packages: [matplotlib]
+    src_root: lib
+    changelog: [doc/api/prev_api_changes/api_changes_3.11.0]
+    hot_symbols: [pyplot, plot, figure, subplots, savefig, show, Axes, Figure, scatter, bar, hist, imshow,
+                  legend, xlabel, ylabel, title, colorbar, cm, get_cmap, colormaps, rcParams, tight_layout,
+                  set_xticklabels, annotate, text, fill_between, errorbar, use]
+    internal_segments: [testing, backends, sphinxext, tests]
+    releases:
+      - {old: v3.10.9, old_date: 2026-04-23, new: v3.11.0, new_date: 2026-06-11}
+
+# Considered and skipped:
+#   httpx      - no stable release since 0.28.1 (2024-12); 1.0 only as 2021 beta tag.
+#   requests   - 2.33/2.34 (2026-03/05) are minor, no public API removals worth diffing.
+#   typer      - 0.2x minors; small API; candidate for a later batch.
+#   celery     - 5.6.0 (2025-11-30); mostly behaviour/config changes, not signature-level.
+#   boto3      - too large / generated clients; out of scope for static diffing.
