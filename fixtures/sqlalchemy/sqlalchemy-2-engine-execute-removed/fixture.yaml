@@ -16,10 +16,13 @@ failure:
 repro:
   python: "3.13"
   deps: ["sqlalchemy==2.0.36"]
+  old_python: "3.12"
+  old_deps: ["sqlalchemy==1.4.54"]
 provenance:
   sources:
     - {type: docs, url: "https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#implicit-and-connectionless-execution-bound-metadata-removed"}
     - {type: other, url: "https://github.com/dagster-io/dagster/discussions/11881"}
     - {type: issue, url: "https://github.com/kvesteri/sqlalchemy-utils/issues/676"}
   license: "MIT"
+  released: "2023-01-26"
 status: verified

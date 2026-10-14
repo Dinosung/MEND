@@ -16,10 +16,13 @@ failure:
 repro:
   python: "3.13"
   deps: ["sqlalchemy==2.0.36"]
+  old_python: "3.12"
+  old_deps: ["sqlalchemy==1.4.54"]
 provenance:
   sources:
     - {type: docs, url: "https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#result-rows-act-like-named-tuples"}
     - {type: docs, url: "https://docs.sqlalchemy.org/en/20/changelog/migration_14.html#rowproxy-is-no-longer-a-proxy-is-now-called-row-and-behaves-like-an-enhanced-named-tuple"}
     - {type: issue, url: "https://github.com/sqlalchemy/sqlalchemy/issues/6218"}
   license: "MIT"
+  released: "2023-01-26"
 status: verified
