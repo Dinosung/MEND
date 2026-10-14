@@ -1,0 +1,27 @@
+id: mistralai-v2-import-moved-to-client
+title: "Importing Mistral from the top-level mistralai package in mistralai 2.0"
+summary: >
+  mistralai 2.0 moved the whole SDK under mistralai.client: `mistralai` is now a namespace
+  package with no Mistral export, so `from mistralai import Mistral` (and
+  `from mistralai.models import ...`) raise ImportError. Import from mistralai.client and
+  mistralai.client.models instead; method names are unchanged.
+ecosystem: python
+package: mistralai
+versions: ">=2.0.0"
+tags: [llm, imports, client, migration]
+failure:
+  kind: api-renamed
+  symptom: "ImportError: cannot import name 'Mistral' from 'mistralai' (unknown location)"
+  bad_pattern: "from mistralai import Mistral"
+  fix_pattern: "from mistralai.client import Mistral"
+repro:
+  python: "3.13"
+  deps: ["mistralai==2.0.0", "httpx==0.28.1"]
+  old_deps: ["mistralai==1.12.4", "httpx==0.28.1"]
+provenance:
+  sources:
+    - {type: docs, url: "https://github.com/mistralai/client-python/blob/v2.0.0/MIGRATION.md#import-changes"}
+    - {type: other, url: "https://github.com/mistralai/client-python/commit/9d290ad34abc9e99f9d6ca5ef3296081809f98b6"}
+  license: "Apache-2.0"
+  released: "2026-03-10"
+status: verified

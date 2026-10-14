@@ -1,0 +1,6 @@
+rules:
+  - id: huggingface-hub-text-generation-stop-sequences-removed
+    languages: [python]
+    severity: ERROR
+    message: "huggingface_hub 2.0 removed stop_sequences= from InferenceClient.text_generation() (TypeError): pass the strings as stop= instead."
+    pattern: $C.text_generation(..., stop_sequences=$V, ...)

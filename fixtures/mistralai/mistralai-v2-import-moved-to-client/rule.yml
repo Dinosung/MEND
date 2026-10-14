@@ -1,0 +1,9 @@
+rules:
+  - id: mistralai-v2-import-moved-to-client
+    languages: [python]
+    severity: ERROR
+    message: "mistralai 2.0 moved the SDK under mistralai.client (ImportError): import Mistral from mistralai.client and models from mistralai.client.models."
+    pattern-either:
+      - pattern: from mistralai import Mistral
+      - pattern: from mistralai.models import $X
+      - pattern: import mistralai.models

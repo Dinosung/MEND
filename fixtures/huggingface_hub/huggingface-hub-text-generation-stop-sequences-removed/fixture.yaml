@@ -1,0 +1,27 @@
+id: huggingface-hub-text-generation-stop-sequences-removed
+title: "Passing stop_sequences= to InferenceClient.text_generation() in huggingface_hub 2.0"
+summary: >
+  huggingface_hub 2.0 removed the deprecated stop_sequences parameter of
+  InferenceClient.text_generation() (and AsyncInferenceClient). Passing it raises TypeError
+  before any request is sent; the stop strings go in stop= instead.
+ecosystem: python
+package: huggingface_hub
+versions: ">=2.0.0"
+tags: [llm, inference, text-generation, signature, migration]
+failure:
+  kind: signature-changed
+  symptom: "TypeError: InferenceClient.text_generation() got an unexpected keyword argument 'stop_sequences'"
+  bad_pattern: "client.text_generation(prompt, stop_sequences=[\"\\n\\n\"])"
+  fix_pattern: "client.text_generation(prompt, stop=[\"\\n\\n\"])"
+repro:
+  python: "3.13"
+  deps: ["huggingface_hub==2.0.0", "httpx2==2.13.0"]
+  old_deps: ["huggingface_hub==1.33.0", "httpx==0.28.1"]
+provenance:
+  sources:
+    - {type: docs, url: "https://github.com/huggingface/huggingface_hub/blob/v2.0.0/docs/source/en/concepts/migration_v2.md#removed-deprecated-apis"}
+    - {type: pr, url: "https://github.com/huggingface/huggingface_hub/pull/4994"}
+    - {type: other, url: "https://github.com/huggingface/huggingface_hub/commit/9f51867e20abd5daab5c0f8d433b64d24e6c1f2d"}
+  license: "Apache-2.0"
+  released: "2026-09-24"
+status: verified
