@@ -23,6 +23,7 @@ Question to answer: *is there a measurable effect to build on?*
 - [ ] Pilot on the SDK batch: Haiku k=3 plus one stronger model (Sonnet) on baseline-failing fixtures, within the $5 cap.
 - [ ] Review all fixture checks for over-strictness (accept any correct solution; only the known failure should fail).
 - [ ] Pilot verdict written to `docs/PROGRESS.md`: continue to Phase 2 only if A0 shows failures that A1 does not fix.
+- [ ] **Checkpoint (owner, 2026-10-14):** after the SDK pilot, pause implementation. Write up the findings, then research market needs and gaps (real pain points, who has them, what exists, the marketing story) and return to the owner with options and a recommendation. No Phase 2 work until the owner picks a direction. The daily task is paused until then.
 
 ## Phase 2: build (to ~mid-January 2027)
 
