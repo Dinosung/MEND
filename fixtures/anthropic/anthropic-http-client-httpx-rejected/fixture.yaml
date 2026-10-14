@@ -1,0 +1,28 @@
+id: anthropic-http-client-httpx-rejected
+title: "Passing an httpx.Client as http_client= to anthropic.Anthropic() in anthropic 1.0"
+summary: >
+  anthropic 1.0 moved its HTTP layer from httpx to httpx2. Custom clients, transports and
+  timeouts passed to the SDK must come from httpx2; an httpx.Client / httpx.AsyncClient given
+  as http_client= raises TypeError when the client is constructed. Use
+  anthropic.DefaultHttpxClient(...) (now an httpx2 client) or httpx2.Client(...).
+ecosystem: python
+package: anthropic
+versions: ">=1.0.0"
+tags: [llm, http, proxy, client, migration]
+failure:
+  kind: behavior-changed
+  symptom: "TypeError: Invalid `http_client` argument; Expected an instance of `httpx2.Client` but got <class 'httpx.Client'>"
+  bad_pattern: "anthropic.Anthropic(http_client=httpx.Client(proxy=proxy_url))"
+  fix_pattern: "anthropic.Anthropic(http_client=anthropic.DefaultHttpxClient(proxy=proxy_url))"
+repro:
+  python: "3.13"
+  deps: ["anthropic==1.0.0", "httpx2==2.13.0", "httpx==0.28.1"]
+  old_deps: ["anthropic==0.125.0", "httpx==0.28.1"]
+provenance:
+  sources:
+    - {type: docs, url: "https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/MIGRATION.md#custom-http-clients-transports-timeouts-and-limits"}
+    - {type: changelog, url: "https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/CHANGELOG.md"}
+    - {type: other, url: "https://github.com/anthropics/anthropic-sdk-python/commit/33e296749dda59c3b9af85d9bee37ae241b92a28"}
+  license: "MIT"
+  released: "2026-08-20"
+status: verified

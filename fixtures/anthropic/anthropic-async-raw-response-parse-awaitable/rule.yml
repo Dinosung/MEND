@@ -1,0 +1,15 @@
+rules:
+  - id: anthropic-async-raw-response-parse-awaitable
+    languages: [python]
+    severity: ERROR
+    message: "anthropic 1.0: on the async client, with_raw_response results are AsyncAPIResponse; parse()/read()/text()/json() must be awaited."
+    patterns:
+      - pattern-inside: |
+          $R = await $C.with_raw_response.$M(...)
+          ...
+      - pattern-either:
+          - pattern: $R.parse(...)
+          - pattern: $R.read()
+          - pattern: $R.text()
+          - pattern: $R.json()
+      - pattern-not-inside: await $R.$F(...)

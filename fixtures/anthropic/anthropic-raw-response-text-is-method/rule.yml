@@ -1,0 +1,14 @@
+rules:
+  - id: anthropic-raw-response-text-is-method
+    languages: [python]
+    severity: ERROR
+    message: "anthropic 1.0: with_raw_response returns APIResponse, where .text and .content are methods (.text(), .read()); the attribute form is a bound method."
+    patterns:
+      - pattern-inside: |
+          $R = $C.with_raw_response.$M(...)
+          ...
+      - pattern-either:
+          - pattern: $R.text
+          - pattern: $R.content
+      - pattern-not-inside: $R.text()
+      - pattern-not-inside: $R.content()

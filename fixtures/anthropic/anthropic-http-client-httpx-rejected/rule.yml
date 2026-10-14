@@ -1,0 +1,10 @@
+rules:
+  - id: anthropic-http-client-httpx-rejected
+    languages: [python]
+    severity: ERROR
+    message: "anthropic 1.0 requires httpx2 objects (TypeError for httpx.Client): use anthropic.DefaultHttpxClient(...) or httpx2.Client(...)."
+    pattern-either:
+      - pattern: anthropic.Anthropic(..., http_client=httpx.Client(...), ...)
+      - pattern: anthropic.AsyncAnthropic(..., http_client=httpx.AsyncClient(...), ...)
+      - pattern: Anthropic(..., http_client=httpx.Client(...), ...)
+      - pattern: AsyncAnthropic(..., http_client=httpx.AsyncClient(...), ...)

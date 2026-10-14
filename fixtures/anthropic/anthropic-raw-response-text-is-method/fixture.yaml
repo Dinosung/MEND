@@ -1,0 +1,28 @@
+id: anthropic-raw-response-text-is-method
+title: "Reading .text / .content as properties on a with_raw_response result in anthropic 1.0"
+summary: >
+  anthropic 1.0 made .with_raw_response return APIResponse instead of LegacyAPIResponse. On
+  it, .text and .content are no longer properties: call .text() and .read() (await them on
+  the async client). The old spelling yields a bound method, so writing or parsing the body
+  fails with TypeError. Headers, status_code and parse() are unchanged on the sync client.
+ecosystem: python
+package: anthropic
+versions: ">=1.0.0"
+tags: [llm, raw-response, logging, migration]
+failure:
+  kind: behavior-changed
+  symptom: "TypeError: write() argument must be str, not method (json.loads(raw.text): the JSON object must be str, bytes or bytearray, not method)"
+  bad_pattern: "raw = client.messages.with_raw_response.create(...); body = raw.text"
+  fix_pattern: "raw = client.messages.with_raw_response.create(...); body = raw.text()"
+repro:
+  python: "3.13"
+  deps: ["anthropic==1.0.0", "httpx2==2.13.0"]
+  old_deps: ["anthropic==0.125.0", "httpx==0.28.1"]
+provenance:
+  sources:
+    - {type: docs, url: "https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/MIGRATION.md#with_raw_response-returns-the-new-response-classes"}
+    - {type: changelog, url: "https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/CHANGELOG.md"}
+    - {type: other, url: "https://github.com/anthropics/anthropic-sdk-python/commit/33e296749dda59c3b9af85d9bee37ae241b92a28"}
+  license: "MIT"
+  released: "2026-08-20"
+status: verified
