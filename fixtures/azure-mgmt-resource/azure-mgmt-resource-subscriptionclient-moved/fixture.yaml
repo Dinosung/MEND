@@ -1,0 +1,28 @@
+id: azure-mgmt-resource-subscriptionclient-moved
+title: "Importing SubscriptionClient from azure.mgmt.resource in azure-mgmt-resource 25"
+summary: >
+  azure-mgmt-resource 25.0 split the subscriptions, features, links, locks, policy,
+  managedapplications, databoundaries, changes and privatelinks modules into separate
+  azure-mgmt-resource-{module} packages. `from azure.mgmt.resource import SubscriptionClient`
+  now raises ImportError; install azure-mgmt-resource-subscriptions and import from
+  azure.mgmt.resource.subscriptions.
+ecosystem: python
+package: azure-mgmt-resource
+versions: ">=25.0.0"
+tags: [azure, cloud, import-path, package-split, migration]
+failure:
+  kind: api-removed
+  symptom: "ImportError: cannot import name 'SubscriptionClient' from 'azure.mgmt.resource'"
+  bad_pattern: "from azure.mgmt.resource import SubscriptionClient"
+  fix_pattern: "from azure.mgmt.resource.subscriptions import SubscriptionClient  # package azure-mgmt-resource-subscriptions"
+repro:
+  python: "3.13"
+  deps: ["azure-mgmt-resource==25.0.0", "azure-mgmt-resource-subscriptions==1.0.0", "azure-mgmt-core==1.6.0", "azure-core==1.38.0", "isodate==0.7.2", "requests==2.32.5"]
+  old_deps: ["azure-mgmt-resource==24.0.0", "azure-common==1.1.28", "azure-mgmt-core==1.6.0", "azure-core==1.38.0", "isodate==0.7.2", "requests==2.32.5"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://github.com/Azure/azure-sdk-for-python/blob/azure-mgmt-resource_25.0.0/sdk/resources/azure-mgmt-resource/CHANGELOG.md"}
+    - {type: other, url: "https://github.com/Azure/azure-sdk-for-python/blob/azure-mgmt-resource_25.0.0/sdk/resources/azure-mgmt-resource/azure/mgmt/resource/__init__.py"}
+  license: "MIT"
+  released: "2026-02-04"
+status: verified

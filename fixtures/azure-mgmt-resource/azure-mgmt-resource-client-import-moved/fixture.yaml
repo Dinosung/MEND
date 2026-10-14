@@ -1,0 +1,27 @@
+id: azure-mgmt-resource-client-import-moved
+title: "Importing ResourceManagementClient from azure.mgmt.resource in azure-mgmt-resource 26"
+summary: >
+  azure-mgmt-resource 26.0 turned azure.mgmt.resource into a bare namespace package: it no
+  longer re-exports ResourceManagementClient, so `from azure.mgmt.resource import
+  ResourceManagementClient` raises ImportError. Import it from azure.mgmt.resource.resources.
+ecosystem: python
+package: azure-mgmt-resource
+versions: ">=26.0.0"
+tags: [azure, cloud, import-path, migration]
+failure:
+  kind: api-renamed
+  symptom: "ImportError: cannot import name 'ResourceManagementClient' from 'azure.mgmt.resource'"
+  bad_pattern: "from azure.mgmt.resource import ResourceManagementClient"
+  fix_pattern: "from azure.mgmt.resource.resources import ResourceManagementClient"
+repro:
+  python: "3.13"
+  deps: ["azure-mgmt-resource==26.0.0", "azure-mgmt-core==1.6.0", "azure-core==1.38.0", "isodate==0.7.2", "requests==2.32.5"]
+  old_deps: ["azure-mgmt-resource==25.0.0", "azure-mgmt-core==1.6.0", "azure-core==1.38.0", "isodate==0.7.2", "requests==2.32.5"]
+provenance:
+  sources:
+    - {type: changelog, url: "https://github.com/Azure/azure-sdk-for-python/blob/azure-mgmt-resource_26.0.0/sdk/resources/azure-mgmt-resource/CHANGELOG.md"}
+    - {type: docs, url: "https://github.com/Azure/azure-sdk-for-python/blob/azure-mgmt-resource_26.0.0/sdk/resources/azure-mgmt-resource/README.md"}
+    - {type: other, url: "https://github.com/Azure/azure-sdk-for-python/blob/azure-mgmt-resource_26.0.0/sdk/resources/azure-mgmt-resource/azure/mgmt/resource/__init__.py"}
+  license: "MIT"
+  released: "2026-06-24"
+status: verified

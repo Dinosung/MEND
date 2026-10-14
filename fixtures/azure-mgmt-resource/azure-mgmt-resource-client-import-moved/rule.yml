@@ -1,0 +1,6 @@
+rules:
+  - id: azure-mgmt-resource-client-import-moved
+    languages: [python]
+    severity: ERROR
+    message: "azure-mgmt-resource 26: azure.mgmt.resource no longer re-exports ResourceManagementClient (ImportError). Use `from azure.mgmt.resource.resources import ResourceManagementClient`."
+    pattern: from azure.mgmt.resource import ResourceManagementClient

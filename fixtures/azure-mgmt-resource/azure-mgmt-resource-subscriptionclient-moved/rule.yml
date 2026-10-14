@@ -1,0 +1,12 @@
+rules:
+  - id: azure-mgmt-resource-subscriptionclient-moved
+    languages: [python]
+    severity: ERROR
+    message: "azure-mgmt-resource 25 moved SubscriptionClient to the azure-mgmt-resource-subscriptions package (ImportError). Use `from azure.mgmt.resource.subscriptions import SubscriptionClient`."
+    pattern-either:
+      - pattern: from azure.mgmt.resource import SubscriptionClient
+      - pattern: from azure.mgmt.resource import FeatureClient
+      - pattern: from azure.mgmt.resource import PolicyClient
+      - pattern: from azure.mgmt.resource import ManagementLockClient
+      - pattern: from azure.mgmt.resource import ManagementLinkClient
+      - pattern: from azure.mgmt.resource import ApplicationClient
