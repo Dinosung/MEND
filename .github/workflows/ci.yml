@@ -66,9 +66,27 @@ jobs:
           r = json.load(open("verify-report.json"))
           s = r["summary"]
           print(f"### mend verify: {s['ok']}/{s['total']} ok, {s['fail']} failed, {s['error']} infrastructure errors\n")
-          print("| fixture | result | reason |\n|---|---|---|")
+          print(f"Differential gate (bad passes on old_deps): {s['differential_ok']}/{s['differential']} fixtures with old_deps.\n")
+          print("| fixture | result | bad passes on old | reason |\n|---|---|---|---|")
           for x in r["results"]:
-              print(f"| `{x['fixture_id']}` | {x['outcome']} | {x['reason']} |")
+              old = {True: "yes", False: "**no**", None: "-"}[x["bad_passed_old"]] if x["differential"] else "n/a"
+              print(f"| `{x['fixture_id']}` | {x['outcome']} | {old} | {x['reason']} |")
+          PY
+      - name: Timing summary
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY" || true
+          import json
+          r = json.load(open("verify-report.json"))
+          t = r["timing"]
+          b = t["by_run"]
+          print(f"### Timing: {t['wall_seconds']:.0f}s wall, {t['run_seconds']:.0f}s across runs\n")
+          print(f"fixed {b['fixed']:.0f}s, bad {b['bad']:.0f}s, bad_old {b['bad_old']:.0f}s\n")
+          print("| fixture | fixed (s) | bad (s) | bad_old (s) | total (s) |\n|---|---:|---:|---:|---:|")
+          for x in sorted(r["results"], key=lambda x: -x["total_duration"]):
+              d = x["durations"]
+              cell = lambda k: f"{d[k]:.1f}" if k in d else "-"
+              print(f"| `{x['fixture_id']}` | {cell('fixed')} | {cell('bad')} | {cell('bad_old')} | {x['total_duration']:.1f} |")
           PY
       - name: Upload report
         if: always()
