@@ -5,21 +5,15 @@
 # sum of `spend_usd` from earlier runs' summary.json before starting another one.
 agent: claude_code
 model: claude-haiku-5-5
-# Fixtures most likely to fail on current models (2025-26 breaking changes).
+# Diagnosis: the one fresh fixture with baseline failures.
 fixtures:
-  - numpy-trapz-removed
-  - starlette-1-app-route-decorator-removed
-  - starlette-1-on-startup-removed
-  - fastapi-strict-content-type-json-body
-  - fastapi-app-add-event-handler-removed
-  - pandas-cow-chained-assignment-noop
-  - pandas-str-dtype-not-object
+  - anthropic-messages-sampling-params-removed
 arms: [A0, A1, A4]
-trials: 2              # 7 fixtures x 3 arms x 2 = 42 trials
+trials: 5              # 1 fixture x 3 arms x 5 = 15 trials
 max_turns: 12
 per_trial_usd: 0.10    # passed to claude --max-budget-usd; charged in full if a trial reports no cost
-run_usd: 1.50          # this run stops launching trials before exceeding this
+run_usd: 0.30          # this run stops launching trials before exceeding this
 max_usd: 5.0           # overall cap across runs
-prior_spend_usd: 0.0
+prior_spend_usd: 1.63
 max_trials: 300
 scorer: uv
