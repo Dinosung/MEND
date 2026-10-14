@@ -117,9 +117,11 @@ jobs:
           if (out / "results.jsonl").is_file():
               for line in (out / "results.jsonl").read_text().splitlines():
                   r = json.loads(line)
-                  lines.append(" ".join(f"{k}={r.get(k)}" for k in
-                                        ("fixture", "arm", "trial", "outcome", "cost_usd", "num_turns", "agent_seconds", "result_subtype", "agent_error", "detail")))
-          msg = "\n".join(lines) or "no results produced"
+                  # Compact per-trial lines; None fields are omitted to stay under the 64KB limit.
+                  lines.append(" ".join(f"{k}={r[k]}" for k in
+                                        ("fixture", "arm", "trial", "outcome", "num_turns", "agent_error", "detail")
+                                        if r.get(k) is not None) + f" usd={r.get('cost_usd') or 0:.4f}")
+          msg = "\n".join(lines)[:60000] or "no results produced"
           print("::notice title=MEND-Bench results::" + msg.replace("%", "%25").replace("\r", "").replace("\n", "%0A"))
           EOF
 
