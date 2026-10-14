@@ -21,4 +21,5 @@ provenance:
     - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#changes-to-pydanticbasemodel"}
     - {type: docs, url: "https://docs.pydantic.dev/latest/concepts/models/#rootmodel-and-custom-root-types"}
   license: "MIT"
+  released: "2023-06-30"
 status: verified

@@ -22,4 +22,5 @@ provenance:
     - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#changes-to-config"}
     - {type: other, url: "https://github.com/tiangolo/fastapi/pull/11031"}
   license: "MIT"
+  released: "2023-06-30"
 status: verified

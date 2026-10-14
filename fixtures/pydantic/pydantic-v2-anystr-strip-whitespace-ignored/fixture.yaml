@@ -16,8 +16,10 @@ failure:
 repro:
   python: "3.12"
   deps: ["pydantic==2.9.2"]
+  old_deps: ["pydantic==1.10.26"]
 provenance:
   sources:
     - {type: docs, url: "https://docs.pydantic.dev/latest/migration/#changes-to-config"}
   license: "MIT"
+  released: "2023-06-30"
 status: verified
