@@ -102,7 +102,8 @@ The table above was produced on 2026-10-14 by running each tool on every fixture
   `select` config gets neither hit. The NPY/PD/FAST/AIR codes on ruff `main`
   (0.17.0-dev, commit a8632f8) match 0.16.8.
 - **pyupgrade (3.22.0) and flake8-pydantic (0.4.0), run.** Neither covers any fixture:
-  their only hits fired on `bad/` and `fixed/` alike. They are not re-run weekly.
+  their only hits fired on `bad/` and `fixed/` alike. pyupgrade (`--py313-plus`) is
+  re-run weekly; flake8-pydantic is not.
 - **bump-pydantic 0.8.0, source reading.** It needs LibCST's native parser, which
   could not be installed here. Verdicts come from its codemods and unit tests (e.g.
   `REMOVED_KEYS` contains `allow_mutation`; the root matcher only matches
@@ -112,12 +113,14 @@ The table above was produced on 2026-10-14 by running each tool on every fixture
 
 Reviewed verdicts live in `scripts/overlap/manual_review.json` and override the
 automatic one. The weekly workflow (`.github/workflows/overlap.yml`) re-runs ruff
-(NPY, PD, FAST, AIR) and bump-pydantic with their latest releases; a **(differs)** row
+(NPY, PD, FAST, AIR), pyupgrade and bump-pydantic with their latest releases, and
+uploads `overlap.json` (per fixture: ruff codes on bad/fixed, whether each rewriting
+tool touched bad/fixed, auto and reviewed verdicts); a **(differs)** row
 means a tool changed or the review needs a look.
 
 Reproduce:
 
 ```sh
-pip install ruff bump-pydantic
-python scripts/overlap/run_overlap.py fixtures
+pip install ruff pyupgrade bump-pydantic
+python scripts/overlap/run_overlap.py fixtures > overlap.md  # also writes overlap.json
 ```
