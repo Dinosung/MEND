@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -26,6 +27,14 @@ from bench.v2.taskgen import (
 
 FIXTURES = load_fixtures(ROOT / "fixtures")
 PY313 = shutil.which("python3.13")
+
+
+def _has_numpy_2_4(python: str | None) -> bool:
+    """The local-scoring tests replay numpy-trapz-removed, which needs numpy>=2.4."""
+    if python is None:
+        return False
+    code = "import numpy, sys; sys.exit(0 if tuple(map(int, numpy.__version__.split('.')[:2])) >= (2, 4) else 1)"
+    return subprocess.run([python, "-I", "-c", code], capture_output=True).returncode == 0
 
 
 def fx(fid: str):
@@ -140,7 +149,7 @@ def test_sanitize_discards_test_tampering(tmp_path):
     assert sanitize(clean, out2, spec)["tampered"] == []
 
 
-needs_py313 = pytest.mark.skipif(PY313 is None, reason="python3.13 with numpy needed for local scoring")
+needs_py313 = pytest.mark.skipif(not _has_numpy_2_4(PY313), reason="python3.13 with numpy>=2.4 needed for local scoring")
 
 
 @needs_py313
