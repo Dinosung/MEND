@@ -1,19 +1,35 @@
 # MEND backlog
 
-Direction: see `STRATEGY.md` (adopted 2026-10-14). MEND is a **verified post-cutoff
-tripwire** for Python: witness programs for breaking changes from roughly the last 18
-months, delivered by hooks and CI, with a probe step recording which current models
-actually make each mistake.
+Direction (owner, 2026-10-14, see `MARKET_RESEARCH.md`): **C then B**.
+- **C. "Claimed vs. proven" study, published first.** Re-run coding agents' "done" claims
+  against the original, untouched tests and publish how often they hold.
+- **B. Receipts tool, shipped with it.** A five-minute, agent-neutral check (CLI, Claude Code
+  Stop hook, GitHub Action) that reproduces the study's measurement on the user's own branch.
+- The breaking-change catalog stays as the study's task generator and as a narrow tripwire for
+  external-service SDKs; it is not the launch story.
 
-The daily progress run takes the top unchecked item it can complete, ships it, and
-checks it off with the date. Items marked **[needs owner]** require the maintainer;
-skip them and note it in the progress log.
+Design rules: deterministic checks only (no LLM judge in the verdict); **zero tokens of agent
+context** (runs outside the agent, speaks only when a claim fails); agent-neutral; published
+precision; keep it simple.
 
-Out of scope until the mid-January 2027 verdict: JS/TS, security weaknesses,
-hallucinated packages, project-specific lessons, hand-authoring well-known pre-cutoff
-migrations. Public launch waits for benchmark results.
+Budget: free work first (tasks, tool, analysis, dry runs with in-session agents). Paid API runs
+only for the publishable measurement; current cap $5 total ($3.89 spent). Ask the owner before
+raising it (expected ~$20-30 for the lean study).
 
-## Phase 1: two-week pilot (to 2026-10-27)
+## Now: study (C) and receipts (B)
+
+- [ ] Receipts tool v0: `mend receipt` restores original tests/test config from the base commit, applies the agent's source changes, re-runs the tests, and reports claimed vs. proven plus protected-file edits, skipped/xfail/deleted tests. Markdown receipt + exit code. Stop hook and GitHub Action wrappers.
+- [ ] Study task set: ~40 hard upgrade tasks generated from the catalog (multi-file repos on the old version, task: upgrade and make tests pass), where a real fix is hard and editing tests is tempting.
+- [ ] Study harness: run an agent, capture its final claim, score with original tests restored, hand-label every claimed-but-not-proven case.
+- [ ] Dry run of the study with in-session agents (free) to debug tasks and labels.
+- [ ] **[needs owner]** Budget for the publishable run (Claude Code Haiku k=3 + one Opus pass; Codex later).
+- [ ] Measure receipts precision on all labelled cases (target ≥0.9 for blocking verdicts).
+- [ ] Rewrite README around the study finding and the receipts tool.
+- [ ] Publish: findings post + reproducible harness; launch the tool with it. **[needs owner]** timing.
+
+## Parked (earlier direction)
+
+### Phase 1: two-week pilot (to 2026-10-27), done at checkpoint
 
 Budget: **$5 total API spend** for benchmark/probe runs until the owner raises it. Track every run's cost in `docs/PROGRESS.md`.
 
@@ -25,7 +41,7 @@ Question to answer: *is there a measurable effect to build on?*
 - [ ] Pilot verdict written to `docs/PROGRESS.md`: continue to Phase 2 only if A0 shows failures that A1 does not fix.
 - [ ] **Checkpoint (owner, 2026-10-14):** after the SDK pilot, pause implementation. Write up the findings, then research market needs and gaps (real pain points, who has them, what exists, the marketing story) and return to the owner with options and a recommendation. No Phase 2 work until the owner picks a direction. The daily task is paused until then.
 
-## Phase 2: build (to ~mid-January 2027)
+### Phase 2: build (parked)
 
 - [ ] Pipeline automation: PyPI feed polling for a download-ranked watchlist, griffe + release-note extraction, LLM drafting, four verification gates, probe step, scheduled Actions. Target ~100 candidates, 50+ verified probed fixtures, <15 min review each.
 - [ ] Probe status per fixture: per-model failure rate, `retired` date when models stop failing.
@@ -38,7 +54,7 @@ Question to answer: *is there a measurable effect to build on?*
 - [ ] **[needs owner]** Choose data licence (CC-BY-4.0 vs CDLA-Permissive-2.0); code stays MIT.
 - [ ] **[needs owner]** PyPI trusted publishing for `mend-agent`.
 
-## Kill/continue criteria (mid-January 2027)
+### Kill/continue criteria (old direction)
 
 See `STRATEGY.md`: ≥50 baseline-failing tasks, A4 beats best of A1/A2 by ≥10 points with CI
 excluding zero, ≤2% false-positive harm, ≥10 verified post-cutoff fixtures/week.
