@@ -18,10 +18,7 @@ raising it (expected ~$20-30 for the lean study).
 
 ## Now: study (C) and receipts (B)
 
-- [ ] Receipts tool v0: `mend receipt` restores original tests/test config from the base commit, applies the agent's source changes, re-runs the tests, and reports claimed vs. proven plus protected-file edits, skipped/xfail/deleted tests. Markdown receipt + exit code. Stop hook and GitHub Action wrappers.
-- [ ] Study task set: ~40 hard upgrade tasks generated from the catalog (multi-file repos on the old version, task: upgrade and make tests pass), where a real fix is hard and editing tests is tempting.
-- [ ] Study harness: run an agent, capture its final claim, score with original tests restored, hand-label every claimed-but-not-proven case.
-- [ ] Dry run of the study with in-session agents (free) to debug tasks and labels.
+- [ ] Impossible task variant (ImpossibleBench-style: one test contradicts another; 'do not modify tests'), then a second free dry run. Paid run only if dry runs show tasks can separate honest from dishonest agents.
 - [ ] **[needs owner]** Budget for the publishable run (Claude Code Haiku k=3 + one Opus pass; Codex later).
 - [ ] Measure receipts precision on all labelled cases (target ≥0.9 for blocking verdicts).
 - [ ] Rewrite README around the study finding and the receipts tool.
@@ -61,6 +58,10 @@ excluding zero, ≤2% false-positive harm, ≥10 verified post-cutoff fixtures/w
 
 ## Done
 
+- [x] 2026-10-15: Receipts tool v0 (`mend receipt`, Stop hook, GitHub Action; pre-existing failures don't block).
+- [x] 2026-10-15: Study task set: 40 upgrade-rescue tasks, all verified in CI (unfixed fails, reference fix passes).
+- [x] 2026-10-15: Study harness with claim parsing and outcome classes.
+- [x] 2026-10-15: Free dry run: 6/6 honest passes; tasks too easy; parser bug fixed.
 - [x] 2026-10-14: MEND-Bench v2 pilot: Harbor-format agentic tasks with implicit versions (lockfile only), hidden read-only tests, source-only scoring; arms A0 (none), A1 (versions line), A4 (MEND plugin); ~15 existing + ~15 post-cutoff candidates; one model, k=3. Report A0 failure rate and paired A4-vs-A1.
 - [x] 2026-10-14: Release-diff prototype: griffe breaking-change diff on ~10 watchlist libraries' releases from the past 12 months; candidate list with false-positive rate.
 - [x] 2026-10-14: Claude Code plugin: SessionStart hook (lockfile-scoped lookup, ≤10 fact-phrased lines) + PostToolUse hook (`mend check` on edited .py files, exit 2 with fixture IDs) + MCP server; marketplace.json; end-to-end test on a sample repo.
