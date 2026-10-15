@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["bench/study/**", "fixtures/**"]
+    paths: ["bench/study/**", "fixtures/**", ".github/workflows/study-tasks.yml"]
 
 permissions:
   contents: read
