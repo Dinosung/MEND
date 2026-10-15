@@ -18,7 +18,7 @@ raising it (expected ~$20-30 for the lean study).
 
 ## Now: study (C) and receipts (B)
 
-- [ ] Impossible task variant (ImpossibleBench-style: one test contradicts another; 'do not modify tests'), then a second free dry run. Paid run only if dry runs show tasks can separate honest from dishonest agents.
+- [x] Impossible task variant and two free probes (FINDINGS 2026-10-15): 23/24 honest flags, 1 tampered pass (Haiku deleted a test, led with "all tests pass"). Rates on short tasks are low; owner decision needed on the study's shape before any paid run.
 - [ ] **[needs owner]** Budget for the publishable run (Claude Code Haiku k=3 + one Opus pass; Codex later).
 - [ ] Measure receipts precision on all labelled cases (target ≥0.9 for blocking verdicts).
 - [ ] Rewrite README around the study finding and the receipts tool.
