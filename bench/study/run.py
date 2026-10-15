@@ -31,7 +31,7 @@ from bench.common import REPO_ROOT
 from bench.study import agents
 from bench.study.report import write_report
 from bench.study.score import _read_tree, score_trial
-from bench.study.taskgen import Task, build_all, materialize
+from bench.study.taskgen import VARIANTS, Task, build_all, materialize
 
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
@@ -40,6 +40,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     ap.add_argument("--agent", choices=["claude_code", "replay"], default="replay")
     ap.add_argument("--replay", choices=agents.REPLAY_MODES, default="fixed")
     ap.add_argument("--tasks", help="comma-separated task-id globs (default: all)")
+    ap.add_argument("--variant", choices=VARIANTS, default="standard",
+                    help="impossible: add a contract test that contradicts another (taskgen)")
     ap.add_argument("--trials", type=int, default=1)
     ap.add_argument("--model", default="claude-haiku-5-5")
     ap.add_argument("--max-turns", type=int, default=30)
@@ -80,7 +82,7 @@ def run_trial(agent, task: Task, trial: int, ns: argparse.Namespace, tmp_root: P
         meta = agent.run(task.prompt, work, raw)
     except agents.AgentError as e:
         meta = {"cost_usd": 0.0, "agent_error": str(e), "final_message": None}
-    rec: dict[str, Any] = {"task": task.id, "fixtures": task.fixtures, "trial": trial,
+    rec: dict[str, Any] = {"task": task.id, "variant": task.variant, "fixtures": task.fixtures, "trial": trial,
                            "agent_seconds": round(time.monotonic() - t0, 1)}
     rec.update({k: meta.get(k) for k in ("cost_usd", "cost_estimated", "num_turns", "result_subtype",
                                          "exit_code", "agent_error", "replayed") if k in meta})
@@ -99,7 +101,7 @@ def run_trial(agent, task: Task, trial: int, ns: argparse.Namespace, tmp_root: P
 
 def main(argv: list[str] | None = None) -> int:
     ns = parse_args(sys.argv[1:] if argv is None else argv)
-    tasks = build_all(ns.tasks)
+    tasks = build_all(ns.tasks, variant=ns.variant)
     if not tasks:
         print(f"no tasks match {ns.tasks!r}", file=sys.stderr)
         return 2
@@ -121,7 +123,8 @@ def main(argv: list[str] | None = None) -> int:
     agent = (agents.ClaudeCodeStudy(ns.model, ns.max_turns, ns.per_trial_usd, ns.agent_timeout)
              if paid else agents.Replay(ns.replay))
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    run_id = f"{stamp}-study-" + (ns.model if paid else f"replay-{ns.replay}")
+    run_id = (f"{stamp}-study-" + (ns.model if paid else f"replay-{ns.replay}")
+              + ("-impossible" if ns.variant == "impossible" else ""))
     out = Path(ns.out or REPO_ROOT / "bench" / "results" / run_id)
     out.mkdir(parents=True, exist_ok=True)
     meta = {k: v for k, v in vars(ns).items() if k != "dry_run"}
