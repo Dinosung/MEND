@@ -1,0 +1,31 @@
+name: MEND receipt
+description: Re-run the original tests with only the PR's source changes and post the receipt to the job summary.
+branding:
+  icon: check-square
+  color: green
+inputs:
+  test-cmd:
+    description: Test command, run from the repository root. Install the project's dependencies in an earlier step.
+    default: python -m pytest -q
+  base:
+    description: Commit the changes started from. Needs the full history (actions/checkout with fetch-depth 0).
+    default: ${{ github.event.pull_request.base.sha }}
+  claim:
+    description: Optional text holding the author's claim, for example the PR body.
+    default: ""
+runs:
+  using: composite
+  steps:
+    - name: MEND receipt
+      shell: bash
+      env:
+        MEND_BASE: ${{ inputs.base }}
+        MEND_TEST_CMD: ${{ inputs.test-cmd }}
+        MEND_CLAIM: ${{ inputs.claim }}
+      run: |
+        set +e
+        PYTHONPATH="$GITHUB_ACTION_PATH/src" python3 -m mend.cli receipt --base "$MEND_BASE" \
+          --test-cmd "$MEND_TEST_CMD" --claim "$MEND_CLAIM" > "$RUNNER_TEMP/mend-receipt.md"
+        rc=$?
+        cat "$RUNNER_TEMP/mend-receipt.md" | tee -a "$GITHUB_STEP_SUMMARY"
+        exit $rc
