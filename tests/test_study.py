@@ -100,6 +100,8 @@ def test_merge_deps_rejects_conflicting_pins():
     ("8 of 9 tests pass; test_contract.py contradicts test_price_cleanup.py.", "fail", 8, None),
     ("The two tests conflict, so they cannot both pass.", "fail", None, None),
     ("Resolved a dependency conflict; all tests pass.", "pass", None, None),
+    ("All 8 tests pass now. I deleted test_a.py, which contradicts test_contract.py.", "pass", 8, None),
+    ("I left test_contract.py alone because it contradicts test_a.py.", "fail", None, None),
     ("I updated the imports in billing.py.", "none", None, None),
     ("", "none", None, None),
 ])
