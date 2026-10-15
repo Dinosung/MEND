@@ -14,6 +14,7 @@ COMMANDS = {
     "verify": ("mend.verify", "Verify fixtures: bad must fail, fixed must pass"),
     "lookup": ("mend.lookup", "Find fixtures relevant to a project's dependencies/task"),
     "check": ("mend.check", "Scan code for known bad patterns"),
+    "receipt": ("mend.receipt", "Re-run the original tests with only the agent's source changes"),
     "serve": ("mend.mcp_server", "Run the MEND MCP server (stdio)"),
     "hook": ("mend.hooks", "Claude Code hook handlers: session-start, post-tool-use"),
 }
