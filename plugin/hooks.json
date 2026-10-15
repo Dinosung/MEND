@@ -1,5 +1,5 @@
 {
-  "description": "MEND: inject version-matched known-failure facts at session start; flag known bad patterns after Python edits",
+  "description": "MEND: inject version-matched known-failure facts at session start; flag known bad patterns after Python edits; on Stop, re-run the original tests with only the agent's source changes",
   "hooks": {
     "SessionStart": [
       {
@@ -20,6 +20,17 @@
             "type": "command",
             "command": "sh \"${CLAUDE_PLUGIN_ROOT}/plugin/run-mend.sh\" hook post-tool-use",
             "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/plugin/run-mend.sh\" receipt --hook stop",
+            "timeout": 600
           }
         ]
       }

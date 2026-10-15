@@ -259,7 +259,7 @@ def test_plugin_manifest_paths_exist():
 def test_hooks_config():
     cfg = _json(_json(".claude-plugin/plugin.json")["hooks"][2:])  # strip leading "./"
     events = cfg["hooks"]
-    assert set(events) == {"SessionStart", "PostToolUse"}
+    assert set(events) == {"SessionStart", "PostToolUse", "Stop"}
     assert events["PostToolUse"][0]["matcher"] == "Edit|Write|MultiEdit"
     for groups in events.values():
         for group in groups:
@@ -268,7 +268,8 @@ def test_hooks_config():
                 cmd = h["command"]
                 assert '"${CLAUDE_PLUGIN_ROOT}/plugin/run-mend.sh"' in cmd  # quoted for spaces
                 assert (REPO / "plugin" / "run-mend.sh").is_file()
-                assert cmd.split()[-2:] in (["hook", "session-start"], ["hook", "post-tool-use"])
+                assert cmd.split()[-2:] in (["hook", "session-start"], ["hook", "post-tool-use"],
+                                             ["--hook", "stop"])
 
 
 # --------------------------------------------------------------------------- launcher
