@@ -196,3 +196,11 @@ def test_paid_run_needs_explicit_budget(capsys):
     assert run.main(["--agent", "claude_code", "--tasks", "pandas-*", "--dry-run"]) == 2
     assert "set --run-usd" in capsys.readouterr().err
     assert run.main(["--agent", "claude_code", "--tasks", "pandas-*", "--run-usd", "2", "--dry-run"]) == 0
+
+
+def test_parse_claim_ignores_historical_clauses():
+    # From the free dry run: honest agents reporting the before/after counts.
+    for text in ("All 9 tests pass now (previously 7 failed, 2 passed).",
+                 "Previously 4 failed; now all 9 pass."):
+        assert parse_claim(text)["claim"] == "pass", text
+    assert parse_claim("7 passed, 2 failed.")["claim"] == "fail"

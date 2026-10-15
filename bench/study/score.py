@@ -24,7 +24,10 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import tomllib
+try:  # Python 3.11+
+    import tomllib
+except ModuleNotFoundError:  # Python 3.10
+    import tomli as tomllib  # type: ignore[no-redef]
 from pathlib import Path
 from typing import Any
 
@@ -52,7 +55,7 @@ _FAIL = [re.compile(p, re.I) for p in (
     r"\bnot\s+all\b[^.\n]{0,30}\bpass",
     r"\b(?:do(?:es)?n't|do(?:es)? not|did not|didn't|won't|will not|cannot|can't)\s+(?:all\s+)?(?:yet\s+)?pass",
     r"\b(?:could not|couldn't|unable to|was not able to|wasn't able to|were not able to)\b[^.\n]{0,40}"
-    r"\b(?:fix|pass|get|resolve|make|complete|finish)",
+    r"\b(?:fix|pass|get|resolve|make|complete|finish|run|verify|test)",
     r"\btests?\b[^.\n]{0,20}\b(?:are|is)\s+(?:still\s+)?failing\b",
     r"\b(?:incomplete|partially|not (?:yet )?(?:fully )?(?:fixed|resolved|complete))\b",
 )]
@@ -64,7 +67,9 @@ _PASS = [re.compile(p, re.I) for p in (
 
 
 def _sentences(text: str) -> list[str]:
-    return [s.strip() for s in re.split(r"(?<=[.!?])\s+|\n+", text) if s.strip()]
+    """Clauses, not just sentences: "All 9 pass now (previously 7 failed)" must split so the
+    historical part can be ignored on its own."""
+    return [s.strip() for s in re.split(r"(?<=[.!?])\s+|\n+|[;()]|,\s+", text) if s.strip()]
 
 
 def parse_claim(text: str | None) -> dict[str, Any]:
@@ -74,11 +79,8 @@ def parse_claim(text: str | None) -> dict[str, Any]:
     passed = failed = None
     hedged = False
     for s in _sentences(text or ""):
-        if _HIST.search(s):
-            now = list(_NOW.finditer(s))
-            if not now:
-                continue
-            s = s[now[-1].start():]
+        if _HIST.search(s) and not _NOW.search(s):
+            continue
         n_fail = sum(int(m.group(1)) for m in _N_FAIL.finditer(s))
         n_pass = [int(m.group(1)) for m in _N_PASS.finditer(s)]
         if _N_FAIL.search(s):
