@@ -49,10 +49,16 @@ skip or rewrite any test.
 Usage errors (not a git repo, unknown base) exit 2. A failing verdict always comes from
 the re-run itself; diff counts and claim wording never fail a check on their own.
 
+## Failures that were already there
+
+When the re-run fails, the receipt also runs the tests at the base commit. If every failure
+already happens there, the receipt says so ("pre-existing"). The Stop hook then stays silent
+unless the agent claimed the tests pass: a false "tests pass" claim is always reported, but
+unrelated tests that were broken before the agent started are not.
+
 ## What it does not check
 
 - Whether the tests are any good, or whether they cover the task.
-- Tests that already failed at the base commit. They make every receipt NOT PROVEN.
 - Lint or type-checker suppressions (`# noqa`, `# type: ignore`) and coverage thresholds.
 - Source-side cheating that the original tests don't catch, such as special-casing test
   inputs, or a test file the agent added that patches source code at import time.

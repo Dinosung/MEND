@@ -136,8 +136,9 @@ def run_tests(cmd: str, cwd: Path) -> dict:
     counts = {("errors" if w.startswith("error") else w): int(n) for n, w in _TALLY.findall(summary)}
     if r.returncode == 5 or "no tests ran" in summary:
         counts["no_tests"] = 1
-    failures = [ln for ln in out.splitlines() if ln.startswith(("FAILED ", "ERROR "))][:10]
-    return {"exit": r.returncode, "counts": counts, "failures": failures,
+    failures = [ln for ln in out.splitlines() if ln.startswith(("FAILED ", "ERROR "))]
+    return {"exit": r.returncode, "counts": counts, "failures": failures[:10],
+            "failed_ids": sorted({ln.split()[1] for ln in failures if len(ln.split()) > 1}),
             "summary": summary or f"exit code {r.returncode}"}
 
 
@@ -175,19 +176,27 @@ def receipt(repo: str | Path = ".", base: str | None = None, test_cmd: str = DEF
     base = _git(root, "rev-parse", "--verify", f"{base}^{{commit}}").strip() if base else default_base(root)
     changed = changed_files(root, base)
     with tempfile.TemporaryDirectory(prefix="mend-receipt-") as tmp:
-        dest = Path(tmp) / "clean"
+        dest, at_base = Path(tmp) / "clean", Path(tmp) / "base"
         try:
             tree = build_clean_tree(root, base, changed, dest)
             clean = run_tests(test_cmd, dest)
+            # Failures that already happen at the base commit are not the agent's doing.
+            pre_existing = False
+            if clean["failed_ids"]:
+                _git(root, "worktree", "add", "--detach", "--quiet", str(at_base), base)
+                before = run_tests(test_cmd, at_base)
+                pre_existing = set(clean["failed_ids"]) <= set(before["failed_ids"])
         finally:
-            _git(root, "worktree", "remove", "--force", str(dest), check=False)
+            for d in (dest, at_base):
+                _git(root, "worktree", "remove", "--force", str(d), check=False)
             _git(root, "worktree", "prune", check=False)
     same = not tree["protected"] and not tree["added_tests"]
     agent = clean if same else run_tests(test_cmd, root)
     claim = parse_claim(claim_text)
     tests = [p for p in changed if kind(p) == "test"]
     return {"verdict": verdict(clean, claim, tree["protected"]), "base": base, "test_cmd": test_cmd,
-            "clean": clean, "agent": agent, "agent_same_tree": same, "claim": claim, **tree,
+            "clean": clean, "agent": agent, "agent_same_tree": same, "claim": claim,
+            "pre_existing": pre_existing, **tree,
             **count_test_changes(root, base, tests)}
 
 
@@ -226,6 +235,8 @@ def render(r: dict) -> str:
         lines.append(f"- Test-file changes: {len(r['removed_tests'])} test(s) removed"
                      f"{' (' + _short(r['removed_tests']) + ')' if r['removed_tests'] else ''}, "
                      f"skip markers {r['skip_added']:+d}, xfail markers {r['xfail_added']:+d}")
+    if r["pre_existing"]:
+        lines.append("- All of these failures also happen at the base commit (pre-existing).")
     lines += [f"- {f}" for f in r["clean"]["failures"]]
     return "\n".join(lines)
 
@@ -263,8 +274,12 @@ def hook_stop(raw: str, test_cmd: str) -> int:
     except Exception:  # a hook must never break the session
         return 0
     counts = r["clean"]["counts"]
-    if not ((r["verdict"] == "CLAIM MISMATCH" and counts)
-            or (r["verdict"] == "NOT PROVEN" and counts.get("failed", 0) + counts.get("errors", 0))):
+    # Block on a false "tests pass" claim, or on failures the agent introduced. Failures that
+    # already happen at the base, with no claim that they were fixed, are not worth blocking.
+    claim_mismatch = r["verdict"] == "CLAIM MISMATCH" and counts
+    new_failures = (r["verdict"] == "NOT PROVEN" and not r["pre_existing"]
+                    and counts.get("failed", 0) + counts.get("errors", 0))
+    if not (claim_mismatch or new_failures):
         return 0
     text = "MEND receipt (re-run of the original tests with only the source changes applied):\n\n" + render(r)
     if data.get("stop_hook_active"):  # loop guard: already continued once, so report to the user

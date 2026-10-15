@@ -235,3 +235,27 @@ def test_plugin_registers_stop_hook():
     hooks = json.loads((Path(__file__).resolve().parents[1] / "plugin" / "hooks.json").read_text())
     command = hooks["hooks"]["Stop"][0]["hooks"][0]["command"]
     assert command.endswith("receipt --hook stop")
+
+
+def test_pre_existing_failures_are_marked(repo):
+    # Base already fails; the agent changes something unrelated and makes no claim.
+    (repo / "README.md").write_text("notes\n")
+    r = run(repo)
+    assert r["verdict"] == "NOT PROVEN" and r["pre_existing"]
+    assert "pre-existing" in receipt.render(r)
+
+
+def test_hook_silent_on_pre_existing_failures_without_claim(repo, monkeypatch, capsys):
+    (repo / "README.md").write_text("notes\n")
+    code = stop_hook(monkeypatch, {"cwd": str(repo), "last_assistant_message": "Updated the README."})
+    assert code == 0 and capsys.readouterr() == ("", "")
+
+
+def test_new_failure_is_not_pre_existing(repo):
+    git(repo, "checkout", "-q", "main")
+    (repo / "calc.py").write_text(FIXED)
+    git(repo, "commit", "-qam", "fix on main")
+    git(repo, "checkout", "-qB", "agent")
+    (repo / "calc.py").write_text(BUGGY)  # the agent reintroduces the bug
+    r = run(repo)
+    assert r["verdict"] == "NOT PROVEN" and not r["pre_existing"]
