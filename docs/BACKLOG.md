@@ -1,5 +1,8 @@
 # MEND backlog
 
+**Paused by the owner, 2026-10-14**, after the impossible-variant probes (FINDINGS 2026-10-15)
+showed too little evidence of the pain. Nothing below is active.
+
 Direction (owner, 2026-10-14, see `MARKET_RESEARCH.md`): **C then B**.
 - **C. "Claimed vs. proven" study, published first.** Re-run coding agents' "done" claims
   against the original, untouched tests and publish how often they hold.

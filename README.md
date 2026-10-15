@@ -1,5 +1,10 @@
 # MEND
 
+> **Status: paused (2026-10-14).** Free probes found current agents, Opus especially, rarely
+> misreport test results on short tasks (23 of 24 honest; see
+> [`bench/results/FINDINGS.md`](bench/results/FINDINGS.md)), so the pain MEND targets is not
+> proven. The code and fixtures stay here as they are; no further work is planned for now.
+
 **Verified failure memory for AI coding agents.** MEND is a catalog of mistakes that coding
 agents keep making. Each entry ships with a reproducer that fails on the bad code and passes
 on the fix. Agents can query the catalog over MCP before they write code, and you can scan
